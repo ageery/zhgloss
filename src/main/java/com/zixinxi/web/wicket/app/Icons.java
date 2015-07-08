@@ -1,0 +1,16 @@
+package com.zixinxi.web.wicket.app;
+
+import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
+import de.agilecoders.wicket.core.markup.html.bootstrap.image.IconType;
+
+public class Icons {
+
+	public static final IconType ICON_SEARCH = GlyphIconType.search;
+	public static final IconType ICON_CLEAR = GlyphIconType.remove;
+	public static final IconType ICON_SEGMENT = GlyphIconType.play;
+	
+	private Icons() {
+		super();
+	}
+	
+}

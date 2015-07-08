@@ -1,0 +1,20 @@
+<html wicket:id="html" xmlns:wicket="http://wicket.apache.org">
+<wicket:extend>
+	<h1 wicket:id="header">[HEADER]</h1>
+	<div>
+		<form wicket:id="form">
+			<div wicket:id="textGroup">
+				<textarea wicket:id="text" rows="8" cols="50"></textarea>
+			</div>
+			<div>
+				<button wicket:id="segmentButton">[SEGMENT]</button>
+			</div>
+		</form>
+	</div>
+	<div>
+		<ul wicket:id="results" class="list-inline">
+			<li wicket:id="words"><span wicket:id="word">[WORD]</span></li>
+		</ul>
+	</div>
+</wicket:extend>
+</html>

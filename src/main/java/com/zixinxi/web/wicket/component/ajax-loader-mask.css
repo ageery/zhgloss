@@ -1,0 +1,54 @@
+.ajax-loader-parent {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    zoom: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+.ajax-loader-child {
+    text-align: center;
+}
+
+/* vertical centering */
+.ajax-loader-parent {
+    display: table
+}
+
+.ajax-loader-child {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#ajax-loader-message {
+    z-index: 999999;
+    /* 	width: 300px;
+            border: 1px solid #666;
+            margin: auto;
+            text-align: center;
+            vertical-align: middle; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 150px;
+    color: white;
+}
+#ajax-loader-message-title {
+    text-align: left;
+    font-size: 1.1em;
+    color: white;
+    background-color: #949494;
+    padding:1px 1px 1px 6px;
+}
+#ajax-loader-message-content {
+    background-color: #DDD;
+}
+#ajax-loader-message-content > img {
+    margin: 5px auto;
+}
