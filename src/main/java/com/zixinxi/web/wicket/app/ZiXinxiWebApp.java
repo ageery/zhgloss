@@ -33,6 +33,7 @@ public class ZiXinxiWebApp extends WebApplication {
     private void configureBootstrap() {
         BootstrapSettings settings = new BootstrapSettings();
         settings.setThemeProvider(new SingleThemeProvider(new ZiXinxiTheme()));
+        settings.useCdnResources(true);
         Bootstrap.install(this, settings);
         BootstrapLess.install(this);
     }

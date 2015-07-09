@@ -15,6 +15,7 @@ import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,8 @@ import com.zixinxi.repo.TranscriptionRepo;
 import com.zixinxi.repo.TranscriptionRepoImpl;
 import com.zixinxi.repo.WordRepo;
 import com.zixinxi.repo.WordRepoImpl;
+import com.zixinxi.service.AppConfigService;
+import com.zixinxi.service.AppConfigServiceImpl;
 import com.zixinxi.service.TranscriptionService;
 import com.zixinxi.service.TranscriptionServiceImpl;
 import com.zixinxi.service.WordService;
@@ -41,9 +44,13 @@ public class ZiXinxiApp {
 
 	@Inject
 	private DataSource dataSource;
+	@Inject
+	private AppConfig appConfig;
 	
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(ZiXinxiApp.class, args);
+    	SpringApplication app = new SpringApplication(ZiXinxiApp.class);
+    	//app.addListeners(new ApplicationStartedListener());
+    	app.run(args);
     }
     
     @Bean
@@ -54,6 +61,11 @@ public class ZiXinxiApp {
     @Bean
     public DSLContext getDslContext() {
     	return DSL.using(dataSource, POSTGRES_9_4);
+    }
+    
+    @Bean
+    public AppConfigService getAppConfigService() {
+    	return new AppConfigServiceImpl(appConfig);
     }
     
     @Bean
@@ -79,6 +91,12 @@ public class ZiXinxiApp {
     @Bean
     public TranscriptionService getTranscriptionService() {
     	return new TranscriptionServiceImpl(getTranscriptionRepo());
+    }
+    
+    @Bean
+    @ConditionalOnProperty(prefix = "zixinxi", name = "refreshCedictDataAtStartup")
+    public CedictDataRefreshRunner getCedictDataLoader() {
+    	return new CedictDataRefreshRunner(getWordService());
     }
     
     @Bean

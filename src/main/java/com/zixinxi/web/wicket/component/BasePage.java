@@ -51,7 +51,7 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         navbar.setBrandName(Model.of("字信息 - Character Info"));
         navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
                 new NavbarButton<>(LookupPage.class, new ResourceModel("topmenu.lookup")),
-                new NavbarButton<>(TranscriptionsPage.class, new ResourceModel("topmenu.transcriptions")),
+                //new NavbarButton<>(TranscriptionsPage.class, new ResourceModel("topmenu.transcriptions")),
                 new NavbarButton<>(SegmentPage.class, new ResourceModel("topmenu.segment"))));
         return navbar;
     }
