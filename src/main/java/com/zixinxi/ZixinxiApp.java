@@ -18,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zixinxi.domain.WicketProperties;
@@ -35,6 +36,7 @@ import com.zixinxi.web.wicket.app.ZiXinxiWebApp;
 
 @SpringBootApplication
 @EnableConfigurationProperties
+@EnableScheduling
 public class ZixinxiApp {
 
 	@Inject

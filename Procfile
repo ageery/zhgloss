@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -DDATABASE_URL=$DATABASE_URL -jar target/zixinxi-0.0.1-SNAPSHOT.jar

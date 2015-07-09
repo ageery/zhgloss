@@ -44,6 +44,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guavaVersion}</version>
@@ -212,12 +216,6 @@
 			</activation>
 			<build>
 				<plugins>
-					<!-- <plugin> <groupId>org.flywaydb</groupId> <artifactId>flyway-maven-plugin</artifactId> 
-						<version>${flywayVersion}</version> <executions> <execution> <phase>compile</phase> 
-						<goals> <goal>migrate</goal> </goals> </execution> </executions> <configuration> 
-						<url>${db.url}</url> <user>${db.username}</user> <password>${db.password}</password> 
-						<locations> <location>filesystem:src/main/resources/db/migration</location> 
-						</locations> </configuration> </plugin> -->
 					<plugin>
 						<groupId>org.jooq</groupId>
 						<artifactId>jooq-codegen-maven</artifactId>
