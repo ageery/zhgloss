@@ -37,13 +37,13 @@ import com.zixinxi.web.wicket.app.ZiXinxiWebApp;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableScheduling
-public class ZixinxiApp {
+public class ZiXinxiApp {
 
 	@Inject
 	private DataSource dataSource;
 	
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(ZixinxiApp.class, args);
+        SpringApplication.run(ZiXinxiApp.class, args);
     }
     
     @Bean
