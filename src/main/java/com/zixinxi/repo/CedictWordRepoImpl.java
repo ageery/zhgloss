@@ -8,12 +8,12 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import javax.sql.DataSource;
-import javax.sql.PooledConnection;
 
 import org.jooq.lambda.Unchecked;
 import org.postgresql.copy.CopyManager;
@@ -60,9 +60,8 @@ public class CedictWordRepoImpl implements CedictWordRepo {
 					.defPkGenerator(PK_GENERATOR)
 					.umlautRepresentation(UMLAUT));
 			
-			PooledConnection pooledConnection = (PooledConnection) dataSource.getConnection();
 			try (
-				BaseConnection baseConnection = (BaseConnection) pooledConnection.getConnection();
+				BaseConnection baseConnection = dataSource.getConnection().unwrap(BaseConnection.class);
 				Reader cedictWordReader = Files.newBufferedReader(cedictWordPath, UTF8);
 				Reader cedictDefReader = Files.newBufferedReader(cedictDefPath, UTF8);)
 			{
