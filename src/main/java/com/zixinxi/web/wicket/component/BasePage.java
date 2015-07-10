@@ -3,14 +3,15 @@ package com.zixinxi.web.wicket.component;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.ResourceLink;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 import com.zixinxi.web.wicket.content.lookup.LookupPage;
 import com.zixinxi.web.wicket.content.segment.SegmentPage;
-import com.zixinxi.web.wicket.content.transcription.TranscriptionsPage;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.IeEdgeMetaTag;
@@ -36,8 +37,8 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         add(new MetaTag("author", Model.of("author"), new ResourceModel("app.author")));
         add(newNavbar("navbar"));
         add(new FooterPanel("footer"));
-        //add(new AjaxLoaderMaskPanel("loader"));
         add(new Icon("loader", FontAwesomeIconType.spinner).setMarkupId(LOADER_ID));
+        add(new ResourceLink<>("favIcon", new PackageResourceReference(BasePage.class, "res/favicon.png")));
     }
     
     protected IModel<String> getTitleModel() {
