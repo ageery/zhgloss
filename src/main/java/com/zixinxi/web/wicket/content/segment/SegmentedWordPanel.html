@@ -1,11 +1,11 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:panel>
-	<ruby>
-		<rb wicket:id="characters">[CHARACTERS]</rb>
-		<rp>(</rp>
-		<rt wicket:id="transcription">[TRANSCRIPTION]</rt>
-		<rp>)</rp>
-		<rtc wicket:id="definitionContainer"><abbr wicket:id="shortDefinition">[SHORT DEFINITION]</abbr></rtc>
-	</ruby>
+	<div class="panel panel-default word-info">
+		<div class="panel-body text-center">
+			<div><p class="small" wicket:id="transcriptions">[TRANSCRIPTION]</p></div>
+			<div><strong><p wicket:id="characters">[CHARACTERS]</p></strong></div>
+			<div><p wicket:id="definitions">[SHORT DEFINITION]</p></div>
+		</div>
+	</div>
 </wicket:panel>
 </html>
