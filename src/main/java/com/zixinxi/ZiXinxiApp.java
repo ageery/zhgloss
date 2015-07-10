@@ -3,10 +3,15 @@ package com.zixinxi;
 import static com.zixinxi.web.ZixinxiWebConstants.REST_PATH;
 import static org.jooq.SQLDialect.POSTGRES_9_4;
 
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.HashSet;
 
 import javax.inject.Inject;
 import javax.servlet.DispatcherType;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionTrackingMode;
 import javax.sql.DataSource;
 
 import org.apache.wicket.protocol.http.WebApplication;
@@ -17,6 +22,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -116,5 +122,19 @@ public class ZiXinxiApp {
         registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
         return registration;
     }
+    
+    @Bean
+    public SessionTrackingConfigListener sessionTrackingConfigListener() {
+    	return new SessionTrackingConfigListener();
+    }
+    
+    private static class SessionTrackingConfigListener implements ServletContextInitializer {
+
+		@Override
+		public void onStartup(ServletContext servletContext) throws ServletException {
+			servletContext.setSessionTrackingModes(new HashSet<>(Arrays.asList(SessionTrackingMode.COOKIE)));
+		}
+	
+	}
     
 }
