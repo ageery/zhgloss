@@ -3,8 +3,16 @@
 	<h1 wicket:id="header">[HEADER]</h1>
 	<div>
 		<form wicket:id="form">
-			<div wicket:id="textGroup">
-				<textarea wicket:id="text" rows="8" cols="50"></textarea>
+			<div wicket:id="searchContainer">
+				<div wicket:id="typeGroup">
+					<select wicket:id="types"></select>
+				</div>
+				<div wicket:id="systemGroup">
+					<select wicket:id="systems"></select>
+				</div>
+				<div wicket:id="textGroup">
+					<textarea wicket:id="text" rows="8" cols="50"></textarea>
+				</div>
 			</div>
 			<div>
 				<ul wicket:id="results" class="list-inline">
