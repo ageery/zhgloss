@@ -6,9 +6,16 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zixinxi.domain.Op;
+import com.zixinxi.domain.SerializableFunction;
 
 public class WordParts implements Serializable {
 
+	public static final SerializableFunction<WordParts, Op<String>> FUNCTION_TRADITIONAL = wp -> Op.of(wp).flatMap(WordParts::getTraditional);
+	public static final SerializableFunction<WordParts, Op<String>> FUNCTION_SIMPLIFIED = wp -> Op.of(wp).flatMap(WordParts::getSimplified);
+	public static final SerializableFunction<WordParts, Op<String>> FUNCTION_TRANSCRIPTION = wp -> Op.of(wp).flatMap(WordParts::getTranscription);
+	public static final SerializableFunction<WordParts, Op<List<String>>> FUNCTION_DEFINITIONS = wp -> Op.of(wp).flatMap(WordParts::getDefinitions);
+	
 	@JsonProperty("id")
 	private UUID id;
 	

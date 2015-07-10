@@ -11,24 +11,24 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
-import org.wicketstuff.lazymodel.LazyColumn;
 import org.wicketstuff.lazymodel.LazyModel;
 
+import com.zixinxi.domain.SerializableFunction;
 import com.zixinxi.web.wicket.component.ListView;
 import com.zixinxi.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.CssClassNameAppender;
 
-public class OrderedListFilteredColumn<T, S, R extends List<String>, F> extends LazyColumn<T, S, R> implements IFilteredColumn<T, S> {
+public class OrderedListFilteredColumn<T, S, R extends List<String>, F> extends FunctionColumn<T, S, R> implements IFilteredColumn<T, S> {
 
 	private LazyModel<F> filterModel;
 
-	public OrderedListFilteredColumn(IModel<String> displayModel, LazyModel<R> cellModel, LazyModel<F> filterModel) {
-		this(displayModel, cellModel, filterModel, null);
+	public OrderedListFilteredColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, LazyModel<F> filterModel) {
+		this(displayModel, dataFunction, filterModel, null);
 	}
 	
-	public OrderedListFilteredColumn(IModel<String> displayModel, LazyModel<R> cellModel, LazyModel<F> filterModel, S sortProperty) {
-		super(displayModel, cellModel, sortProperty);
+	public OrderedListFilteredColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, LazyModel<F> filterModel, S sortProperty) {
+		super(displayModel, dataFunction, sortProperty);
 		this.filterModel = filterModel;
 	}
 

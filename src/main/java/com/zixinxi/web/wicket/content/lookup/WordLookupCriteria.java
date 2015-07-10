@@ -1,12 +1,22 @@
 package com.zixinxi.web.wicket.content.lookup;
 
+import static com.zixinxi.domain.Op.of;
+
 import java.io.Serializable;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class WordLookupCriteria implements Serializable {
+import com.zixinxi.domain.Op;
+import com.zixinxi.domain.SerializableFunction;
 
+public class WordLookupCriteria implements Serializable {
+	
+	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_TRADITIONAL = wlc -> of(wlc).flatMap(WordLookupCriteria::getTraditionalCharacters);
+	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_SIMPLIFIED = wlc -> of(wlc).flatMap(WordLookupCriteria::getSimplifiedCharacters);
+	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_PINYIN = wlc -> of(wlc).flatMap(WordLookupCriteria::getPinyin);
+	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_DEFINITION = wlc -> of(wlc).flatMap(WordLookupCriteria::getDefinition);
+	
 	private String traditionalCharacters;
 	private String simplifiedCharacters;
 	private String pinyin;

@@ -21,6 +21,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.event.annotation.OnEvent;
 
+import com.zixinxi.domain.OpFunction;
 import com.zixinxi.domain.external.TranscriptionSystemInfo;
 import com.zixinxi.domain.external.WordParts;
 import com.zixinxi.service.WordService;
@@ -101,22 +102,22 @@ public class LookupPanel extends Panel {
 		return asList(
 				new TextFilteredColumn<>(
 						new ResourceModel("column.traditional_characters"), 
-						WordPartsModels.LM_TRADITIONAL_CHARACTERS, 
+						new OpFunction<>(WordParts.FUNCTION_TRADITIONAL), 
 						WordLookupCriteriaModels.LM_TRADITIONAL_CHARACTERS, 
 						WordSorts.TRADITIONAL),
 				new TextFilteredColumn<>(
 						new ResourceModel("column.simplified_characters"), 
-						WordPartsModels.LM_SIMPLIFIED_CHARACTERS, 
+						new OpFunction<>(WordParts.FUNCTION_SIMPLIFIED), 
 						WordLookupCriteriaModels.LM_SIMPLIFIED_CHARACTERS, 
 						WordSorts.SIMPLIFIED),
 				new TextFilteredColumn<>(
 						new ResourceModel("column.transcription"), 
-						WordPartsModels.LM_TRANSCRIPTION, 
+						new OpFunction<>(WordParts.FUNCTION_TRANSCRIPTION),
 						WordLookupCriteriaModels.LM_PINYIN, 
 						WordSorts.TRANSCRIPTION),
 				new OrderedListFilteredColumn<>(
 						new ResourceModel("column.definition"), 
-						WordPartsModels.LM_DEFINITIONS, 
+						new OpFunction<>(WordParts.FUNCTION_DEFINITIONS), 
 						WordLookupCriteriaModels.LM_DEFINITION)
 		);
 	}
