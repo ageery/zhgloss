@@ -1,11 +1,16 @@
 package com.zixinxi.domain.external;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zixinxi.domain.Op;
+import com.zixinxi.domain.SerializableFunction;
 
 public class SegmentedWord {
 
+	public static final SerializableFunction<SegmentedWord, Op<String>> FUNCTION_TEXT = sw -> Op.of(sw).flatMap(SegmentedWord::getText);
+	
 	@JsonProperty("text")
 	private String text;
 	
@@ -40,6 +45,10 @@ public class SegmentedWord {
 	public SegmentedWord withWords(List<WordParts> words) {
 		setWords(words);
 		return this;
+	}
+	
+	public Stream<WordParts> getWordStream() {
+		return words == null ? Stream.empty() : words.stream();
 	}
 	
 }

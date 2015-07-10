@@ -7,14 +7,15 @@
 				<textarea wicket:id="text" rows="8" cols="50"></textarea>
 			</div>
 			<div>
+				<ul wicket:id="results" class="list-inline">
+					<li wicket:id="words"><span wicket:id="word">[WORD]</span></li>
+				</ul>
+			</div>
+			<div>
 				<button wicket:id="segmentButton">[SEGMENT]</button>
+				<button wicket:id="editButton">[EDIT]</button>
 			</div>
 		</form>
-	</div>
-	<div>
-		<ul wicket:id="results" class="list-inline">
-			<li wicket:id="words"><span wicket:id="word">[WORD]</span></li>
-		</ul>
 	</div>
 </wicket:extend>
 </html>

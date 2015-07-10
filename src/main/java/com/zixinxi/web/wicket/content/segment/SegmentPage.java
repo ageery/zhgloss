@@ -1,10 +1,6 @@
 package com.zixinxi.web.wicket.content.segment;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.model.IModel;
@@ -15,11 +11,12 @@ import org.wicketstuff.annotation.mount.MountPath;
 import org.wicketstuff.event.annotation.OnEvent;
 import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 
-import com.zixinxi.domain.external.SegmentedWord;
 import com.zixinxi.service.WordService;
 import com.zixinxi.web.wicket.component.BasePage;
 import com.zixinxi.web.wicket.component.ListView;
+import com.zixinxi.web.wicket.component.button.EditButton;
 import com.zixinxi.web.wicket.component.button.SearchButton;
+import com.zixinxi.web.wicket.event.EditEvent;
 import com.zixinxi.web.wicket.event.SearchEvent;
 import com.zixinxi.web.wicket.model.SupplierModel;
 
@@ -33,36 +30,59 @@ public class SegmentPage extends BasePage {
 	@SpringBean
 	private WordService service;
 	
-	private WebMarkupContainer results;
+	private IModel<Boolean> isEditModeModel;
 	
 	public SegmentPage(PageParameters parameters) {
 		super(parameters);
-		add(new Heading("header", Model.of("Segment Text")));
 		
+		/*
+		 * Models.
+		 */
+		isEditModeModel = Model.of(true);
+		IModel<Boolean> isSegmentModeModel = new SupplierModel<>(() -> !isEditModeModel.getObject());
 		IModel<String> textModel = Model.of();
 		
+		add(new Heading("header", Model.of("Segment Text")));
+
+		/*
+		 * Form.
+		 */
 		Form<?> form = new Form<>("form", textModel);
 		add(form);
 		
 		form.add(new FormGroup("textGroup")
-			.add(new TextArea<>("text", textModel).add(new InputBehavior())));
+			.add(new TextArea<>("text", textModel).add(new InputBehavior()))
+			.add(new VisibleModelBehavior(isEditModeModel)));
 		
-		form.add(new SearchButton("segmentButton", Model.of("Segment")));
+		form.add(new SearchButton("segmentButton", Model.of("Segment")).add(new VisibleModelBehavior(isEditModeModel)));
+		form.add(new EditButton("editButton", Model.of("Edit")).add(new VisibleModelBehavior(isSegmentModeModel)));
 		
-		IModel<List<SegmentedWord>> segmentedWordListModel = new SegmentedWordModel(textModel);
-		results = new WebMarkupContainer("results");
+		WebMarkupContainer results = new WebMarkupContainer("results");
 		results.setOutputMarkupPlaceholderTag(true);
-		results.add(new VisibleModelBehavior(new SupplierModel<>(() -> !StringUtils.isEmpty(textModel.getObject()))));
-		add(results);
+		results.add(new VisibleModelBehavior(isSegmentModeModel));
+		form.add(results);
 		
-		results.add(new ListView<>("words", segmentedWordListModel, 
-				item -> item.add(new Label("word", SegmentedWordModels.bindText(item.getModel())))));
+		results.add(new ListView<>("words", new SegmentedWordModel(textModel),
+				item -> item.add(new SegmentedWordPanel("word", item.getModel()))));
 		
+	}
+	
+	@Override
+	protected void onDetach() {
+		super.onDetach();
+		isEditModeModel.detach();
 	}
 	
 	@OnEvent
 	public void handleSearchEvent(SearchEvent<String> event) {
-		event.getTarget().add(results);
+		isEditModeModel.setObject(false);
+		event.getTarget().add(this);
 	}
-
+	
+	@OnEvent
+	public void handleEditEvent(EditEvent<String> event) {
+		isEditModeModel.setObject(true);
+		event.getTarget().add(this);
+	}
+	
 }

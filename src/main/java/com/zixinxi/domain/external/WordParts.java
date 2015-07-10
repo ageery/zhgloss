@@ -3,6 +3,7 @@ package com.zixinxi.domain.external;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -90,6 +91,10 @@ public class WordParts implements Serializable {
 	public WordParts withDefinitions(List<String> definitions) {
 		setDefinitions(definitions);
 		return this;
+	}
+
+	public Stream<String> getDefinitionStream() {
+		return definitions == null ? Stream.empty() : definitions.stream();
 	}
 	
 }
