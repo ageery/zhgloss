@@ -126,12 +126,6 @@ public class WordRestController {
 				.collect(Collectors.toList());
 	}
 	
-	@RequestMapping(REST_PATH + "/load")
-	public int loadWords() 
-	{		
-		return service.loadNewCedictWords();
-	}
-	
 	// FIXME: this does not work
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
