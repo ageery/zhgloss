@@ -183,11 +183,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-lazymodel</artifactId>
-			<version>${wicketstuffVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-annotationeventdispatcher</artifactId>
 			<version>${wicketstuffVersion}</version>
 			<exclusions>

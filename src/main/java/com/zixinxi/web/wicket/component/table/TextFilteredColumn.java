@@ -4,31 +4,33 @@ import org.apache.wicket.Component;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.IFilteredColumn;
 import org.apache.wicket.model.IModel;
-import org.wicketstuff.lazymodel.LazyModel;
 
 import com.zixinxi.domain.SerializableFunction;
+import com.zixinxi.domain.SerializableProperty;
+import com.zixinxi.web.wicket.model.LambdaModel;
 
-public class TextFilteredColumn<T, S, R, F> extends FunctionColumn<T, S, R> implements IFilteredColumn<T, S> {
+public class TextFilteredColumn<T, S, R, Q, F> extends FunctionColumn<T, S, R> implements IFilteredColumn<T, S> {
 
-	private LazyModel<F> filterModel;
+	private SerializableProperty<Q, F> filterProperty;
 	
-	public TextFilteredColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, LazyModel<F> filterModel) {
-		this(displayModel, dataFunction, filterModel, null);
+	public TextFilteredColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, SerializableProperty<Q, F> filterProperty) {
+		this(displayModel, dataFunction, filterProperty, null);
 	}
 	
-	public TextFilteredColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, LazyModel<F> filterModel, S sortProperty) {
+	public TextFilteredColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, SerializableProperty<Q, F> filterProperty, S sortProperty) {
 		super(displayModel, dataFunction, sortProperty);
-		this.filterModel = filterModel;
+		this.filterProperty = filterProperty;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Component getFilter(String componentId, FilterForm<?> form) {
-		return new TextSearchButtonFilter<>(componentId, getFilterModel(form), form, getDisplayModel());
+		return new TextSearchButtonFilter<>(componentId, getFilterModel((FilterForm<Q>)form), form, getDisplayModel());
 	}
 
-	protected IModel<F> getFilterModel(final FilterForm<?> form)
+	protected IModel<F> getFilterModel(final FilterForm<Q> form)
 	{
-		return filterModel.bind(form.getDefaultModel());
+		return new LambdaModel<>(form.getModel(), filterProperty.getGetter(), filterProperty.getSetter());
 	}
 
 }

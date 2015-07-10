@@ -2,10 +2,14 @@ package com.zixinxi.domain.external;
 
 import java.io.Serializable;
 
+import com.zixinxi.domain.Op;
 import com.zixinxi.domain.SerializableFunction;
 
 public class TranscriptionPlane implements Serializable {
 
+	public static final SerializableFunction<TranscriptionPlane, Op<String>> FUNCTION_SYLLABLE_NAME = tp -> Op.of(tp).flatMap(TranscriptionPlane::getSyllableName);
+	public static final SerializableFunction<TranscriptionPlane, Op<Integer>> FUNCTION_TONE = tp -> Op.of(tp).flatMap(TranscriptionPlane::getTone);
+	
 	private String syllableName;
 	private int tone;
 	private SerializableFunction<String, String> tonedRepresentationMapper;

@@ -103,22 +103,22 @@ public class LookupPanel extends Panel {
 				new TextFilteredColumn<>(
 						new ResourceModel("column.traditional_characters"), 
 						new OpFunction<>(WordParts.FUNCTION_TRADITIONAL), 
-						WordLookupCriteriaModels.LM_TRADITIONAL_CHARACTERS, 
+						WordLookupCriteria.PROPERTY_TRADITIONAL_CHARACTERS,
 						WordSorts.TRADITIONAL),
 				new TextFilteredColumn<>(
 						new ResourceModel("column.simplified_characters"), 
 						new OpFunction<>(WordParts.FUNCTION_SIMPLIFIED), 
-						WordLookupCriteriaModels.LM_SIMPLIFIED_CHARACTERS, 
+						WordLookupCriteria.PROPERTY_SIMPLIFIED_CHARACTERS,
 						WordSorts.SIMPLIFIED),
 				new TextFilteredColumn<>(
 						new ResourceModel("column.transcription"), 
 						new OpFunction<>(WordParts.FUNCTION_TRANSCRIPTION),
-						WordLookupCriteriaModels.LM_PINYIN, 
+						WordLookupCriteria.PROPERTY_PINYIN, 
 						WordSorts.TRANSCRIPTION),
 				new OrderedListFilteredColumn<>(
 						new ResourceModel("column.definition"), 
 						new OpFunction<>(WordParts.FUNCTION_DEFINITIONS), 
-						WordLookupCriteriaModels.LM_DEFINITION)
+						WordLookupCriteria.PROPERTY_DEFINITION)
 		);
 	}
 	

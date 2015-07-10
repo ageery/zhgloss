@@ -1,21 +1,20 @@
 package com.zixinxi.web.wicket.content.lookup;
 
-import static com.zixinxi.domain.Op.of;
+import static com.zixinxi.domain.SerializableProperty.of;
 
 import java.io.Serializable;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.zixinxi.domain.Op;
-import com.zixinxi.domain.SerializableFunction;
+import com.zixinxi.domain.SerializableProperty;
 
 public class WordLookupCriteria implements Serializable {
 	
-	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_TRADITIONAL = wlc -> of(wlc).flatMap(WordLookupCriteria::getTraditionalCharacters);
-	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_SIMPLIFIED = wlc -> of(wlc).flatMap(WordLookupCriteria::getSimplifiedCharacters);
-	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_PINYIN = wlc -> of(wlc).flatMap(WordLookupCriteria::getPinyin);
-	public static final SerializableFunction<WordLookupCriteria, Op<String>> FUNCTION_DEFINITION = wlc -> of(wlc).flatMap(WordLookupCriteria::getDefinition);
+	public static final SerializableProperty<WordLookupCriteria, String> PROPERTY_TRADITIONAL_CHARACTERS = of(WordLookupCriteria::getTraditionalCharacters, WordLookupCriteria::setTraditionalCharacters);
+	public static final SerializableProperty<WordLookupCriteria, String> PROPERTY_SIMPLIFIED_CHARACTERS = of(WordLookupCriteria::getSimplifiedCharacters, WordLookupCriteria::setSimplifiedCharacters);
+	public static final SerializableProperty<WordLookupCriteria, String> PROPERTY_PINYIN = of(WordLookupCriteria::getPinyin, WordLookupCriteria::setPinyin);
+	public static final SerializableProperty<WordLookupCriteria, String> PROPERTY_DEFINITION = of(WordLookupCriteria::getDefinition, WordLookupCriteria::setDefinition);
 	
 	private String traditionalCharacters;
 	private String simplifiedCharacters;

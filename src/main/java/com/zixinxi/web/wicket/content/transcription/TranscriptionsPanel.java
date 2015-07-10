@@ -15,12 +15,12 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.wicketstuff.lazymodel.LazyColumn;
-import org.wicketstuff.lazymodel.LazyModel;
 
+import com.zixinxi.domain.OpFunction;
 import com.zixinxi.domain.external.TranscriptionPlane;
 import com.zixinxi.service.TranscriptionService;
 import com.zixinxi.web.wicket.component.table.BootstrapDataTable;
+import com.zixinxi.web.wicket.component.table.FunctionColumn;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.heading.Heading;
 
@@ -29,7 +29,6 @@ public class TranscriptionsPanel extends Panel {
 	@SpringBean
 	private TranscriptionService service;
 	
-	private static final LazyModel<String> LM_SYLLABLE = LazyModel.model(LazyModel.from(TranscriptionPlane.class).getSyllableName());
 	
 	public TranscriptionsPanel(String id) {
 		super(id);
@@ -43,8 +42,8 @@ public class TranscriptionsPanel extends Panel {
 	
 	private List<IColumn<TranscriptionPlane, Void>> getColumns() {
 		
-		List<IColumn<TranscriptionPlane, Void>> list = new ArrayList<>(Arrays.asList(new LazyColumn<>(Model.of("Syllable"), LM_SYLLABLE),
-				new LazyColumn<>(Model.of("Tone"), TranscriptionPlaneModels.LM_TONE)
+		List<IColumn<TranscriptionPlane, Void>> list = new ArrayList<>(Arrays.asList(new FunctionColumn<>(Model.of("Syllable"), new OpFunction<>(TranscriptionPlane.FUNCTION_SYLLABLE_NAME)),
+				new FunctionColumn<>(Model.of("Tone"), new OpFunction<>(TranscriptionPlane.FUNCTION_TONE))
 		));
 		list.addAll(service.getTranscriptionSystems()
 			.map(ts -> new TranscriptionPointColumn<Void>(Model.of(ts.getName()), ts.getCode()))
