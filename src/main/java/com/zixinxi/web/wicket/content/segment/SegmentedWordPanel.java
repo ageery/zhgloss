@@ -3,6 +3,7 @@ package com.zixinxi.web.wicket.content.segment;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
@@ -14,19 +15,28 @@ import com.zixinxi.domain.external.WordParts;
 import com.zixinxi.web.wicket.behavior.SameTitleAsContentAppender;
 import com.zixinxi.web.wicket.model.BlankToNbspModel;
 import com.zixinxi.web.wicket.model.LambdaModel;
+import com.zixinxi.web.wicket.model.SupplierModel;
+
+import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.CssClassNameAppender;
 
 public class SegmentedWordPanel extends Panel {
 
 	public SegmentedWordPanel(String id, IModel<SegmentedWord> model) {
 		super(id, model);
-		add(new Label("transcriptions", new BlankToNbspModel(new SegmentedWordTranscriptionsModel(model)))
+		
+		WebMarkupContainer container = new WebMarkupContainer("container");
+		container.add(new CssClassNameAppender(new SupplierModel<>(() -> model.getObject().hasDefinition() ? "panel panel-default" : "")));
+		add(container);
+		
+		container.add(new Label("transcriptions", new BlankToNbspModel(new SegmentedWordTranscriptionsModel(model)))
 			.add(new SameTitleAsContentAppender())
 			.setEscapeModelStrings(false));
-		add(new Label("characters", new LambdaModel<>(model, new OpFunction<>(SegmentedWord.FUNCTION_TEXT)))
+		container.add(new Label("characters", new LambdaModel<>(model, new OpFunction<>(SegmentedWord.FUNCTION_TEXT)))
 			.add(new SameTitleAsContentAppender()));
-		add(new Label("definitions", new BlankToNbspModel(new SegmentedWordDefinitionsModel(model)))
+		container.add(new Label("definitions", new BlankToNbspModel(new SegmentedWordDefinitionsModel(model)))
 			.add(new SameTitleAsContentAppender())
 			.setEscapeModelStrings(false));
+		 
 	}
 	
 	private static class SegmentedWordTranscriptionsModel extends LoadableDetachableDependentModel<String, SegmentedWord> {

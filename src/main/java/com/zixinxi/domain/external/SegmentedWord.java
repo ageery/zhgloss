@@ -51,4 +51,8 @@ public class SegmentedWord {
 		return words == null ? Stream.empty() : words.stream();
 	}
 	
+	public boolean hasDefinition() {
+		return getWordStream().count() > 0;
+	}
+	
 }
