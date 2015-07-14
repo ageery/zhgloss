@@ -1,5 +1,9 @@
 package com.zixinxi.web.wicket.component;
 
+import static com.zixinxi.web.wicket.app.Icons.ICON_DICTIONARY;
+import static com.zixinxi.web.wicket.app.Icons.ICON_GLOSS;
+import static de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents.transform;
+
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -10,6 +14,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
+import com.zixinxi.web.wicket.app.Icons;
 import com.zixinxi.web.wicket.content.dictionary.DictionaryPage;
 import com.zixinxi.web.wicket.content.gloss.GlossPage;
 
@@ -50,9 +55,11 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         navbar.setPosition(Navbar.Position.TOP);
         navbar.setInverted(true);
         navbar.setBrandName(new ResourceModel("app.branding"));
-        navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
-                new NavbarButton<>(DictionaryPage.class, new ResourceModel("label.dictionary")),
-                new NavbarButton<>(GlossPage.class, new ResourceModel("label.gloss"))));
+        navbar.addComponents(transform(Navbar.ComponentPosition.LEFT,
+                new NavbarButton<>(DictionaryPage.class, new ResourceModel("label.dictionary"))
+                	.setIconType(ICON_DICTIONARY),
+                new NavbarButton<>(GlossPage.class, new ResourceModel("label.gloss"))
+                	.setIconType(ICON_GLOSS)));
         return navbar;
     }
 

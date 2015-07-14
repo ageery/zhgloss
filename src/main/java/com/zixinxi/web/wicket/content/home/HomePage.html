@@ -1,8 +1,22 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:extend>
-	<h1 wicket:id="header">[HEADER]</h1>
-	<p class="lead">Welcome to the character information warehouse!</p>
-	<p>Use the menu items to search for words in different ways.</p>
-	<p>The data comes from the Chinese English Dictionary (CEDICT) project.</p>
+	<div class="row">
+		<div class="col-md-6">
+			<h1 class="jumbotron">
+				<a wicket:id="dictionaryLink"><i wicket:id="icon"></i>
+					<span wicket:id="label">[LABEL]</span>
+				</a>
+				<span class="small" wicket:id="dictionaryDescription">[DESCRIPTION]</span>
+			</h1>
+		</div>
+		<div class="col-md-6">
+			<h1 class="jumbotron">
+				<a wicket:id="glossLink"><i wicket:id="icon"></i>
+					<span wicket:id="label">[LABEL]</span>
+				</a>
+				<span class="small" wicket:id="glossDescription">[DESCRIPTION]</span>
+			</h1>
+		</div>
+	</div>
 </wicket:extend>
 </html>

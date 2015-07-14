@@ -11,6 +11,6 @@
 	<entry key="instructions">
 		&lt;kbd&gt;*&lt;/kbd&gt; can be used as a wild-card. 
 		Transcription filter criteria must be entered in Hanyu Pinyin.
-		&lt;mark&gt;At least one search criteria is required.&lt;/mark&gt;
 	</entry>
+	<entry key="warning">At least one search criteria is required.</entry>
 </properties>

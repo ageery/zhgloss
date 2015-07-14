@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="page.title">Home</entry>
+	<entry key="page.header">ZhGloss</entry>
+	<entry key="page.headerDescription">Tools for working with Chinese</entry>
+	<entry key="dictionaryDescription">Lookup words by characters, transcription or definition</entry>
+	<entry key="glossDescription">Transform a text of characters into a document of words</entry>
+</properties>

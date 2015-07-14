@@ -4,8 +4,8 @@
 	<entry key="page.title">Gloss</entry>
 	<entry key="page.headerDescription">Enter the text to gloss below</entry>
 	<entry key="instructions">
-		Specify the text to gloss,
-		whether the characters are simplified or traditional
-		and specify the transcription system to use.
+		Specify the text,
+		the transcription system to use
+		and whether the characters are simplified or traditional.
 	</entry>
 </properties>

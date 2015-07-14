@@ -33,8 +33,6 @@ public class TextSearchButtonFilter<T> extends AbstractFilter {
         group.setOutputMarkupId(true);
         add(group);
         
-        group.add(new ClearButton("clear"));
-        
         AbstractButton searchButton = new SearchButton("search");
         group.add(searchButton);
         filter = new TextField<>("filter", model);
@@ -51,12 +49,6 @@ public class TextSearchButtonFilter<T> extends AbstractFilter {
     	if (filter.hasErrorMessage()) {
     		event.getTarget().add(group);
     	}
-    }
-    
-    @OnEvent
-    public void handleClearEvent(ClearEvent event) {
-    	filter.setModelObject(null);
-    	event.getTarget().add(group);
     }
 
 }

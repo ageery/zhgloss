@@ -13,6 +13,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.Filte
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.event.annotation.OnEvent;
@@ -26,9 +27,7 @@ import com.zixinxi.web.wicket.component.table.OrderedListFilteredColumn;
 import com.zixinxi.web.wicket.component.table.TextFilteredColumn;
 import com.zixinxi.web.wicket.event.SearchEvent;
 
-import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Alert;
-import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Alert.Type;
-import de.agilecoders.wicket.core.markup.html.bootstrap.heading.Heading;
+import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.CssClassNameAppender;
 
 public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	
@@ -37,25 +36,23 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	
 	private WordLookupDataSource dataSource;
 	
+	private IModel<String> warningCssClassModel = Model.of("");
 	private DataTable<WordParts, WordSorts> table;
-	private Component errorMessage;
+	private Component warning;
 	
 	public DictionaryPanel(String id, IModel<WordLookupCriteria> model, IModel<TranscriptionSystemInfo> transcriptionSystemModel) {
 		super(id, model);
 		
 		add(new Label("instructions", new ResourceModel("instructions"))
 			.setEscapeModelStrings(false));
+		warning = new Label("warning", new ResourceModel("warning"))
+			.add(new CssClassNameAppender(warningCssClassModel))
+			.setOutputMarkupId(true);
+		add(warning);
 		
 		dataSource = new WordLookupDataSource(model, transcriptionSystemModel);
 		FilterForm<WordLookupCriteria> form = new FilterForm<>("form", dataSource);
 		add(form);
-		
-		errorMessage = new Alert("error", new ResourceModel("lookup.error"))
-				.setCloseButtonVisible(true)
-				.type(Type.Info)
-				.setOutputMarkupPlaceholderTag(true)
-				.setVisible(false);
-		form.add(errorMessage);	
 		
 		table = new BootstrapDataTable<>("table", getColumns(transcriptionSystemModel), dataSource, 10);
 		table.addTopToolbar(new FilterToolbar(table, form, dataSource));
@@ -92,12 +89,12 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	@OnEvent(types = WordLookupCriteria.class, stop = true)
 	public void handleSearchEvent(SearchEvent<WordLookupCriteria> event) {
 		if (event.getPayload().isEmpty()) {
-			errorMessage.setVisible(true);
-			event.getTarget().add(errorMessage);
+			warningCssClassModel.setObject("mark");
+			event.getTarget().add(warning);
 		} else {
-			errorMessage.setVisible(false);
+			warningCssClassModel.setObject("");
 			dataSource.criteriaChanged();
-			event.getTarget().add(table, errorMessage);
+			event.getTarget().add(table, warning);
 		}
 	}
 	

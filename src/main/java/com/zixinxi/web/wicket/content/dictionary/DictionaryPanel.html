@@ -1,10 +1,12 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:panel>
 	<div class="well well-sm">
-		<p wicket:id="instructions">[INSTRUCTIONS]</p>
+		<p>
+			<span wicket:id="instructions">[INSTRUCTIONS]</span>
+			<span wicket:id="warning">[WARNING]</span>
+		</p>
 	</div>
 	<form wicket:id="form">
-		<div wicket:id="error">[ERROR]</div>
 		<table wicket:id="table"></table>
 	</form>
 </wicket:panel>

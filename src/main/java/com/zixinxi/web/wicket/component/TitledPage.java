@@ -16,7 +16,7 @@ public class TitledPage extends BasePage {
 	}
 	
 	protected IModel<String> getPageHeaderModel() {
-		return getTitleModel();
+		return new ResourceModel("page.header", getTitleModel());
 	}
 	
 	protected IModel<String> getDescriptionModel() {
