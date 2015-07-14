@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.lookup;
+package com.zixinxi.web.wicket.content.dictionary;
 
 import static com.zixinxi.domain.SerializableProperty.of;
 
@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
 
 import com.zixinxi.domain.SerializableProperty;
+import com.zixinxi.domain.external.TranscriptionSystemInfo;
 
 public class WordLookupCriteria implements Serializable {
 	

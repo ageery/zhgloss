@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.lookup;
+package com.zixinxi.web.wicket.content.dictionary;
 
 import java.util.List;
 import java.util.stream.Collectors;

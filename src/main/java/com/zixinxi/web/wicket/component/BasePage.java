@@ -10,7 +10,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
-import com.zixinxi.web.wicket.content.lookup.LookupPage;
+import com.zixinxi.web.wicket.content.dictionary.DictionaryPage;
 import com.zixinxi.web.wicket.content.segment.SegmentPage;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
@@ -42,7 +42,7 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
     }
     
     protected IModel<String> getTitleModel() {
-    	return new ResourceModel("app.name");
+    	return new ResourceModel("page.title", new ResourceModel("app.name"));
     }
 
     protected Navbar newNavbar(String markupId) {
@@ -51,9 +51,8 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         navbar.setInverted(true);
         navbar.setBrandName(new ResourceModel("app.branding"));
         navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
-                new NavbarButton<>(LookupPage.class, new ResourceModel("topmenu.lookup")),
-                //new NavbarButton<>(TranscriptionsPage.class, new ResourceModel("topmenu.transcriptions")),
-                new NavbarButton<>(SegmentPage.class, new ResourceModel("topmenu.segment"))));
+                new NavbarButton<>(DictionaryPage.class, new ResourceModel("label.dictionary")),
+                new NavbarButton<>(SegmentPage.class, new ResourceModel("label.gloss"))));
         return navbar;
     }
 

@@ -4,28 +4,13 @@
 	<entry key="app.name">Zhongwen Gloss</entry>
 	<entry key="app.branding">中文光泽 - Zhongwen Gloss</entry>
 	<entry key="app.author">Zhgloss Admin &lt;zhgloss@gmail.com&gt;</entry>
-	<entry key="topmenu.lookup">Lookup</entry>
-	<entry key="topmenu.segment">Segment</entry>
-	<entry key="topmenu.transcriptions">Transcriptions</entry>
-	<entry key="column.traditional_characters">Traditional Characters</entry>
-	<entry key="column.simplified_characters">Simplified Characters</entry>
-	<entry key="column.transcription">Transcription</entry>
-	<entry key="column.definition">English Definitions</entry>
-	<entry key="transcriptions.header">Mandarin Transcription Systems</entry>
-	<entry key="transcriptions.description">List of transcription system equivalences.</entry>
-	<entry key="lookup.header">Word Search</entry>
-	<entry key="lookup.description">Search for words using the filters on the columns below</entry>
-	<entry key="lookup.instructions">
-		The transcription column can be filtered using Hanyu Pinyin; tones can be specified as a number following the syllable.
-		Searches are exact matches, but &lt;kbd&gt;*&lt;/kbd&gt; can be used as a wild-card (e.g, searching for &lt;kbd&gt;jing*&lt;/kbd&gt; or 
-		&lt;kbd&gt;*淨*&lt;/kbd&gt; will find words that start with the Hanyu Pinyin syllable &lt;strong&gt;jing&lt;/strong&gt; (case-insensitive) 
-		and words that contain the character &lt;strong&gt;淨&lt;/strong&gt;, respectively).
-	</entry>
+	
 	<entry key="lookup.error">At least one non-empty criteria must be specified.</entry>
 	<entry key="lookup.transcriptions_displayed">Transcriptions displayed in</entry>
 	
-	<entry key="label.transcription_system">Transcription System</entry>
-	<entry key="label.gloss">Gloss</entry>
 	<entry key="label.character_type">Character Type</entry>
+	<entry key="label.dictionary">Dictionary</entry>
+	<entry key="label.gloss">Gloss</entry>
+	<entry key="label.transcription_system">Transcription System</entry>
 	
 </properties>

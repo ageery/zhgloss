@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="page.title">Dictionary</entry>
+	<entry key="page.headerDescription">Search for words using the filters on the columns below</entry>
+	<entry key="column.traditional_characters">Traditional Characters</entry>
+	<entry key="column.simplified_characters">Simplified Characters</entry>
+	<entry key="column.transcription">Transcription</entry>
+	<entry key="column.definition">English Definitions</entry>
+	<entry key="datatable.no-records-found">No words found that match the search criteria</entry>
+	<entry key="instructions">
+		&lt;kbd&gt;*&lt;/kbd&gt; can be used as a wild-card. 
+		Transcription filter criteria must be entered in Hanyu Pinyin.
+		&lt;mark&gt;At least one search criteria is required.&lt;/mark&gt;
+	</entry>
+</properties>

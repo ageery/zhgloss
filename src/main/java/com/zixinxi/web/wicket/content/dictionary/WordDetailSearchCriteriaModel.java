@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.lookup;
+package com.zixinxi.web.wicket.content.dictionary;
 
 import static org.jooq.lambda.Seq.seq;
 import static org.jooq.lambda.Seq.zipWithIndex;

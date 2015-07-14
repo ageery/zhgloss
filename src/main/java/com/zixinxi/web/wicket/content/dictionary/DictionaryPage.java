@@ -1,25 +1,27 @@
-package com.zixinxi.web.wicket.content.lookup;
+package com.zixinxi.web.wicket.content.dictionary;
 
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import com.zixinxi.web.wicket.component.BasePage;
+import com.zixinxi.domain.external.TranscriptionSystemInfo;
+import com.zixinxi.web.wicket.component.TitledPage;
 
-@MountPath("/lookup")
-public class LookupPage extends BasePage {
+@MountPath("/dictionary")
+public class DictionaryPage extends TitledPage {
 
 	private static final String PARAM_NAME_PINYIN = "p";
 	private static final String PARAM_NAME_SYSTEM_CODE = "s";
 	
-	public LookupPage(PageParameters parameters) {
+	public DictionaryPage(PageParameters parameters) {
 		super(parameters);
 		
 		String pinyin = parameters.get(PARAM_NAME_PINYIN).toString();
-		String systemCode = parameters.get(PARAM_NAME_SYSTEM_CODE).toString("H");
+		String systemCode = parameters.get(PARAM_NAME_SYSTEM_CODE)
+				.toString(TranscriptionSystemInfo.CODE_HANYU_PINYIN);
 		
 		WordLookupCriteria criteria = new WordLookupCriteria().withPinyin(pinyin);
-		add(new LookupPanel("panel", Model.of(criteria), new TranscriptionSystemInfoModel(systemCode)));
+		add(new DictionaryPanel("panel", Model.of(criteria), new TranscriptionSystemInfoModel(systemCode)));
 	}
 	
 	public static PageParameters getPageParameters(String code, String pinyin) {

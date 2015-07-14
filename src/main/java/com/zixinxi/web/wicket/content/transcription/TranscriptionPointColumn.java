@@ -8,7 +8,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 import com.zixinxi.domain.external.TranscriptionPlane;
-import com.zixinxi.web.wicket.content.lookup.LookupPage;
+import com.zixinxi.web.wicket.content.dictionary.DictionaryPage;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapBookmarkablePageLink;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
@@ -48,7 +48,7 @@ public class TranscriptionPointColumn<S> extends AbstractColumn<TranscriptionPla
 		public LookupPageLink(String id, IModel<TranscriptionPlane> rowModel) {
 			super(id);
 			TranscriptionPlane tp = rowModel.getObject();
-			add(new BootstrapBookmarkablePageLink<TranscriptionPlane>("link", LookupPage.class, LookupPage.getPageParameters(transcriptionSystemCode, tp.getSyllableName() + tp.getTone()), Buttons.Type.Link)
+			add(new BootstrapBookmarkablePageLink<TranscriptionPlane>("link", DictionaryPage.class, DictionaryPage.getPageParameters(transcriptionSystemCode, tp.getSyllableName() + tp.getTone()), Buttons.Type.Link)
 					.setLabel( new TranscriptionPointModel(rowModel)));
 		}
 		

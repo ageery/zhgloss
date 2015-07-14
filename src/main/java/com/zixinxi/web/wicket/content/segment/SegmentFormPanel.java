@@ -9,8 +9,8 @@ import org.apache.wicket.model.ResourceModel;
 import com.zixinxi.domain.CharacterType;
 import com.zixinxi.web.wicket.component.button.SearchButton;
 import com.zixinxi.web.wicket.component.form.ChoiceRenderer;
-import com.zixinxi.web.wicket.content.lookup.CharacterTypeListModel;
-import com.zixinxi.web.wicket.content.lookup.TranscriptionSystemInfoListModel;
+import com.zixinxi.web.wicket.content.dictionary.CharacterTypeListModel;
+import com.zixinxi.web.wicket.content.dictionary.TranscriptionSystemInfoListModel;
 import com.zixinxi.web.wicket.model.LambdaModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons.Type;
