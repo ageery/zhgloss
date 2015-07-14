@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.segment;
+package com.zixinxi.web.wicket.content.gloss;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -8,9 +8,9 @@ import org.apache.wicket.model.Model;
 import com.zixinxi.web.wicket.component.ListView;
 import com.zixinxi.web.wicket.component.button.EditButton;
 
-public class SegmentedWordResultsPanel extends Panel {
+public class GlossResultsPanel extends Panel {
 
-	public SegmentedWordResultsPanel(String id, IModel<SegmentedWordSearchCriteria> model) {
+	public GlossResultsPanel(String id, IModel<SegmentedWordSearchCriteria> model) {
 		super(id, model);
 		
 		/*
@@ -24,7 +24,7 @@ public class SegmentedWordResultsPanel extends Panel {
 		 * Results.
 		 */
 		add(new ListView<>("words", new SegmentedWordListModel(model),
-				item -> item.add(new SegmentedWordPanel("word", item.getModel()))));
+				item -> item.add(new WordPanel("word", item.getModel()))));
 	}
 
 }

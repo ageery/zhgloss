@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.segment;
+package com.zixinxi.web.wicket.content.gloss;
 
 import java.util.Collections;
 import java.util.List;

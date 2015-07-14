@@ -11,7 +11,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
 import com.zixinxi.web.wicket.content.dictionary.DictionaryPage;
-import com.zixinxi.web.wicket.content.segment.SegmentPage;
+import com.zixinxi.web.wicket.content.gloss.GlossPage;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.IeEdgeMetaTag;
@@ -52,7 +52,7 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         navbar.setBrandName(new ResourceModel("app.branding"));
         navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
                 new NavbarButton<>(DictionaryPage.class, new ResourceModel("label.dictionary")),
-                new NavbarButton<>(SegmentPage.class, new ResourceModel("label.gloss"))));
+                new NavbarButton<>(GlossPage.class, new ResourceModel("label.gloss"))));
         return navbar;
     }
 

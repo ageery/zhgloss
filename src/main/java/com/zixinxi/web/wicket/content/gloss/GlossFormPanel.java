@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.segment;
+package com.zixinxi.web.wicket.content.gloss;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
@@ -19,9 +19,9 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormGroup;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.InputBehavior;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.form.select.BootstrapSelect;
 
-public class SegmentFormPanel extends Panel {
+public class GlossFormPanel extends Panel {
 
-	public SegmentFormPanel(String id, IModel<SegmentedWordSearchCriteria> model) {
+	public GlossFormPanel(String id, IModel<SegmentedWordSearchCriteria> model) {
 		super(id, model);
 		
 		/*

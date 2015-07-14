@@ -1,4 +1,4 @@
-package com.zixinxi.web.wicket.content.segment;
+package com.zixinxi.web.wicket.content.gloss;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,9 +19,9 @@ import com.zixinxi.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.CssClassNameAppender;
 
-public class SegmentedWordPanel extends Panel {
+public class WordPanel extends Panel {
 
-	public SegmentedWordPanel(String id, IModel<SegmentedWord> model) {
+	public WordPanel(String id, IModel<SegmentedWord> model) {
 		super(id, model);
 		
 		WebMarkupContainer container = new WebMarkupContainer("container");

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="page.title">Gloss</entry>
+	<entry key="page.headerDescription">Enter the text to gloss below</entry>
+	<entry key="instructions">
+		Specify the text to gloss,
+		whether the characters are simplified or traditional
+		and specify the transcription system to use.
+	</entry>
+</properties>
