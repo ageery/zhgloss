@@ -23,4 +23,9 @@
 	</entry>
 	<entry key="lookup.error">At least one non-empty criteria must be specified.</entry>
 	<entry key="lookup.transcriptions_displayed">Transcriptions displayed in</entry>
+	
+	<entry key="label.transcription_system">Transcription System</entry>
+	<entry key="label.gloss">Gloss</entry>
+	<entry key="label.character_type">Character Type</entry>
+	
 </properties>

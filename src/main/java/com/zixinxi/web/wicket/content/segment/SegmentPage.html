@@ -1,14 +1,22 @@
 <html wicket:id="html" xmlns:wicket="http://wicket.apache.org">
 <wicket:extend>
 	<h1 wicket:id="header">[HEADER]</h1>
+	<div wicket:id="form">[FORM]</div>
+	<div wicket:id="results">[RESULTS]</div>
+	<!-- 
 	<div>
 		<form wicket:id="form">
 			<div wicket:id="searchContainer">
-				<div wicket:id="typeGroup">
-					<select wicket:id="types"></select>
-				</div>
-				<div wicket:id="systemGroup">
-					<select wicket:id="systems"></select>
+				<div class="form-group">
+					<div class="form-inline">
+						<div wicket:id="typeGroup">
+							<select wicket:id="types"></select>
+						</div>
+						<div wicket:id="systemGroup">
+							<select wicket:id="systems"></select>
+						</div>
+						<button wicket:id="segmentButton">[SEGMENT]</button>
+					</div>
 				</div>
 				<div wicket:id="textGroup">
 					<textarea wicket:id="text" rows="8" cols="50"></textarea>
@@ -20,10 +28,11 @@
 				</ul>
 			</div>
 			<div>
-				<button wicket:id="segmentButton">[SEGMENT]</button>
+				
 				<button wicket:id="editButton">[EDIT]</button>
 			</div>
 		</form>
 	</div>
+	 -->
 </wicket:extend>
 </html>

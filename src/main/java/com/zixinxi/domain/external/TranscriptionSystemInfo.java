@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class TranscriptionSystemInfo implements Serializable {
 	
+	public static final String CODE_HANYU_PINYIN = "H";
+	
 	private String code;
 	private String name;
 	

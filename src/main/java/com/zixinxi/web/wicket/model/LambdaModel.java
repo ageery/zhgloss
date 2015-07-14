@@ -10,6 +10,7 @@ import org.apache.wicket.model.LoadableDetachableModel;
 
 import com.zixinxi.domain.SerializableBiConsumer;
 import com.zixinxi.domain.SerializableFunction;
+import com.zixinxi.domain.SerializableProperty;
 
 /**
  * {@link LoadableDetachableModel} that wraps an {@link IModel} and applies an 
@@ -37,6 +38,10 @@ public class LambdaModel<T, R> extends LoadableDetachableModel<R> {
 		this(wrappedModel, loadHandler, (t, r) -> {});
 	}
 
+	public LambdaModel(IModel<T> wrappedModel, SerializableProperty<T, R> propertyHandler) {
+		this(wrappedModel, propertyHandler.getGetter(), propertyHandler.getSetter());
+	}
+	
 	/**
 	 * @param wrappedModel {@link IModel} that wraps the value which will be applied to the {@code loadHandler} {@link Function}
 	 * @param loadHandler {@link Function} that is invoked to provide the value for the {@code #load()} method

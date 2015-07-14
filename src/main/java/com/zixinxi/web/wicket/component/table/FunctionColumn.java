@@ -1,5 +1,7 @@
 package com.zixinxi.web.wicket.component.table;
 
+import java.util.function.Function;
+
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.markup.html.basic.Label;
@@ -13,13 +15,13 @@ public class FunctionColumn<T, S, R> extends AbstractColumn<T, S> {
 
 	private SerializableFunction<T, R> dataFunction;
 	
-	public FunctionColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction) {
+	public FunctionColumn(IModel<String> displayModel, Function<T, R> dataFunction) {
 		this(displayModel, dataFunction, null);
 	}
 
-	public FunctionColumn(IModel<String> displayModel, SerializableFunction<T, R> dataFunction, S sortProperty) {
+	public FunctionColumn(IModel<String> displayModel, Function<T, R> dataFunction, S sortProperty) {
 		super(displayModel, sortProperty);
-		this.dataFunction = dataFunction;
+		this.dataFunction = (SerializableFunction<T, R>) dataFunction;
 	}
 
 	@Override
