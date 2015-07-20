@@ -299,6 +299,11 @@
 									<inputSchema>public</inputSchema>
 									<customTypes>
 										<customType>
+											<name>LocalDateTime</name>
+											<type>java.time.LocalDateTime</type>
+											<converter>com.zixinxi.jooq.LocalDateTimeConverter</converter>
+										</customType>
+										<customType>
 											<name>WordInfo</name>
 											<type>com.zixinxi.domain.WordInfo</type>
 											<converter>com.zixinxi.jooq.WordInfoConverter</converter>
@@ -320,6 +325,11 @@
 										</customType>
 									</customTypes>
 									<forcedTypes>
+										<forcedType>
+											<name>LocalDateTime</name>
+											<expression>.*\.load_start|.*load_finish.*</expression>
+											<types>.*</types>
+										</forcedType>
 										<forcedType>
 											<name>WordInfo</name>
 											<expression>.*\.word_info|.*json_arr_search.*|.*jsonb_arr.*</expression>

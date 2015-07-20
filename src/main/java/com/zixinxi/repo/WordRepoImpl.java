@@ -5,6 +5,7 @@ import static com.zixinxi.repo.jooq.tables.Word.WORD;
 import static com.zixinxi.repo.jooq.tables.WordDef.WORD_DEF;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +43,8 @@ import com.zixinxi.domain.WordInfo;
 import com.zixinxi.jooq.FullTextSearchCondition;
 import com.zixinxi.jooq.WordInfoCondition;
 import com.zixinxi.repo.jooq.Routines;
+import com.zixinxi.repo.jooq.tables.CedictLoad;
+import com.zixinxi.repo.jooq.tables.records.CedictLoadRecord;
 
 public class WordRepoImpl implements WordRepo {
 	
@@ -62,8 +65,13 @@ public class WordRepoImpl implements WordRepo {
 	
 	@Override
 	public int updateWordsFromCedictData() {
+		CedictLoadRecord clr = context.newRecord(CedictLoad.CEDICT_LOAD);
+		clr.setLoadStart(LocalDateTime.now());
 		int count = Routines.updateWordsFromCedictWords(context.configuration());
+		clr.setLoadFinish(LocalDateTime.now());
+		clr.setLoadCount(count);
 		context.execute("vacuum analyze");
+		clr.store();
 		return count;
 	}
 	

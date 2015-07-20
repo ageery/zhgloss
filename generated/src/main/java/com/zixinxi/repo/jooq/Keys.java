@@ -4,6 +4,7 @@
 package com.zixinxi.repo.jooq;
 
 
+import com.zixinxi.repo.jooq.tables.CedictLoad;
 import com.zixinxi.repo.jooq.tables.CedictWord;
 import com.zixinxi.repo.jooq.tables.CedictWordDef;
 import com.zixinxi.repo.jooq.tables.SchemaVersion;
@@ -11,6 +12,7 @@ import com.zixinxi.repo.jooq.tables.TranscriptionPoint;
 import com.zixinxi.repo.jooq.tables.TranscriptionSystem;
 import com.zixinxi.repo.jooq.tables.Word;
 import com.zixinxi.repo.jooq.tables.WordDef;
+import com.zixinxi.repo.jooq.tables.records.CedictLoadRecord;
 import com.zixinxi.repo.jooq.tables.records.CedictWordDefRecord;
 import com.zixinxi.repo.jooq.tables.records.CedictWordRecord;
 import com.zixinxi.repo.jooq.tables.records.SchemaVersionRecord;
@@ -22,6 +24,7 @@ import com.zixinxi.repo.jooq.tables.records.WordRecord;
 import javax.annotation.Generated;
 
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
 
@@ -44,11 +47,13 @@ public class Keys {
 	// IDENTITY definitions
 	// -------------------------------------------------------------------------
 
+	public static final Identity<CedictLoadRecord, Integer> IDENTITY_CEDICT_LOAD = Identities0.IDENTITY_CEDICT_LOAD;
 
 	// -------------------------------------------------------------------------
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
+	public static final UniqueKey<CedictLoadRecord> CEDICT_LOAD_PKEY = UniqueKeys0.CEDICT_LOAD_PKEY;
 	public static final UniqueKey<CedictWordRecord> CEDICT_WORD_PKEY = UniqueKeys0.CEDICT_WORD_PKEY;
 	public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_PKEY = UniqueKeys0.CEDICT_WORD_DEF_PKEY;
 	public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_WORD_ID_ORDER_NUM_KEY = UniqueKeys0.CEDICT_WORD_DEF_WORD_ID_ORDER_NUM_KEY;
@@ -71,7 +76,12 @@ public class Keys {
 	// [#1459] distribute members to avoid static initialisers > 64kb
 	// -------------------------------------------------------------------------
 
+	private static class Identities0 extends AbstractKeys {
+		public static Identity<CedictLoadRecord, Integer> IDENTITY_CEDICT_LOAD = createIdentity(CedictLoad.CEDICT_LOAD, CedictLoad.CEDICT_LOAD.CEDICT_LOAD_ID);
+	}
+
 	private static class UniqueKeys0 extends AbstractKeys {
+		public static final UniqueKey<CedictLoadRecord> CEDICT_LOAD_PKEY = createUniqueKey(CedictLoad.CEDICT_LOAD, CedictLoad.CEDICT_LOAD.CEDICT_LOAD_ID);
 		public static final UniqueKey<CedictWordRecord> CEDICT_WORD_PKEY = createUniqueKey(CedictWord.CEDICT_WORD, CedictWord.CEDICT_WORD.ID);
 		public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_PKEY = createUniqueKey(CedictWordDef.CEDICT_WORD_DEF, CedictWordDef.CEDICT_WORD_DEF.ID);
 		public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_WORD_ID_ORDER_NUM_KEY = createUniqueKey(CedictWordDef.CEDICT_WORD_DEF, CedictWordDef.CEDICT_WORD_DEF.WORD_ID, CedictWordDef.CEDICT_WORD_DEF.ORDER_NUM);

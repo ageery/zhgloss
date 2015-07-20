@@ -4,6 +4,7 @@
 package com.zixinxi.repo.jooq;
 
 
+import com.zixinxi.repo.jooq.tables.CedictLoad;
 import com.zixinxi.repo.jooq.tables.CedictWord;
 import com.zixinxi.repo.jooq.tables.CedictWordDef;
 import com.zixinxi.repo.jooq.tables.FindSegments;
@@ -14,7 +15,6 @@ import com.zixinxi.repo.jooq.tables.GetCedictWordParts;
 import com.zixinxi.repo.jooq.tables.MakePrefixes;
 import com.zixinxi.repo.jooq.tables.SchemaVersion;
 import com.zixinxi.repo.jooq.tables.TranscriptionPoint;
-import com.zixinxi.repo.jooq.tables.TranscriptionPointRepresentations;
 import com.zixinxi.repo.jooq.tables.TranscriptionSystem;
 import com.zixinxi.repo.jooq.tables.Word;
 import com.zixinxi.repo.jooq.tables.WordDef;
@@ -36,6 +36,11 @@ import org.jooq.Field;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+	/**
+	 * When and how many rows were loaded from the CEDICT data file.
+	 */
+	public static final CedictLoad CEDICT_LOAD = com.zixinxi.repo.jooq.tables.CedictLoad.CEDICT_LOAD;
 
 	/**
 	 * Character-related word data from the CEDICT file.
@@ -170,11 +175,6 @@ public class Tables {
 	 * Toned transcription syllable info for a transcription system.
 	 */
 	public static final TranscriptionPoint TRANSCRIPTION_POINT = com.zixinxi.repo.jooq.tables.TranscriptionPoint.TRANSCRIPTION_POINT;
-
-	/**
-	 * Transcription points with representation info for each system in JSON.
-	 */
-	public static final TranscriptionPointRepresentations TRANSCRIPTION_POINT_REPRESENTATIONS = com.zixinxi.repo.jooq.tables.TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS;
 
 	/**
 	 * Phonetic systems for transcribing the Mandarin pronounciation of Chinese characters

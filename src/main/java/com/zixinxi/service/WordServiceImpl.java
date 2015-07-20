@@ -34,6 +34,7 @@ public class WordServiceImpl implements WordService {
 	private CedictWordRepo cedictWordRepo;
 
 	public WordServiceImpl(WordRepo repo, CedictWordRepo cedictWordRepo) {
+		super();
 		this.repo = repo;
 		this.cedictWordRepo = cedictWordRepo;
 	}
@@ -54,7 +55,8 @@ public class WordServiceImpl implements WordService {
 		LOGGER.info("Downloading and loading new CEDICT data");
 		cedictWordRepo.load();
 		LOGGER.info("Adding new words from CEDICT data");
-		return repo.updateWordsFromCedictData();
+		int count = repo.updateWordsFromCedictData();
+		return count;
 	}
 	
 	@Override

@@ -4,6 +4,8 @@
 package com.zixinxi.repo.jooq;
 
 
+import com.zixinxi.repo.jooq.Sequences;
+import com.zixinxi.repo.jooq.tables.CedictLoad;
 import com.zixinxi.repo.jooq.tables.CedictWord;
 import com.zixinxi.repo.jooq.tables.CedictWordDef;
 import com.zixinxi.repo.jooq.tables.FindSegments;
@@ -14,7 +16,6 @@ import com.zixinxi.repo.jooq.tables.GetCedictWordParts;
 import com.zixinxi.repo.jooq.tables.MakePrefixes;
 import com.zixinxi.repo.jooq.tables.SchemaVersion;
 import com.zixinxi.repo.jooq.tables.TranscriptionPoint;
-import com.zixinxi.repo.jooq.tables.TranscriptionPointRepresentations;
 import com.zixinxi.repo.jooq.tables.TranscriptionSystem;
 import com.zixinxi.repo.jooq.tables.Word;
 import com.zixinxi.repo.jooq.tables.WordDef;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
+import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
@@ -42,7 +44,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = 810022140;
+	private static final long serialVersionUID = -1621889852;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -57,6 +59,18 @@ public class Public extends SchemaImpl {
 	}
 
 	@Override
+	public final List<Sequence<?>> getSequences() {
+		List result = new ArrayList();
+		result.addAll(getSequences0());
+		return result;
+	}
+
+	private final List<Sequence<?>> getSequences0() {
+		return Arrays.<Sequence<?>>asList(
+			Sequences.CEDICT_LOAD_CEDICT_LOAD_ID_SEQ);
+	}
+
+	@Override
 	public final List<Table<?>> getTables() {
 		List result = new ArrayList();
 		result.addAll(getTables0());
@@ -65,6 +79,7 @@ public class Public extends SchemaImpl {
 
 	private final List<Table<?>> getTables0() {
 		return Arrays.<Table<?>>asList(
+			CedictLoad.CEDICT_LOAD,
 			CedictWord.CEDICT_WORD,
 			CedictWordDef.CEDICT_WORD_DEF,
 			FindSegments.FIND_SEGMENTS,
@@ -75,7 +90,6 @@ public class Public extends SchemaImpl {
 			MakePrefixes.MAKE_PREFIXES,
 			SchemaVersion.SCHEMA_VERSION,
 			TranscriptionPoint.TRANSCRIPTION_POINT,
-			TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS,
 			TranscriptionSystem.TRANSCRIPTION_SYSTEM,
 			Word.WORD,
 			WordDef.WORD_DEF);

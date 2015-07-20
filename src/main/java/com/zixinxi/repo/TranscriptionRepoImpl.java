@@ -8,7 +8,7 @@ import org.jooq.Record2;
 
 import com.zixinxi.domain.external.TranscriptionPlane;
 import com.zixinxi.domain.external.TranscriptionSystemInfo;
-import com.zixinxi.repo.jooq.tables.TranscriptionPointRepresentations;
+import com.zixinxi.repo.jooq.tables.TranscriptionPoint;
 import com.zixinxi.repo.jooq.tables.TranscriptionSystem;
 
 public class TranscriptionRepoImpl extends AbstractRepoImpl implements TranscriptionRepo {
@@ -33,15 +33,15 @@ public class TranscriptionRepoImpl extends AbstractRepoImpl implements Transcrip
 	@Override
 	public Stream<TranscriptionPlane> getTranscriptionPlanes() {
 		return getContext()
-				.select(TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS.PINYIN_SYLLABLE, TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS.TONE, TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS.SYSTEM_INFO)
-				.from(TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS)
-				.orderBy(TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS.PINYIN_SYLLABLE, TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS.TONE)
+				.select(TranscriptionPoint.TRANSCRIPTION_POINT.PINYIN_SYLLABLE, TranscriptionPoint.TRANSCRIPTION_POINT.TONE, TranscriptionPoint.TRANSCRIPTION_POINT.TONED_REPRESENTATION)
+				.from(TranscriptionPoint.TRANSCRIPTION_POINT)
+				.orderBy(TranscriptionPoint.TRANSCRIPTION_POINT.PINYIN_SYLLABLE, TranscriptionPoint.TRANSCRIPTION_POINT.TONE)
 				.fetch()
 				.stream()
 				.map(t -> new TranscriptionPlane()
 							.withSyllableName(t.value1())
 							.withTone(t.value2())
-							.withTonedRepresentationMapper(c -> t.value3().getTranscriptionSystemCode(c).getTonedRepresentation()));
+							.withTonedRepresentationMapper(c -> t.value3()));
 	}
 
 	@Override
