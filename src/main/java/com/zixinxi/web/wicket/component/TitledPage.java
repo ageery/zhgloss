@@ -31,7 +31,9 @@ public class TitledPage extends BasePage {
 	}
 	
 	protected IModel<String> getPageHeaderModel() {
-		return new ResourceModel("page.header", getTitleModel());
+		return new ResourceModel("page.header", 
+				new ResourceModel("page.title").wrapOnAssignment(this))
+			.wrapOnAssignment(this);
 	}
 	
 	protected IModel<String> getDescriptionModel() {
@@ -39,7 +41,8 @@ public class TitledPage extends BasePage {
 	}
 	
 	protected IModel<String> getHelpContentModel() {
-		return new ResourceModel("page.help", EmptyStringModel.get()).wrapOnAssignment(this);
+		return new ResourceModel("page.help", EmptyStringModel.get())
+			.wrapOnAssignment(this);
 	}
 
 }
