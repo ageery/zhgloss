@@ -10,6 +10,7 @@ import com.zixinxi.domain.SerializableFunction;
 public class SegmentedWord {
 
 	public static final SerializableFunction<SegmentedWord, Op<String>> FUNCTION_TEXT = sw -> Op.of(sw).flatMap(SegmentedWord::getText);
+	public static final SerializableFunction<SegmentedWord, Op<List<WordParts>>> FUNCTION_WORDS = sw -> Op.of(sw).flatMap(SegmentedWord::getWords);
 	
 	@JsonProperty("text")
 	private String text;

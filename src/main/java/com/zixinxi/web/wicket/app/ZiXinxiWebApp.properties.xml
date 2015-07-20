@@ -6,6 +6,7 @@
 	<entry key="app.author">zhGloss Admin &lt;zhgloss@gmail.com&gt;</entry>
 	<entry key="label.character_type">Character Type</entry>
 	<entry key="label.dictionary">Dictionary</entry>
+	<entry key="label.format">Format</entry>
 	<entry key="label.gloss">Gloss</entry>
 	<entry key="label.transcription_system">Transcription System</entry>
 </properties>

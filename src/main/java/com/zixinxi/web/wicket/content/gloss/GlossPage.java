@@ -36,9 +36,11 @@ public class GlossPage extends TitledPage {
 						transcriptionService.getTranscriptionSystem(TranscriptionSystemInfo.CODE_HANYU_PINYIN)
 							.orElse(null)));
 		isEditModeModel = Model.of(true);
+		IModel<GlossFormat> formatModel = Model.of(GlossFormat.INLINE);
 		
-		add(new GlossFormPanel("form", searchCriteriaModel).add(new VisibleModelBehavior(isEditModeModel)));
-		add(new GlossResultsPanel("results", searchCriteriaModel)
+		add(new GlossFormPanel("form", searchCriteriaModel, formatModel)
+				.add(new VisibleModelBehavior(isEditModeModel)));
+		add(new GlossResultsPanel("results", searchCriteriaModel, formatModel)
 				.add(new VisibleModelBehavior(new NotModel(isEditModeModel))));
 	}
 	

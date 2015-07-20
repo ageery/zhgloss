@@ -1,5 +1,7 @@
 package com.zixinxi.web.wicket.content.gloss;
 
+import java.util.Arrays;
+
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -9,9 +11,9 @@ import org.apache.wicket.model.ResourceModel;
 import com.zixinxi.domain.CharacterType;
 import com.zixinxi.web.wicket.component.button.SearchButton;
 import com.zixinxi.web.wicket.component.form.ChoiceRenderer;
-import com.zixinxi.web.wicket.content.dictionary.CharacterTypeListModel;
 import com.zixinxi.web.wicket.content.dictionary.TranscriptionSystemInfoListModel;
 import com.zixinxi.web.wicket.model.LambdaModel;
+import com.zixinxi.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons.Type;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
@@ -21,7 +23,7 @@ import de.agilecoders.wicket.extensions.markup.html.bootstrap.form.select.Bootst
 
 public class GlossFormPanel extends Panel {
 
-	public GlossFormPanel(String id, IModel<SegmentedWordSearchCriteria> model) {
+	public GlossFormPanel(String id, IModel<SegmentedWordSearchCriteria> model, IModel<GlossFormat> formatModel) {
 		super(id, model);
 		
 		/*
@@ -36,7 +38,7 @@ public class GlossFormPanel extends Panel {
 		form.add(new FormGroup("typeGroup")
 			.add(new BootstrapSelect<>("types", 
 						new LambdaModel<>(model, SegmentedWordSearchCriteria::getCharacterType, SegmentedWordSearchCriteria::setCharacterType), 
-						new CharacterTypeListModel(),
+						new SupplierModel<>(() -> Arrays.asList(CharacterType.values())),
 						new ChoiceRenderer<>(CharacterType::getDisplayValue, (ct, index) -> ct.getDbValue()))
 					.setLabel(new ResourceModel("label.character_type"))
 					.setRequired(true)));
@@ -51,6 +53,17 @@ public class GlossFormPanel extends Panel {
 						new ChoiceRenderer<>(ts -> ts.getName(), (ts, index) -> ts.getCode()))
 					.setLabel(new ResourceModel("label.transcription_system"))
 					.setRequired(true)));
+		
+		/*
+		 * Format.
+		 */
+		form.add(new FormGroup("formatGroup")
+			.add(new BootstrapSelect<>("formats", 
+					formatModel, 
+					new SupplierModel<>(() -> Arrays.asList(GlossFormat.values())),
+					new ChoiceRenderer<>(GlossFormat::getDisplayValue, (ct, index) -> ct.name()))
+				.setLabel(new ResourceModel("label.format"))
+				.setRequired(true)));
 		
 		/*
 		 * Text.
