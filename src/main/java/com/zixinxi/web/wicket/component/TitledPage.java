@@ -18,8 +18,9 @@ public class TitledPage extends BasePage {
 		add(new Label("header", getPageHeaderModel()));
 		add(new Label("headerDescription", getDescriptionModel()));
 		
-		IModel<String> helpContentModel = new ResourceModel("page.help", EmptyStringModel.get()).wrapOnAssignment(this);
+		IModel<String> helpContentModel = getHelpContentModel();
 		Component helpPanel = new Label("helpContent", helpContentModel)
+				.setEscapeModelStrings(false)
 				.setOutputMarkupPlaceholderTag(true);
 		add(helpPanel);
 		IModel<Boolean> hasHelpContentModel = new SupplierModel<Boolean>(() -> 
@@ -35,6 +36,10 @@ public class TitledPage extends BasePage {
 	
 	protected IModel<String> getDescriptionModel() {
 		return new ResourceModel("page.headerDescription", EmptyStringModel.get());
+	}
+	
+	protected IModel<String> getHelpContentModel() {
+		return new ResourceModel("page.help", EmptyStringModel.get()).wrapOnAssignment(this);
 	}
 
 }
