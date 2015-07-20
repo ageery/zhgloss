@@ -12,6 +12,7 @@ public class FooterPanel extends Panel {
 		super(id);
 		add(new Label("year", new CurrentLocalDateTimeModel("YYYY")));
 		add(new Label("built", new AppConfigModel<>(config -> config.getBuildTimestamp())));
+		add(new Label("version", new AppConfigModel<>(config -> config.getVersion())));
 	}
 
 }

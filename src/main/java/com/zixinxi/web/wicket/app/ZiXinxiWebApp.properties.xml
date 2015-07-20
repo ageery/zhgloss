@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="app.name">ZhGloss</entry>
-	<entry key="app.branding">中文光泽 - ZhGloss</entry>
-	<entry key="app.author">Zhgloss Admin &lt;zhgloss@gmail.com&gt;</entry>
+	<entry key="app.name">zhGloss</entry>
+	<entry key="app.branding">zhGloss</entry>
+	<entry key="app.author">zhGloss Admin &lt;zhgloss@gmail.com&gt;</entry>
 	<entry key="label.character_type">Character Type</entry>
 	<entry key="label.dictionary">Dictionary</entry>
 	<entry key="label.gloss">Gloss</entry>

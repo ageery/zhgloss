@@ -9,6 +9,7 @@ public class Icons {
 	public static final IconType ICON_DICTIONARY = GlyphIconType.book;
 	public static final IconType ICON_EDIT = GlyphIconType.edit;
 	public static final IconType ICON_GLOSS = GlyphIconType.list;
+	public static final IconType ICON_HELP = GlyphIconType.questionsign;
 	public static final IconType ICON_SEARCH = GlyphIconType.search;
 	public static final IconType ICON_SEGMENT = GlyphIconType.play;
 	

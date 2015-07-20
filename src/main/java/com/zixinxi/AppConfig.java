@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class AppConfig {
 
 	private String buildTimestamp;
+	private String version;
 
 	public AppConfig() {
 		super();
@@ -19,6 +20,14 @@ public class AppConfig {
 
 	public void setBuildTimestamp(String buildTimestamp) {
 		this.buildTimestamp = buildTimestamp;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 	
 }

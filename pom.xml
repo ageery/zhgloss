@@ -35,6 +35,7 @@
 		<wicketWebjarsVersion>0.4.6</wicketWebjarsVersion>
 		<wicketstuffVersion>6.19.0</wicketstuffVersion>
 
+		<app.version>${project.version}</app.version>
 		<db.url>${env.DB_URL}</db.url>
 		<db.username>${env.DB_USERNAME}</db.username>
 		<db.password>${env.DB_PASSWORD}</db.password>

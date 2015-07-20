@@ -2,10 +2,8 @@ package com.zixinxi.web.wicket.content.gloss;
 
 import static com.zixinxi.domain.CharacterType.SIMPLFIED;
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -36,11 +34,9 @@ public class GlossPage extends TitledPage {
 		IModel<SegmentedWordSearchCriteria> searchCriteriaModel = Model.of(
 				new SegmentedWordSearchCriteria(SIMPLFIED, 
 						transcriptionService.getTranscriptionSystem(TranscriptionSystemInfo.CODE_HANYU_PINYIN)
-						.orElse(null)));
+							.orElse(null)));
 		isEditModeModel = Model.of(true);
-
-		add(new Label("instructions", new ResourceModel("instructions"))
-			.setEscapeModelStrings(false));
+		
 		add(new GlossFormPanel("form", searchCriteriaModel).add(new VisibleModelBehavior(isEditModeModel)));
 		add(new GlossResultsPanel("results", searchCriteriaModel)
 				.add(new VisibleModelBehavior(new NotModel(isEditModeModel))));

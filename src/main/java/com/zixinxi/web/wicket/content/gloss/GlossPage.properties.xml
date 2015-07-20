@@ -3,7 +3,7 @@
 <properties>
 	<entry key="page.title">Gloss</entry>
 	<entry key="page.headerDescription">Enter the text to gloss below</entry>
-	<entry key="instructions">
+	<entry key="page.help">
 		Specify the text,
 		the transcription system to use
 		and whether the characters are simplified or traditional.
