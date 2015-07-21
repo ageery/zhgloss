@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="page.title">Gloss</entry>
-	<entry key="page.headerDescription">Enter the text to gloss below</entry>
+	<entry key="page.headerDescription">Parse words in text</entry>
 	<entry key="page.help">
 		Specify the text,
 		the transcription system to use

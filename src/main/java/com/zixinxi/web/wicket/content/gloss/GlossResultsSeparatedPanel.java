@@ -6,6 +6,7 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptContentHeaderItem;
 import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -15,7 +16,6 @@ import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 
 import com.zixinxi.domain.OpFunction;
 import com.zixinxi.domain.external.SegmentedWord;
-import com.zixinxi.web.wicket.component.BootstrapExternalLink;
 import com.zixinxi.web.wicket.component.HeaderButtonTitlePanel;
 import com.zixinxi.web.wicket.component.HeaderPanel;
 import com.zixinxi.web.wicket.component.ListView;
@@ -40,7 +40,7 @@ public class GlossResultsSeparatedPanel extends Panel {
 		
 		textBorder.add(new ListView<>("text", model,
 				item -> { 
-					BootstrapExternalLink link = new BootstrapExternalLink("word", Model.of("#def_link_" + item.getIndex()), new LambdaModel<>(item.getModel(), new OpFunction<>(SegmentedWord.FUNCTION_TEXT)));
+					ExternalLink link = new ExternalLink("word", Model.of("#def_link_" + item.getIndex()), new LambdaModel<>(item.getModel(), new OpFunction<>(SegmentedWord.FUNCTION_TEXT)));
 					link.add(new EnabledModelBehavior(new SupplierModel<>(() -> item.getModelObject().hasDefinition())));
 					link.setMarkupId("word_link_" + item.getIndex());
 					item.add(link);
