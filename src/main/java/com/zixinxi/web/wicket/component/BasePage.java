@@ -14,7 +14,6 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
-import com.zixinxi.web.wicket.app.Icons;
 import com.zixinxi.web.wicket.content.dictionary.DictionaryPage;
 import com.zixinxi.web.wicket.content.gloss.GlossPage;
 
@@ -25,7 +24,6 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.html.OptimizedMobileView
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.Icon;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarButton;
-import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeIconType;
 
 public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {

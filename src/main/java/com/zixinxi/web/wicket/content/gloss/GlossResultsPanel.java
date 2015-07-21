@@ -9,7 +9,6 @@ import org.apache.wicket.model.Model;
 import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 
 import com.zixinxi.domain.external.SegmentedWord;
-import com.zixinxi.web.wicket.component.ListView;
 import com.zixinxi.web.wicket.component.button.EditButton;
 import com.zixinxi.web.wicket.model.SupplierModel;
 
