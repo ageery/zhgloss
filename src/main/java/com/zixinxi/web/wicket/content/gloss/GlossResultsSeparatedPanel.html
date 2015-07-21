@@ -1,23 +1,14 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:panel>
 	<form wicket:id="form">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title" wicket:id="textHeader">[TEXT]</span>
-				<button wicket:id="edit">[EDIT]</button>
-			</div>
-			<div class="panel-body">
-				<ul class="list-inline">
-					<li wicket:id="text">
-						<a wicket:id="word">[WORD]</a>
-					</li>
-				</ul>
-			</div>
+		<div wicket:id="text">
+			<ul class="list-inline">
+				<li wicket:id="text">
+					<a wicket:id="word">[WORD]</a>
+				</li>
+			</ul>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title" wicket:id="defsHeader">[TEXT]</h3>
-			</div>
+		<div wicket:id="defs">
 			<ul>
 				<li wicket:id="defs">
 					<div wicket:id="def">[WORD]</div>
