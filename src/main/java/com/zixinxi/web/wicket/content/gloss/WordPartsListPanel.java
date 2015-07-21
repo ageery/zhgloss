@@ -1,19 +1,19 @@
 package com.zixinxi.web.wicket.content.gloss;
 
-import java.util.List;
-
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 
-import com.zixinxi.domain.external.WordParts;
+import com.zixinxi.domain.OpFunction;
+import com.zixinxi.domain.external.SegmentedWord;
 import com.zixinxi.web.wicket.component.ListView;
-import com.zixinxi.web.wicket.model.SupplierModel;
+import com.zixinxi.web.wicket.model.LambdaModel;
 
 public class WordPartsListPanel extends Panel {
 
-	public WordPartsListPanel(String id, IModel<List<WordParts>> model) {
+	public WordPartsListPanel(String id, IModel<SegmentedWord> model, IModel<String> wordLinkModel) {
 		super(id, model);
-		add(new ListView<>("words",  model, item -> item.add(new WordPartsPanel("word", item.getModel(), new SupplierModel<>(() -> "#word_link_" + item.getIndex())))));
+		add(new ListView<>("words", new LambdaModel<>(model, new OpFunction<>(SegmentedWord.FUNCTION_WORDS)), 
+				item -> item.add(new WordPartsPanel("word", new LambdaModel<>(model, new OpFunction<>(SegmentedWord.FUNCTION_TEXT)), item.getModel(), wordLinkModel))));
 	}
 
 }
