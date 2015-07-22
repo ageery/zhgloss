@@ -4,7 +4,10 @@
 	<entry key="app.name">zhGloss</entry>
 	<entry key="app.branding">zhGloss</entry>
 	<entry key="app.author">zhGloss Admin &lt;zhgloss@gmail.com&gt;</entry>
+	<entry key="app.contact">zhgloss@gmail.com</entry>
+	<entry key="label.about">About</entry>
 	<entry key="label.character_type">Character Type</entry>
+	<entry key="label.contact">Contact</entry>
 	<entry key="label.dictionary">Dictionary</entry>
 	<entry key="label.edit">Edit</entry>
 	<entry key="label.format">Format</entry>

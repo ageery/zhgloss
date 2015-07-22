@@ -1,5 +1,7 @@
 package com.zixinxi.web.wicket.component;
 
+import static com.zixinxi.web.wicket.app.Icons.ICON_ABOUT;
+import static com.zixinxi.web.wicket.app.Icons.ICON_CONTACT;
 import static com.zixinxi.web.wicket.app.Icons.ICON_DICTIONARY;
 import static com.zixinxi.web.wicket.app.Icons.ICON_GLOSS;
 import static de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents.transform;
@@ -14,8 +16,10 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
 
+import com.zixinxi.web.wicket.content.about.AboutPage;
 import com.zixinxi.web.wicket.content.dictionary.DictionaryPage;
 import com.zixinxi.web.wicket.content.gloss.GlossPage;
+import com.zixinxi.web.wicket.model.MailToModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.IeEdgeMetaTag;
@@ -24,6 +28,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.html.OptimizedMobileView
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.Icon;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarButton;
+import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarExternalLink;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeIconType;
 
 public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
@@ -54,10 +59,19 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         navbar.setInverted(true);
         navbar.setBrandName(new ResourceModel("app.branding"));
         navbar.addComponents(transform(Navbar.ComponentPosition.LEFT,
-                new NavbarButton<>(DictionaryPage.class, new ResourceModel("label.dictionary"))
+                new NavbarButton<>(DictionaryPage.class, 
+                		new ResourceModel("label.dictionary"))
                 	.setIconType(ICON_DICTIONARY),
-                new NavbarButton<>(GlossPage.class, new ResourceModel("label.gloss"))
-                	.setIconType(ICON_GLOSS)));
+                new NavbarButton<>(GlossPage.class, 
+                		new ResourceModel("label.gloss"))
+                	.setIconType(ICON_GLOSS),
+                new NavbarButton<>(AboutPage.class, 
+                		new ResourceModel("label.about"))
+                	.setIconType(ICON_ABOUT)));
+        navbar.addComponents(transform(Navbar.ComponentPosition.RIGHT,
+        		new NavbarExternalLink(new MailToModel(new ResourceModel("app.contact")))
+        			.setLabel(new ResourceModel("label.contact"))
+        			.setIconType(ICON_CONTACT)));
         return navbar;
     }
 
