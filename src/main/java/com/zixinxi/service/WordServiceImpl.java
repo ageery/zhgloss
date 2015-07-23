@@ -74,5 +74,10 @@ public class WordServiceImpl implements WordService {
 		return find(new WordDetailSearchCriteria().withId(id), transcriptionSystem, Stream.of(new SortInfo<>(WordDetailSort.SIMPLIFIED)), 0, 1)
 				.findFirst();
 	}
+
+	@Override
+	public int countAll() {
+		return repo.countAll();
+	}
 	
 }

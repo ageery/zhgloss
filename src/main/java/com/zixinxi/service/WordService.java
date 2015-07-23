@@ -13,6 +13,8 @@ import com.zixinxi.domain.external.WordParts;
 
 public interface WordService {
 
+	int countAll();
+	
 	int loadNewCedictWords();
 	
 	int count(WordDetailSearchCriteria criteria);

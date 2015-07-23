@@ -11,6 +11,8 @@ import com.zixinxi.domain.WordDetailSort;
 
 public interface WordRepo {
 
+	int countAll();
+	
 	int count(WordDetailSearchCriteria criteria);
 	
 	Stream<WordDetail> find(WordDetailSearchCriteria criteria, String transcriptionSystemCode, Stream<SortInfo<WordDetailSort>> sorts, int offset, int limit);

@@ -223,4 +223,12 @@ public class WordRepoImpl implements WordRepo {
 		
 	}
 
+	@Override
+	public int countAll() {
+		return context
+				.select(DSL.count())
+				.from(WORD)
+				.fetchOne(0, int.class);
+	}
+
 }
