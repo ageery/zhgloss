@@ -1,7 +1,7 @@
 zhGloss
 =======
 
-The [zhGloss][1] application provides both Chinese [dictionary][2] functionality as well as batch text [gloss][3] functionality.
+The [zhGloss][1] application provides both Chinese [dictionary][2] functionality, as well as batch text [gloss][3] functionality.
 
 The Chinese word data is from [CEDICT][4].
 
@@ -35,9 +35,9 @@ To force it to download and refresh the data at application startup time, add `-
 
 `mvn spring-boot:run -DDATABASE_URL=postgres://postgres:password@127.0.0.1:5432/zhgloss -Dzhgloss.refreshCedictDataAtStartup=true`
 
-[1]: http://zhgloss.com
-[2]: http://zhgloss.com/dictionary
-[3]: http://zhgloss.com/gloss
+[1]: http://www.zhgloss.com
+[2]: http://www.zhgloss.com/dictionary
+[3]: http://www.zhgloss.com/gloss
 [4]: http://cc-cedict.org/wiki/
 [5]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 [6]: https://maven.apache.org/
