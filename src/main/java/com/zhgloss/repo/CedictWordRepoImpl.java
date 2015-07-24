@@ -100,7 +100,7 @@ public class CedictWordRepoImpl implements CedictWordRepo {
 			.select(DSL.max(CedictLoad.CEDICT_LOAD.LOAD_FINISH))
 			.from(CedictLoad.CEDICT_LOAD)
 			.fetchAny();
-		return record == null ? Optional.empty() : Optional.of(record.value1());
+		return record == null ? Optional.empty() : Optional.ofNullable(record.value1());
 	}
 
 }
