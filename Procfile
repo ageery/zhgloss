@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -DDATABASE_URL=$DATABASE_URL -Dspring.profiles.active=prod -jar target/zixinxi-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -DDATABASE_URL=$DATABASE_URL -Dspring.profiles.active=prod -jar target/zhgloss-0.0.1-SNAPSHOT.jar

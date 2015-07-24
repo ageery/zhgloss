@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.zixinxi</groupId>
-	<artifactId>zixinxi</artifactId>
+	<groupId>com.zhgloss</groupId>
+	<artifactId>zhgloss</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -289,7 +289,7 @@
 							<generator>
 								<name>org.jooq.util.DefaultGenerator</name>
 								<target>
-									<packageName>com.zixinxi.repo.jooq</packageName>
+									<packageName>com.zhgloss.repo.jooq</packageName>
 									<directory>generated/src/main/java/</directory>
 								</target>
 								<database>
@@ -301,27 +301,27 @@
 										<customType>
 											<name>LocalDateTime</name>
 											<type>java.time.LocalDateTime</type>
-											<converter>com.zixinxi.jooq.LocalDateTimeConverter</converter>
+											<converter>com.zhgloss.jooq.LocalDateTimeConverter</converter>
 										</customType>
 										<customType>
 											<name>WordInfo</name>
-											<type>com.zixinxi.domain.WordInfo</type>
-											<converter>com.zixinxi.jooq.WordInfoConverter</converter>
+											<type>com.zhgloss.domain.WordInfo</type>
+											<converter>com.zhgloss.jooq.WordInfoConverter</converter>
 										</customType>
 										<customType>
 											<name>WordDetail</name>
-											<type>com.zixinxi.domain.WordDetail</type>
-											<converter>com.zixinxi.jooq.WordDetailConverter</converter>
+											<type>com.zhgloss.domain.WordDetail</type>
+											<converter>com.zhgloss.jooq.WordDetailConverter</converter>
 										</customType>
 										<customType>
 											<name>WordDetails</name>
-											<type>com.zixinxi.domain.WordDetails</type>
-											<converter>com.zixinxi.jooq.WordDetailsConverter</converter>
+											<type>com.zhgloss.domain.WordDetails</type>
+											<converter>com.zhgloss.jooq.WordDetailsConverter</converter>
 										</customType>
 										<customType>
 											<name>TranscriptionPointRepresentationInfo</name>
-											<type>com.zixinxi.domain.TranscriptionPointRepresentationInfo</type>
-											<converter>com.zixinxi.jooq.TranscriptionPointRepresentationInfoConverter</converter>
+											<type>com.zhgloss.domain.TranscriptionPointRepresentationInfo</type>
+											<converter>com.zhgloss.jooq.TranscriptionPointRepresentationInfoConverter</converter>
 										</customType>
 									</customTypes>
 									<forcedTypes>
