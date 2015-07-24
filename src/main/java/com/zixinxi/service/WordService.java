@@ -1,5 +1,6 @@
 package com.zixinxi.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -16,6 +17,8 @@ public interface WordService {
 	int countAll();
 	
 	int loadNewCedictWords();
+	
+	Optional<LocalDateTime> getLastCedictLoad();
 	
 	int count(WordDetailSearchCriteria criteria);
 	

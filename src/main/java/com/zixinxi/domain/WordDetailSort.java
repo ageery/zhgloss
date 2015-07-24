@@ -4,6 +4,7 @@ public enum WordDetailSort {
 
 	TRADITIONAL,
 	SIMPLIFIED,
-	TRANSCRIPTION;
+	TRANSCRIPTION,
+	CREATED;
 	
 }

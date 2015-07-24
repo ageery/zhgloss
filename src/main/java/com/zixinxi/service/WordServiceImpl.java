@@ -1,5 +1,6 @@
 package com.zixinxi.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
@@ -78,6 +79,11 @@ public class WordServiceImpl implements WordService {
 	@Override
 	public int countAll() {
 		return repo.countAll();
+	}
+
+	@Override
+	public Optional<LocalDateTime> getLastCedictLoad() {
+		return cedictWordRepo.getLastLoad();
 	}
 	
 }

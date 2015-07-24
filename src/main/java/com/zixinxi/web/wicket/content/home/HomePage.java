@@ -25,6 +25,8 @@ public class HomePage extends TitledPage {
 	public HomePage(PageParameters parameters) {
 		super(parameters);
 		
+		add(new ActivityPanel("activity"));
+		
 		add(new BootstrapBookmarkablePageLink<>("dictionaryLink", DictionaryPage.class, Type.Menu)
 				.setIconType(Icons.ICON_DICTIONARY)
 				.setLabel(new ResourceModel("label.dictionary"))

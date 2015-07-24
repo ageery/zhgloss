@@ -8,7 +8,8 @@ public enum WordDetailSorts {
 
 	TRADITIONAL(Arrays.asList(WordDetailSort.TRADITIONAL)),
 	SIMPLIFIED(Arrays.asList(WordDetailSort.SIMPLIFIED)),
-	TRANSCRIPTION(Arrays.asList(WordDetailSort.TRANSCRIPTION));
+	TRANSCRIPTION(Arrays.asList(WordDetailSort.TRANSCRIPTION)),
+	CREATED(Arrays.asList(WordDetailSort.CREATED));
 	
 	private List<WordDetailSort> sorts;
 	

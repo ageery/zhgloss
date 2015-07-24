@@ -55,7 +55,6 @@ public class ZiXinxiApp {
 	
     public static void main(String[] args) throws Exception {
     	SpringApplication app = new SpringApplication(ZiXinxiApp.class);
-    	//app.addListeners(new ApplicationStartedListener());
     	app.run(args);
     }
     
@@ -86,7 +85,7 @@ public class ZiXinxiApp {
     
     @Bean
     public CedictWordRepo getCedictWordRepo() {
-    	return new CedictWordRepoImpl(dataSource, System.getProperty("java.io.tmpdir"));
+    	return new CedictWordRepoImpl(dataSource, System.getProperty("java.io.tmpdir"), getDslContext());
     }
 
     @Bean

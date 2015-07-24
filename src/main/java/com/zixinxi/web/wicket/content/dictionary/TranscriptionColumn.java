@@ -16,7 +16,6 @@ import com.zixinxi.web.wicket.component.form.ChoiceRenderer;
 import com.zixinxi.web.wicket.component.table.TextFilteredColumn;
 import com.zixinxi.web.wicket.event.SearchEvent;
 
-import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormGroup;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.form.select.BootstrapSelect;
 
 public class TranscriptionColumn extends TextFilteredColumn<WordParts, WordSorts, String, WordLookupCriteria, String> {

@@ -7,9 +7,7 @@ import org.apache.wicket.model.IModel;
 import org.wicketstuff.event.annotation.OnEvent;
 
 import com.zixinxi.web.wicket.component.button.AbstractButton;
-import com.zixinxi.web.wicket.component.button.ClearButton;
 import com.zixinxi.web.wicket.component.button.SearchButton;
-import com.zixinxi.web.wicket.event.ClearEvent;
 import com.zixinxi.web.wicket.event.ValidationErrorEvent;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormGroup;

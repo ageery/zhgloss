@@ -33,7 +33,7 @@ public class WordLookupDataSource extends SortableDataProvider<WordParts, WordSo
 		this.wordDetailCriteriaModel = new WordDetailSearchCriteriaModel(wordLookupCriteriaModel);
 		this.transcriptionSystemModel = transcriptionSystemModel;
 		this.countModel = new WordDetailSearchCriteriaCountModel(wordDetailCriteriaModel);
-		setSort(WordSorts.TRADITIONAL, SortOrder.ASCENDING);
+		setSort(WordSorts.TRANSCRIPTION, SortOrder.ASCENDING);
 		Injector.get().inject(this);
 	}
 	

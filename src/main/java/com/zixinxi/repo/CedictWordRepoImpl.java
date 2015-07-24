@@ -8,13 +8,17 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import javax.sql.DataSource;
 
+import org.jooq.DSLContext;
+import org.jooq.Record1;
+import org.jooq.impl.DSL;
 import org.jooq.lambda.Unchecked;
 import org.postgresql.copy.CopyManager;
 import org.postgresql.core.BaseConnection;
@@ -23,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import com.zixinxi.cedict.parser.CedictTwoFileCsvUnloader;
 import com.zixinxi.cedict.parser.CedictTwoFileCsvUnloaderConfig;
+import com.zixinxi.repo.jooq.tables.CedictLoad;
 
 public class CedictWordRepoImpl implements CedictWordRepo {
 
@@ -34,10 +39,12 @@ public class CedictWordRepoImpl implements CedictWordRepo {
 	
 	private DataSource dataSource;
 	private String dataDirectory;
+	private DSLContext context;
 	
-	public CedictWordRepoImpl(DataSource dataSource, String dataDirectory) {
+	public CedictWordRepoImpl(DataSource dataSource, String dataDirectory, DSLContext context) {
 		this.dataSource = dataSource;
 		this.dataDirectory = dataDirectory;
+		this.context = context;
 	}
 	
 	@Override
@@ -85,6 +92,15 @@ public class CedictWordRepoImpl implements CedictWordRepo {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public Optional<LocalDateTime> getLastLoad() {
+		Record1<LocalDateTime> record = context
+			.select(DSL.max(CedictLoad.CEDICT_LOAD.LOAD_FINISH))
+			.from(CedictLoad.CEDICT_LOAD)
+			.fetchAny();
+		return record == null ? Optional.empty() : Optional.of(record.value1());
 	}
 
 }
