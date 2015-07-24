@@ -27,7 +27,7 @@ The application is built on [Spring Boot][7].  To run it use (substituting the p
 
 `mvn spring-boot:run -DDATABASE_URL=postgres://postgres:password@127.0.0.1:5432/zhgloss`
 
-The application can be accessed at `http://127.0.0.1:8080/`.
+The application can be accessed at the URL `http://127.0.0.1:8080/`.
 
 The application uses the [Flyway][8] library to create and keep the the database structures up-to-date.  It does this when the application is started.
 
