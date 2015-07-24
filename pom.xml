@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.zhgloss</groupId>
 	<artifactId>zhgloss</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<parent>
@@ -12,6 +11,17 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.4.RELEASE</version>
 	</parent>
+
+	<name>zhGloss</name>
+	<description>Provides Chinese dictionary and text gloss functionality</description>
+	<url>https://www.zhgloss.com/</url>
+	<inceptionYear>2015</inceptionYear>
+
+	<scm>
+		<connection>scm:git:https://github.com/ageery/zixinxi</connection>
+		<developerConnection>scm:git:https://github.com/ageery/zixinxi</developerConnection>
+    <tag>zhgloss-1.0.0</tag>
+  </scm>
 
 	<properties>
 
@@ -201,7 +211,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<sourceDirectory></sourceDirectory>
+		<sourceDirectory />
 		<resources>
 			<resource>
 				<filtering>true</filtering>
@@ -297,7 +307,7 @@
 								<database>
 									<name>org.jooq.util.postgres.PostgresDatabase</name>
 									<includes>.*</includes>
-									<excludes></excludes>
+									<excludes />
 									<inputSchema>public</inputSchema>
 									<customTypes>
 										<customType>
