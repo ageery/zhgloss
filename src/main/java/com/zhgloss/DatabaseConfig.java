@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,11 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class DatabaseConfig {
 
+	@Value("${DATABASE_URL}")
+	private URI dbUri;
+	
     @Bean
     public DataSource newDataSource() throws URISyntaxException {
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 		int port = dbUri.getPort();
 		String url = "jdbc:postgresql://" + dbUri.getHost() + ":" + port + dbUri.getPath();
     	DataSourceBuilder builder = DataSourceBuilder.create()

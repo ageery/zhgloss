@@ -21,6 +21,7 @@
 		<maven.compiler.source>${maven.compiler.target}</maven.compiler.source>
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<buildnumberPluginVersion>1.3</buildnumberPluginVersion>
 
 		<guavaVersion>18.0</guavaVersion>
 		<joolVersion>0.9.6</joolVersion>
@@ -221,6 +222,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>${buildnumberPluginVersion}</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>
