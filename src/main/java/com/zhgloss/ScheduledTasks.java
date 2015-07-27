@@ -18,9 +18,9 @@ public class ScheduledTasks {
 	private WordService wordService;
 	
 	/*
-	 * Load new CEDICT words every day at 01:07:13 AM.
+	 * Load new CEDICT words every day at 01:07:13 AM EST.
 	 */
-	@Scheduled(cron = "13 7 1 * * *")
+	@Scheduled(cron = "13 7 1 * * *", zone = "EST")
 	public void loadUpdatedCedictData() {
 		LOGGER.info("Starting to refresh CEDICT data from scheduler");
 		int count = wordService.loadNewCedictWords();
