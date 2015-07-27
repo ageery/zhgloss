@@ -1,16 +1,18 @@
 package com.zhgloss.domain.external;
 
+import static java.util.Optional.ofNullable;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zhgloss.domain.Op;
 import com.zhgloss.domain.SerializableFunction;
 
 public class SegmentedWord {
-
-	public static final SerializableFunction<SegmentedWord, Op<String>> FUNCTION_TEXT = sw -> Op.of(sw).flatMap(SegmentedWord::getText);
-	public static final SerializableFunction<SegmentedWord, Op<List<WordParts>>> FUNCTION_WORDS = sw -> Op.of(sw).flatMap(SegmentedWord::getWords);
+	
+	public static final SerializableFunction<SegmentedWord, Optional<String>> FUNCTION_TEXT = sw -> ofNullable(sw).flatMap(x -> ofNullable(x.getText()));
+	public static final SerializableFunction<SegmentedWord, Optional<List<WordParts>>> FUNCTION_WORDS = sw -> ofNullable(sw).flatMap(x -> ofNullable(x.getWords()));
 	
 	@JsonProperty("text")
 	private String text;

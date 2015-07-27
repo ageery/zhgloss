@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.ResourceModel;
 
-import com.zhgloss.domain.OpFunction;
+import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.web.wicket.component.form.ChoiceRenderer;
@@ -25,7 +25,7 @@ public class TranscriptionColumn extends TextFilteredColumn<WordParts, WordSorts
 	
 	public TranscriptionColumn(IModel<WordLookupCriteria> model, IModel<TranscriptionSystemInfo> transcriptionSystemModel) {
 		super(new ResourceModel("column.transcription"), 
-				new OpFunction<>(WordParts.FUNCTION_TRANSCRIPTION),
+				new OptionalFunction<>(WordParts.FUNCTION_TRANSCRIPTION),
 				WordLookupCriteria.PROPERTY_PINYIN);
 		this.model = model;
 		this.transcriptionSystemModel = transcriptionSystemModel;

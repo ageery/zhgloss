@@ -16,7 +16,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import com.zhgloss.domain.OpFunction;
+import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.TranscriptionPlane;
 import com.zhgloss.service.TranscriptionService;
 import com.zhgloss.web.wicket.component.table.BootstrapDataTable;
@@ -42,8 +42,8 @@ public class TranscriptionsPanel extends Panel {
 	
 	private List<IColumn<TranscriptionPlane, Void>> getColumns() {
 		
-		List<IColumn<TranscriptionPlane, Void>> list = new ArrayList<>(Arrays.asList(new FunctionColumn<>(Model.of("Syllable"), new OpFunction<>(TranscriptionPlane.FUNCTION_SYLLABLE_NAME)),
-				new FunctionColumn<>(Model.of("Tone"), new OpFunction<>(TranscriptionPlane.FUNCTION_TONE))
+		List<IColumn<TranscriptionPlane, Void>> list = new ArrayList<>(Arrays.asList(new FunctionColumn<>(Model.of("Syllable"), new OptionalFunction<>(TranscriptionPlane.FUNCTION_SYLLABLE_NAME)),
+				new FunctionColumn<>(Model.of("Tone"), new OptionalFunction<>(TranscriptionPlane.FUNCTION_TONE))
 		));
 		list.addAll(service.getTranscriptionSystems()
 			.map(ts -> new TranscriptionPointColumn<Void>(Model.of(ts.getName()), ts.getCode()))

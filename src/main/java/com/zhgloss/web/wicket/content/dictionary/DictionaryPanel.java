@@ -15,7 +15,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.event.annotation.OnEvent;
 
-import com.zhgloss.domain.OpFunction;
+import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.service.WordService;
@@ -56,16 +56,16 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 		return asList(
 				new TextFilteredColumn<>(
 						new ResourceModel("column.traditional_characters"), 
-						new OpFunction<>(WordParts.FUNCTION_TRADITIONAL), 
+						new OptionalFunction<>(WordParts.FUNCTION_TRADITIONAL), 
 						WordLookupCriteria.PROPERTY_TRADITIONAL_CHARACTERS),
 				new TextFilteredColumn<>(
 						new ResourceModel("column.simplified_characters"), 
-						new OpFunction<>(WordParts.FUNCTION_SIMPLIFIED), 
+						new OptionalFunction<>(WordParts.FUNCTION_SIMPLIFIED), 
 						WordLookupCriteria.PROPERTY_SIMPLIFIED_CHARACTERS),
 				new TranscriptionColumn(getModel(), transcriptionSystemModel),
 				new OrderedListFilteredColumn<>(
 						new ResourceModel("column.definition"), 
-						new OpFunction<>(WordParts.FUNCTION_DEFINITIONS), 
+						new OptionalFunction<>(WordParts.FUNCTION_DEFINITIONS), 
 						WordLookupCriteria.PROPERTY_DEFINITION)
 		);
 	}

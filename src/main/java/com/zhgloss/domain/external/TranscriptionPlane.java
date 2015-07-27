@@ -1,14 +1,16 @@
 package com.zhgloss.domain.external;
 
-import java.io.Serializable;
+import static java.util.Optional.ofNullable;
 
-import com.zhgloss.domain.Op;
+import java.io.Serializable;
+import java.util.Optional;
+
 import com.zhgloss.domain.SerializableFunction;
 
 public class TranscriptionPlane implements Serializable {
 
-	public static final SerializableFunction<TranscriptionPlane, Op<String>> FUNCTION_SYLLABLE_NAME = tp -> Op.of(tp).flatMap(TranscriptionPlane::getSyllableName);
-	public static final SerializableFunction<TranscriptionPlane, Op<Integer>> FUNCTION_TONE = tp -> Op.of(tp).flatMap(TranscriptionPlane::getTone);
+	public static final SerializableFunction<TranscriptionPlane, Optional<String>> FUNCTION_SYLLABLE_NAME = tp -> ofNullable(tp).flatMap(x -> ofNullable(x.getSyllableName()));
+	public static final SerializableFunction<TranscriptionPlane, Optional<Integer>> FUNCTION_TONE = tp -> ofNullable(tp).flatMap(x -> ofNullable(x.getTone()));
 	
 	private String syllableName;
 	private int tone;

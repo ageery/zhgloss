@@ -1,20 +1,22 @@
 package com.zhgloss.domain.external;
 
+import static java.util.Optional.ofNullable;
+
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zhgloss.domain.Op;
 import com.zhgloss.domain.SerializableFunction;
 
 public class WordParts implements Serializable {
 
-	public static final SerializableFunction<WordParts, Op<String>> FUNCTION_TRADITIONAL = wp -> Op.of(wp).flatMap(WordParts::getTraditional);
-	public static final SerializableFunction<WordParts, Op<String>> FUNCTION_SIMPLIFIED = wp -> Op.of(wp).flatMap(WordParts::getSimplified);
-	public static final SerializableFunction<WordParts, Op<String>> FUNCTION_TRANSCRIPTION = wp -> Op.of(wp).flatMap(WordParts::getTranscription);
-	public static final SerializableFunction<WordParts, Op<List<String>>> FUNCTION_DEFINITIONS = wp -> Op.of(wp).flatMap(WordParts::getDefinitions);
+	public static final SerializableFunction<WordParts, Optional<String>> FUNCTION_TRADITIONAL = wp -> ofNullable(wp).flatMap(x -> ofNullable(x.getTraditional()));
+	public static final SerializableFunction<WordParts, Optional<String>> FUNCTION_SIMPLIFIED = wp -> ofNullable(wp).flatMap(x -> ofNullable(x.getSimplified()));
+	public static final SerializableFunction<WordParts, Optional<String>> FUNCTION_TRANSCRIPTION = wp -> ofNullable(wp).flatMap(x -> ofNullable(x.getTranscription()));
+	public static final SerializableFunction<WordParts, Optional<List<String>>> FUNCTION_DEFINITIONS = wp -> ofNullable(wp).flatMap(x -> ofNullable(x.getDefinitions()));
 	
 	@JsonProperty("id")
 	private UUID id;

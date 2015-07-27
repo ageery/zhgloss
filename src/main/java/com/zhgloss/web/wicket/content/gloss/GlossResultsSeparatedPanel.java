@@ -14,7 +14,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.wicketstuff.minis.behavior.EnabledModelBehavior;
 import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 
-import com.zhgloss.domain.OpFunction;
+import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.SegmentedWord;
 import com.zhgloss.web.wicket.component.HeaderButtonTitlePanel;
 import com.zhgloss.web.wicket.component.HeaderPanel;
@@ -40,7 +40,7 @@ public class GlossResultsSeparatedPanel extends Panel {
 		
 		textBorder.add(new ListView<>("text", model,
 				item -> { 
-					ExternalLink link = new ExternalLink("word", Model.of("#def_link_" + item.getIndex()), new LambdaModel<>(item.getModel(), new OpFunction<>(SegmentedWord.FUNCTION_TEXT)));
+					ExternalLink link = new ExternalLink("word", Model.of("#def_link_" + item.getIndex()), new LambdaModel<>(item.getModel(), new OptionalFunction<>(SegmentedWord.FUNCTION_TEXT)));
 					link.add(new EnabledModelBehavior(new SupplierModel<>(() -> item.getModelObject().hasDefinition())));
 					link.setMarkupId("word_link_" + item.getIndex());
 					item.add(link);

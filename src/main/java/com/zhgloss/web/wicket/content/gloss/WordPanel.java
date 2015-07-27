@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.wicketstuff.minis.model.LoadableDetachableDependentModel;
 
-import com.zhgloss.domain.OpFunction;
+import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.SegmentedWord;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.web.wicket.behavior.SameTitleAsContentAppender;
@@ -31,7 +31,7 @@ public class WordPanel extends Panel {
 		container.add(new Label("transcriptions", new BlankToNbspModel(new SegmentedWordTranscriptionsModel(model)))
 			.add(new SameTitleAsContentAppender())
 			.setEscapeModelStrings(false));
-		container.add(new Label("characters", new LambdaModel<>(model, new OpFunction<>(SegmentedWord.FUNCTION_TEXT)))
+		container.add(new Label("characters", new LambdaModel<>(model, new OptionalFunction<>(SegmentedWord.FUNCTION_TEXT)))
 			.add(new SameTitleAsContentAppender()));
 		container.add(new Label("definitions", new BlankToNbspModel(new SegmentedWordDefinitionsModel(model)))
 			.add(new SameTitleAsContentAppender())

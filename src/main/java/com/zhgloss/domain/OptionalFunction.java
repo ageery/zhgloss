@@ -1,15 +1,17 @@
 package com.zhgloss.domain;
 
-public class OpFunction<T, R> implements SerializableFunction<T, R> {
+import java.util.Optional;
+
+public class OptionalFunction<T, R> implements SerializableFunction<T, R> {
 	
-	private SerializableFunction<T, Op<R>> opFunction;
+	private SerializableFunction<T, Optional<R>> opFunction;
 	private SerializableSupplier<R> defaultValueSupplier;
 	
 	/**
 	 * @param opFunction {@link ISerializableFunction} that returns an 
 	 * 		{@link Op} object
 	 */
-	public OpFunction(SerializableFunction<T, Op<R>> opFunction) {
+	public OptionalFunction(SerializableFunction<T, Optional<R>> opFunction) {
 		this(opFunction, () -> null);
 	}
 
@@ -20,14 +22,14 @@ public class OpFunction<T, R> implements SerializableFunction<T, R> {
 	 * 		invoked to provide a default value for the function if it 
 	 * 		returns <code>null</code>
 	 */
-	public OpFunction(SerializableFunction<T, Op<R>> opFunction, SerializableSupplier<R> defaultValueSupplier) {
+	public OptionalFunction(SerializableFunction<T, Optional<R>> opFunction, SerializableSupplier<R> defaultValueSupplier) {
 		this.opFunction = opFunction;
 		this.defaultValueSupplier = defaultValueSupplier;
 	}
 
 	@Override
 	public R apply(T t) {
-		return opFunction.apply(t).toOptional().orElse(defaultValueSupplier.get());
+		return opFunction.apply(t).orElse(defaultValueSupplier.get());
 	}
 	
 }
