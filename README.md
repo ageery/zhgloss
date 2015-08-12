@@ -1,6 +1,8 @@
 zhGloss
 =======
 
+[![Build Status](https://travis-ci.org/ageery/zhgloss.svg?branch=master)](https://travis-ci.org/ageery/zhgloss)
+
 The [zhGloss][1] application provides both Chinese [dictionary][2] functionality, as well as batch text [gloss][3] functionality.
 
 The Chinese word data is from [CEDICT][4].

@@ -11,3 +11,8 @@ cache:
     - $HOME/.m2
 
 install: true
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
