@@ -183,7 +183,7 @@ public class WordRepoImpl implements WordRepo {
 	private Stream<SortField<?>> getOrderBy(Stream<SortInfo<WordDetailSort>> sorts) {
 		return sorts.flatMap(si -> Seq.zip(
 					SORT_MAP.get(si.getProperty()).get(), 
-					Seq.generate(() -> si.isAscending())))
+					Seq.<Boolean>generate(() -> si.isAscending()))) // https://bugs.eclipse.org/bugs/show_bug.cgi?id=470826
 				.map(t -> t.v1().sort(t.v2() ? SortOrder.ASC : SortOrder.DESC));
 	}
 	

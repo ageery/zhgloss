@@ -19,9 +19,11 @@ public class CedictDataRefreshRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		LOGGER.info("Refreshing CEDICT data at startup...");
-		int count = wordService.loadNewCedictWords();
-		LOGGER.info("Finished refreshing CEDICT data at startup: count={}", count);
+		if (wordService.countAll() == 0) {
+			LOGGER.info("Loading CEDICT data since there are currently no words...");
+			int count = wordService.loadNewCedictWords();
+			LOGGER.info("Finished refreshing CEDICT data at startup: count={}", count);
+		}
 	}
 
 }

@@ -20,10 +20,11 @@ import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -46,7 +47,7 @@ import com.zhgloss.web.wicket.app.ZhGlossWebApp;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableScheduling
-public class ZhGlossApp {
+public class ZhGlossApp extends SpringBootServletInitializer {
 
 	@Inject
 	private DataSource dataSource;
@@ -58,7 +59,12 @@ public class ZhGlossApp {
     	app.run(args);
     }
     
-    @Bean
+    @Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    	return builder.sources(ZhGlossApp.class);
+	}
+
+	@Bean
     public ObjectMapper getObjectMapper() {
     	return new ObjectMapper();
     }
@@ -99,7 +105,6 @@ public class ZhGlossApp {
     }
     
     @Bean
-    @ConditionalOnProperty(prefix = "zhgloss", name = "refreshCedictDataAtStartup")
     public CedictDataRefreshRunner getCedictDataLoader() {
     	return new CedictDataRefreshRunner(getWordService());
     }
