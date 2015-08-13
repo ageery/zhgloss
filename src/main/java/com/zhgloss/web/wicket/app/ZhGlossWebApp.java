@@ -14,6 +14,8 @@ import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 import de.agilecoders.wicket.core.settings.SingleThemeProvider;
 import de.agilecoders.wicket.less.BootstrapLess;
+import de.agilecoders.wicket.webjars.WicketWebjars;
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 
 public class ZhGlossWebApp extends WebApplication {
 	
@@ -31,6 +33,7 @@ public class ZhGlossWebApp extends WebApplication {
 	}
 	
     private void configureBootstrap() {
+    	WicketWebjars.install(this, new WebjarsSettings().useCdnResources(true));
         BootstrapSettings settings = new BootstrapSettings();
         settings.setThemeProvider(new SingleThemeProvider(new ZhGlossTheme()));
         settings.useCdnResources(true);

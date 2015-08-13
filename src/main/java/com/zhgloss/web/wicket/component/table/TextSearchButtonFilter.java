@@ -40,6 +40,8 @@ public class TextSearchButtonFilter<T> extends AbstractFilter {
         filter.setEscapeModelStrings(false);
         
         enableFocusTracking(filter);
+        
+        form.setDefaultButton(searchButton);
     }
     
     @OnEvent

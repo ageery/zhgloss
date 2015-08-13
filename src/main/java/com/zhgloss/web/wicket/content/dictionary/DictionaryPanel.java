@@ -40,7 +40,7 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 		add(form);
 		
 		table = new BootstrapDataTable<>("table", getColumns(transcriptionSystemModel), dataSource, 10);
-		table.addTopToolbar(new FilterToolbar(table, form, dataSource));
+		table.addTopToolbar(new FilterToolbar(table, form));
 		table.addBottomToolbar(new NoRecordsToolbar(table) {
 
 			@Override

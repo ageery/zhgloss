@@ -9,3 +9,5 @@ target
 .springBeans
 rebel.xml
 .env
+/.apt_generated/
+/.factorypath

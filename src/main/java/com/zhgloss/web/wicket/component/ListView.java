@@ -11,7 +11,7 @@ public class ListView<T> extends org.apache.wicket.markup.html.list.ListView<T> 
 
 	private SerializableConsumer<ListItem<T>> consumer;
 	
-	public ListView(String id, IModel<? extends List<? extends T>> model, SerializableConsumer<ListItem<T>> consumer) {
+	public ListView(String id, IModel<? extends List<T>> model, SerializableConsumer<ListItem<T>> consumer) {
 		super(id, model);
 		this.consumer = consumer;
 	}
