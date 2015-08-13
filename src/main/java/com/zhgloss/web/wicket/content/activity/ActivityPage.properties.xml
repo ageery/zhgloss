@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="page.title">CEDICT Words</entry>
+	<entry key="page.help">CEDict Words loaded on the given date</entry>
+</properties>

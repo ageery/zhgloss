@@ -13,4 +13,5 @@
 	<entry key="label.format">Format</entry>
 	<entry key="label.gloss">Gloss</entry>
 	<entry key="label.transcription_system">Transcription System</entry>
+	<entry key="label.recently_added_words">Recently Added Words</entry>
 </properties>

@@ -4,17 +4,9 @@
 package com.zhgloss.repo.jooq;
 
 
-import javax.annotation.Generated;
-
-import org.jooq.ForeignKey;
-import org.jooq.Identity;
-import org.jooq.UniqueKey;
-import org.jooq.impl.AbstractKeys;
-
 import com.zhgloss.repo.jooq.tables.CedictLoad;
 import com.zhgloss.repo.jooq.tables.CedictWord;
 import com.zhgloss.repo.jooq.tables.CedictWordDef;
-import com.zhgloss.repo.jooq.tables.SchemaVersion;
 import com.zhgloss.repo.jooq.tables.TranscriptionPoint;
 import com.zhgloss.repo.jooq.tables.TranscriptionSystem;
 import com.zhgloss.repo.jooq.tables.Word;
@@ -22,11 +14,17 @@ import com.zhgloss.repo.jooq.tables.WordDef;
 import com.zhgloss.repo.jooq.tables.records.CedictLoadRecord;
 import com.zhgloss.repo.jooq.tables.records.CedictWordDefRecord;
 import com.zhgloss.repo.jooq.tables.records.CedictWordRecord;
-import com.zhgloss.repo.jooq.tables.records.SchemaVersionRecord;
 import com.zhgloss.repo.jooq.tables.records.TranscriptionPointRecord;
 import com.zhgloss.repo.jooq.tables.records.TranscriptionSystemRecord;
 import com.zhgloss.repo.jooq.tables.records.WordDefRecord;
 import com.zhgloss.repo.jooq.tables.records.WordRecord;
+
+import javax.annotation.Generated;
+
+import org.jooq.ForeignKey;
+import org.jooq.Identity;
+import org.jooq.UniqueKey;
+import org.jooq.impl.AbstractKeys;
 
 
 /**
@@ -57,7 +55,6 @@ public class Keys {
 	public static final UniqueKey<CedictWordRecord> CEDICT_WORD_PKEY = UniqueKeys0.CEDICT_WORD_PKEY;
 	public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_PKEY = UniqueKeys0.CEDICT_WORD_DEF_PKEY;
 	public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_WORD_ID_ORDER_NUM_KEY = UniqueKeys0.CEDICT_WORD_DEF_WORD_ID_ORDER_NUM_KEY;
-	public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = UniqueKeys0.SCHEMA_VERSION_PK;
 	public static final UniqueKey<TranscriptionPointRecord> TRANSCRIPTION_POINT_PKEY = UniqueKeys0.TRANSCRIPTION_POINT_PKEY;
 	public static final UniqueKey<TranscriptionSystemRecord> TRANSCRIPTION_SYSTEM_PKEY = UniqueKeys0.TRANSCRIPTION_SYSTEM_PKEY;
 	public static final UniqueKey<WordRecord> WORD_PKEY = UniqueKeys0.WORD_PKEY;
@@ -85,7 +82,6 @@ public class Keys {
 		public static final UniqueKey<CedictWordRecord> CEDICT_WORD_PKEY = createUniqueKey(CedictWord.CEDICT_WORD, CedictWord.CEDICT_WORD.ID);
 		public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_PKEY = createUniqueKey(CedictWordDef.CEDICT_WORD_DEF, CedictWordDef.CEDICT_WORD_DEF.ID);
 		public static final UniqueKey<CedictWordDefRecord> CEDICT_WORD_DEF_WORD_ID_ORDER_NUM_KEY = createUniqueKey(CedictWordDef.CEDICT_WORD_DEF, CedictWordDef.CEDICT_WORD_DEF.WORD_ID, CedictWordDef.CEDICT_WORD_DEF.ORDER_NUM);
-		public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = createUniqueKey(SchemaVersion.SCHEMA_VERSION, SchemaVersion.SCHEMA_VERSION.VERSION);
 		public static final UniqueKey<TranscriptionPointRecord> TRANSCRIPTION_POINT_PKEY = createUniqueKey(TranscriptionPoint.TRANSCRIPTION_POINT, TranscriptionPoint.TRANSCRIPTION_POINT.TS_CODE, TranscriptionPoint.TRANSCRIPTION_POINT.PINYIN_SYLLABLE, TranscriptionPoint.TRANSCRIPTION_POINT.TONE);
 		public static final UniqueKey<TranscriptionSystemRecord> TRANSCRIPTION_SYSTEM_PKEY = createUniqueKey(TranscriptionSystem.TRANSCRIPTION_SYSTEM, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_CODE);
 		public static final UniqueKey<WordRecord> WORD_PKEY = createUniqueKey(Word.WORD, Word.WORD.ID);

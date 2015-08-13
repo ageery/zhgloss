@@ -4,16 +4,7 @@
 package com.zhgloss.repo.jooq;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Sequence;
-import org.jooq.Table;
-import org.jooq.impl.SchemaImpl;
-
+import com.zhgloss.repo.jooq.Sequences;
 import com.zhgloss.repo.jooq.tables.CedictLoad;
 import com.zhgloss.repo.jooq.tables.CedictWord;
 import com.zhgloss.repo.jooq.tables.CedictWordDef;
@@ -23,11 +14,20 @@ import com.zhgloss.repo.jooq.tables.FindWords;
 import com.zhgloss.repo.jooq.tables.FindWordsByDef;
 import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
 import com.zhgloss.repo.jooq.tables.MakePrefixes;
-import com.zhgloss.repo.jooq.tables.SchemaVersion;
 import com.zhgloss.repo.jooq.tables.TranscriptionPoint;
 import com.zhgloss.repo.jooq.tables.TranscriptionSystem;
 import com.zhgloss.repo.jooq.tables.Word;
 import com.zhgloss.repo.jooq.tables.WordDef;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import org.jooq.Sequence;
+import org.jooq.Table;
+import org.jooq.impl.SchemaImpl;
 
 
 /**
@@ -43,7 +43,7 @@ import com.zhgloss.repo.jooq.tables.WordDef;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = -99785532;
+	private static final long serialVersionUID = 80279314;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -87,7 +87,6 @@ public class Public extends SchemaImpl {
 			FindWordsByDef.FIND_WORDS_BY_DEF,
 			GetCedictWordParts.GET_CEDICT_WORD_PARTS,
 			MakePrefixes.MAKE_PREFIXES,
-			SchemaVersion.SCHEMA_VERSION,
 			TranscriptionPoint.TRANSCRIPTION_POINT,
 			TranscriptionSystem.TRANSCRIPTION_SYSTEM,
 			Word.WORD,

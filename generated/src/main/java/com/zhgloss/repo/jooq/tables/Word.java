@@ -4,7 +4,14 @@
 package com.zhgloss.repo.jooq.tables;
 
 
-import java.sql.Timestamp;
+import com.zhgloss.domain.WordInfo;
+import com.zhgloss.jooq.LocalDateTimeConverter;
+import com.zhgloss.jooq.WordInfoConverter;
+import com.zhgloss.repo.jooq.Keys;
+import com.zhgloss.repo.jooq.Public;
+import com.zhgloss.repo.jooq.tables.records.WordRecord;
+
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -16,12 +23,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-
-import com.zhgloss.domain.WordInfo;
-import com.zhgloss.jooq.WordInfoConverter;
-import com.zhgloss.repo.jooq.Keys;
-import com.zhgloss.repo.jooq.Public;
-import com.zhgloss.repo.jooq.tables.records.WordRecord;
 
 
 /**
@@ -37,7 +38,7 @@ import com.zhgloss.repo.jooq.tables.records.WordRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Word extends TableImpl<WordRecord> {
 
-	private static final long serialVersionUID = 1734092467;
+	private static final long serialVersionUID = -1882283296;
 
 	/**
 	 * The reference instance of <code>public.word</code>
@@ -65,12 +66,12 @@ public class Word extends TableImpl<WordRecord> {
 	/**
 	 * The column <code>public.word.created_date</code>.
 	 */
-	public final TableField<WordRecord, Timestamp> CREATED_DATE = createField("created_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "");
+	public final TableField<WordRecord, LocalDateTime> CREATED_DATE = createField("created_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "", new LocalDateTimeConverter());
 
 	/**
 	 * The column <code>public.word.updated_date</code>.
 	 */
-	public final TableField<WordRecord, Timestamp> UPDATED_DATE = createField("updated_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "");
+	public final TableField<WordRecord, LocalDateTime> UPDATED_DATE = createField("updated_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "", new LocalDateTimeConverter());
 
 	/**
 	 * Create a <code>public.word</code> table reference

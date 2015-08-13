@@ -49,9 +49,9 @@
 		<wicketstuffVersion>7.0.0</wicketstuffVersion>
 
 		<app.version>${project.version}</app.version>
-		<db.url>${env.DB_URL}</db.url>
-		<db.username>${env.DB_USERNAME}</db.username>
-		<db.password>${env.DB_PASSWORD}</db.password>
+		<db.url>${DB_URL}</db.url>
+		<db.username>${DB_USERNAME}</db.username>
+		<db.password>${DB_PASSWORD}</db.password>
 
 	</properties>
 
@@ -354,7 +354,7 @@
 								<database>
 									<name>org.jooq.util.postgres.PostgresDatabase</name>
 									<includes>.*</includes>
-									<excludes />
+									<excludes>schema_version</excludes>
 									<inputSchema>public</inputSchema>
 									<customTypes>
 										<customType>
@@ -386,7 +386,7 @@
 									<forcedTypes>
 										<forcedType>
 											<name>LocalDateTime</name>
-											<expression>.*\.load_start|.*load_finish.*</expression>
+											<expression>.*\.load_start|.*load_finish.*|.*created_date.*|.*updated_date.*</expression>
 											<types>.*</types>
 										</forcedType>
 										<forcedType>

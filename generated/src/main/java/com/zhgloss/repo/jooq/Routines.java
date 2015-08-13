@@ -4,11 +4,6 @@
 package com.zhgloss.repo.jooq;
 
 
-import javax.annotation.Generated;
-
-import org.jooq.Configuration;
-import org.jooq.Field;
-
 import com.zhgloss.domain.WordInfo;
 import com.zhgloss.repo.jooq.routines.FindLongestWordPrefix;
 import com.zhgloss.repo.jooq.routines.FindLongestWordPrefixNullable;
@@ -24,6 +19,11 @@ import com.zhgloss.repo.jooq.tables.FindWords;
 import com.zhgloss.repo.jooq.tables.FindWordsByDef;
 import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
 import com.zhgloss.repo.jooq.tables.MakePrefixes;
+
+import javax.annotation.Generated;
+
+import org.jooq.Configuration;
+import org.jooq.Field;
 
 
 /**

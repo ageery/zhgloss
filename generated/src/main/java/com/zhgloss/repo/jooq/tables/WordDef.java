@@ -4,7 +4,12 @@
 package com.zhgloss.repo.jooq.tables;
 
 
-import java.sql.Timestamp;
+import com.zhgloss.jooq.LocalDateTimeConverter;
+import com.zhgloss.repo.jooq.Keys;
+import com.zhgloss.repo.jooq.Public;
+import com.zhgloss.repo.jooq.tables.records.WordDefRecord;
+
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -17,10 +22,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-
-import com.zhgloss.repo.jooq.Keys;
-import com.zhgloss.repo.jooq.Public;
-import com.zhgloss.repo.jooq.tables.records.WordDefRecord;
 
 
 /**
@@ -36,7 +37,7 @@ import com.zhgloss.repo.jooq.tables.records.WordDefRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WordDef extends TableImpl<WordDefRecord> {
 
-	private static final long serialVersionUID = 979887007;
+	private static final long serialVersionUID = 1852033682;
 
 	/**
 	 * The reference instance of <code>public.word_def</code>
@@ -79,12 +80,12 @@ public class WordDef extends TableImpl<WordDefRecord> {
 	/**
 	 * The column <code>public.word_def.created_date</code>.
 	 */
-	public final TableField<WordDefRecord, Timestamp> CREATED_DATE = createField("created_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "");
+	public final TableField<WordDefRecord, LocalDateTime> CREATED_DATE = createField("created_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "", new LocalDateTimeConverter());
 
 	/**
 	 * The column <code>public.word_def.updated_date</code>.
 	 */
-	public final TableField<WordDefRecord, Timestamp> UPDATED_DATE = createField("updated_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "");
+	public final TableField<WordDefRecord, LocalDateTime> UPDATED_DATE = createField("updated_date", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "", new LocalDateTimeConverter());
 
 	/**
 	 * Create a <code>public.word_def</code> table reference

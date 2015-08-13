@@ -4,6 +4,8 @@
 package com.zhgloss.repo.jooq;
 
 
+import com.zhgloss.repo.jooq.Public;
+
 import javax.annotation.Generated;
 
 import org.jooq.Sequence;

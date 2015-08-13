@@ -4,6 +4,11 @@
 package com.zhgloss.repo.jooq.tables;
 
 
+import com.zhgloss.jooq.LocalDateTimeConverter;
+import com.zhgloss.repo.jooq.Keys;
+import com.zhgloss.repo.jooq.Public;
+import com.zhgloss.repo.jooq.tables.records.CedictLoadRecord;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -16,11 +21,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
-
-import com.zhgloss.jooq.LocalDateTimeConverter;
-import com.zhgloss.repo.jooq.Keys;
-import com.zhgloss.repo.jooq.Public;
-import com.zhgloss.repo.jooq.tables.records.CedictLoadRecord;
 
 
 /**

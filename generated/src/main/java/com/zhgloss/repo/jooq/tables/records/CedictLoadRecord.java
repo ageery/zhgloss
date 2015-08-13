@@ -4,6 +4,8 @@
 package com.zhgloss.repo.jooq.tables.records;
 
 
+import com.zhgloss.repo.jooq.tables.CedictLoad;
+
 import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
@@ -13,8 +15,6 @@ import org.jooq.Record1;
 import org.jooq.Record4;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
-
-import com.zhgloss.repo.jooq.tables.CedictLoad;
 
 
 /**

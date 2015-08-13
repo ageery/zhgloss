@@ -1,13 +1,16 @@
 package com.zhgloss.web.wicket.content.home;
 
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import com.zhgloss.domain.WordDetailSearchCriteria;
 import com.zhgloss.service.WordService;
 import com.zhgloss.web.wicket.app.Icons;
+import com.zhgloss.web.wicket.component.HeaderPanel;
 import com.zhgloss.web.wicket.component.TitledPage;
 import com.zhgloss.web.wicket.content.dictionary.DictionaryPage;
 import com.zhgloss.web.wicket.content.gloss.GlossPage;
@@ -25,7 +28,9 @@ public class HomePage extends TitledPage {
 	public HomePage(PageParameters parameters) {
 		super(parameters);
 		
-		add(new ActivityPanel("activity"));
+		add(new HeaderPanel("panel", cid -> new ActivityHeaderPanel(cid))
+				.add(new Label("title", new ResourceModel("label.recently_added_words")))
+				.add(new ActivityPanel("activity", Model.of(new WordDetailSearchCriteria()), Model.of("H"), 20)));
 		
 		add(new BootstrapBookmarkablePageLink<>("dictionaryLink", DictionaryPage.class, Type.Menu)
 				.setIconType(Icons.ICON_DICTIONARY)

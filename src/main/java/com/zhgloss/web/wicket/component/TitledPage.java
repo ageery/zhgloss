@@ -15,6 +15,11 @@ public class TitledPage extends BasePage {
 
 	public TitledPage(PageParameters parameters) {
 		super(parameters);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
 		add(new Label("header", getPageHeaderModel()));
 		add(new Label("headerDescription", getDescriptionModel()));
 		
@@ -36,7 +41,7 @@ public class TitledPage extends BasePage {
 			.wrapOnAssignment(this);
 	}
 	
-	protected IModel<String> getDescriptionModel() {
+	protected IModel<?> getDescriptionModel() {
 		return new ResourceModel("page.headerDescription", EmptyStringModel.get());
 	}
 	

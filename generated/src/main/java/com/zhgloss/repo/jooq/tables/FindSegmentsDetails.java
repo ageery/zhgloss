@@ -4,6 +4,11 @@
 package com.zhgloss.repo.jooq.tables;
 
 
+import com.zhgloss.domain.WordDetails;
+import com.zhgloss.jooq.WordDetailsConverter;
+import com.zhgloss.repo.jooq.Public;
+import com.zhgloss.repo.jooq.tables.records.FindSegmentsDetailsRecord;
+
 import javax.annotation.Generated;
 
 import org.jooq.Field;
@@ -11,11 +16,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-
-import com.zhgloss.domain.WordDetails;
-import com.zhgloss.jooq.WordDetailsConverter;
-import com.zhgloss.repo.jooq.Public;
-import com.zhgloss.repo.jooq.tables.records.FindSegmentsDetailsRecord;
 
 
 /**

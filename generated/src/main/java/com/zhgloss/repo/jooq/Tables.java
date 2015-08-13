@@ -4,10 +4,6 @@
 package com.zhgloss.repo.jooq;
 
 
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-
 import com.zhgloss.repo.jooq.tables.CedictLoad;
 import com.zhgloss.repo.jooq.tables.CedictWord;
 import com.zhgloss.repo.jooq.tables.CedictWordDef;
@@ -17,11 +13,14 @@ import com.zhgloss.repo.jooq.tables.FindWords;
 import com.zhgloss.repo.jooq.tables.FindWordsByDef;
 import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
 import com.zhgloss.repo.jooq.tables.MakePrefixes;
-import com.zhgloss.repo.jooq.tables.SchemaVersion;
 import com.zhgloss.repo.jooq.tables.TranscriptionPoint;
 import com.zhgloss.repo.jooq.tables.TranscriptionSystem;
 import com.zhgloss.repo.jooq.tables.Word;
 import com.zhgloss.repo.jooq.tables.WordDef;
+
+import javax.annotation.Generated;
+
+import org.jooq.Field;
 
 
 /**
@@ -165,11 +164,6 @@ public class Tables {
 	public static MakePrefixes MAKE_PREFIXES(Field<String> txt) {
 		return MakePrefixes.MAKE_PREFIXES.call(txt);
 	}
-
-	/**
-	 * The table public.schema_version
-	 */
-	public static final SchemaVersion SCHEMA_VERSION = com.zhgloss.repo.jooq.tables.SchemaVersion.SCHEMA_VERSION;
 
 	/**
 	 * Toned transcription syllable info for a transcription system.

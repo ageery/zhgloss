@@ -4,13 +4,13 @@
 package com.zhgloss.repo.jooq.routines;
 
 
+import com.zhgloss.repo.jooq.Public;
+
 import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.Parameter;
 import org.jooq.impl.AbstractRoutine;
-
-import com.zhgloss.repo.jooq.Public;
 
 
 /**

@@ -4,14 +4,14 @@
 package com.zhgloss.repo.jooq.tables.records;
 
 
+import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
+
 import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.Record3;
 import org.jooq.Row3;
 import org.jooq.impl.TableRecordImpl;
-
-import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
 
 
 /**

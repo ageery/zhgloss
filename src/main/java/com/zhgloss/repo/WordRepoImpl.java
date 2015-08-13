@@ -14,6 +14,7 @@ import static org.jooq.impl.DSL.name;
 import static org.jooq.impl.DSL.rowNumber;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
@@ -125,7 +126,8 @@ public class WordRepoImpl implements WordRepo {
 				getIdCondition(criteria),
 				getWordLengthCondition(criteria), 
 				getCharacterCondition(criteria), 
-				getDefinitionCondition(criteria))
+				getDefinitionCondition(criteria),
+				getCreatedDateCondition(criteria))
 			.flatMap(op -> op.isPresent() ? Stream.of(op.get()) : Stream.empty())
 			.collect(Collectors.toList());
 	}
@@ -209,6 +211,13 @@ public class WordRepoImpl implements WordRepo {
 	private static Optional<Condition> getWordLengthCondition(WordDetailSearchCriteria criteria) {
 		Integer wordLength = criteria.getWordLength();
 		return wordLength != null ? Optional.of(DSL.condition("jsonb_array_length(word_info) = ?", wordLength)) : Optional.empty();
+	}
+
+	private Optional<Condition> getCreatedDateCondition(WordDetailSearchCriteria criteria) {
+		LocalDate createdDate = criteria.getCreatedDate();
+		return (createdDate != null) ?
+				Optional.of(WORD.CREATED_DATE.between(createdDate.atStartOfDay(), createdDate.plusDays(1).atStartOfDay())) :
+				Optional.empty(); 
 	}
 	
 	private static String toFtsQueryString(Stream<String> termStream) {
