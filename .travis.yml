@@ -23,4 +23,4 @@ env:
     - secure: "nqzIY4HVdXluD2KI/pGIF3R6mV8JB48hfhmx7UgW0I4SrBZnkLyXkUeVknokPkMVhhliFFOl7IMRKqTlzSeanlHPQXyA8wgvF59XQZc0kuUrgef1IqlliVhZTMaFbUp407Mi3nEZmAUKtsgLL3+uFiFAhfNB5NLGFFzCKJRpWyaCJh1261NxDzzJ2/Kqa5jcvhmJ9xY/YJHxiq40B9d1pZVMcFGeMMaV3F4D3eJHFVgy0K5qrpqI1G1Y8IUl8j+ZtDvax3Wu9VXqCs8z+CCmaJVN0RHgNdu2Ro80vkUBApZv9f/TVAm6dEoiqRZAK0qZYg+x+gBqn8F6UzvZvTj7LZD8J2UDF1WINnQFjefTp0RKQfL4lTX7xXKTXN89xST5YGGboa4pZJ+j+xkQFHXVRuF4Xr2tuvUwr6NVpSdJJTnI4UBd0gpFcWZ4XDrX8SI1TgxaLiRCSIbWBr1bP61RztyCgbS+LHY68OsPnu3WJ3VnQCF8V/KdEwQRZz/Lql6VkhhneZ9AKaqmn2yjiaLM6EqwdmFOR2XtXpNwQ/RY7LriVoa5r7QOO9JvVkDCizyEaq7EYkMwcCf7Oldb3Le1nlOuvan2qh7TP20QjZc/e+sFIy8TfOJCB/tAbXqm6K+lBdTtwpsHkJ6ZLDGK2alAvaBmuZfWx2Xd6H+ZVd5tPIM="
 
 after_success:
-    "curl -T target/zhgloss.war -u $TOMCAT_USER:$TOMCAT_PASSWORD http://www.zhgloss.com/manager/text/deploy?path=/zhgloss&update=true"
+    "curl -T target/zhgloss.war -u $TOMCAT_USER:$TOMCAT_PASSWORD http://www.zhgloss.com/manager/text/deploy?path=/zhgloss\\&update=true"
