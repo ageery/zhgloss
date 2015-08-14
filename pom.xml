@@ -251,6 +251,24 @@
 		</resources>
 		<plugins>
 			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>fix-eol</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <fixcrlf srcdir="${project.build.outputDirectory}" includes="**/*.sql" eol="crlf" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<executions>
