@@ -259,7 +259,7 @@
                         <phase>process-resources</phase>
                         <configuration>
                             <target>
-                                <fixcrlf srcdir="${project.build.outputDirectory}" includes="**/*.sql" eol="crlf" />
+                                <fixcrlf srcdir="${project.build.outputDirectory}" includes="**/*.sql" eol="lf" />
                             </target>
                         </configuration>
                         <goals>
