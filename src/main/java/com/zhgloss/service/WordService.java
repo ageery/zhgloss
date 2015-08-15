@@ -9,6 +9,7 @@ import com.zhgloss.domain.CharacterType;
 import com.zhgloss.domain.SortInfo;
 import com.zhgloss.domain.WordDetailSearchCriteria;
 import com.zhgloss.domain.WordDetailSort;
+import com.zhgloss.domain.external.CedictLoadInfo;
 import com.zhgloss.domain.external.SegmentedWord;
 import com.zhgloss.domain.external.WordParts;
 
@@ -19,6 +20,8 @@ public interface WordService {
 	int loadNewCedictWords();
 	
 	Optional<LocalDateTime> getLastCedictLoad();
+	
+	Stream<CedictLoadInfo> getCedictLoadHistory(int offset, int limit);
 	
 	int count(WordDetailSearchCriteria criteria);
 	

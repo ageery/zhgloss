@@ -35,6 +35,10 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
 
 	private static final String LOADER_ID = "ajax-loader-mask";
 	
+	public BasePage() {
+		this(new PageParameters());
+	}
+	
     public BasePage(final PageParameters parameters) {
         super(parameters);
         add(new HtmlTag("html"));

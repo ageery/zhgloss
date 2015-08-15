@@ -13,6 +13,10 @@ import com.zhgloss.web.wicket.model.SupplierModel;
 
 public class TitledPage extends BasePage {
 
+	public TitledPage() {
+		this(new PageParameters());
+	}
+	
 	public TitledPage(PageParameters parameters) {
 		super(parameters);
 	}

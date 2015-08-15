@@ -15,6 +15,7 @@ import com.zhgloss.domain.SortInfo;
 import com.zhgloss.domain.WordDetail;
 import com.zhgloss.domain.WordDetailSearchCriteria;
 import com.zhgloss.domain.WordDetailSort;
+import com.zhgloss.domain.external.CedictLoadInfo;
 import com.zhgloss.domain.external.SegmentedWord;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.repo.CedictWordRepo;
@@ -84,6 +85,11 @@ public class WordServiceImpl implements WordService {
 	@Override
 	public Optional<LocalDateTime> getLastCedictLoad() {
 		return cedictWordRepo.getLastLoad();
+	}
+
+	@Override
+	public Stream<CedictLoadInfo> getCedictLoadHistory(int offset, int limit) {
+		return cedictWordRepo.getLoadList(offset, limit);
 	}
 	
 }

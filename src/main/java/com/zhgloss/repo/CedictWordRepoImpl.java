@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import com.zhgloss.cedict.parser.CedictTwoFileCsvUnloader;
 import com.zhgloss.cedict.parser.CedictTwoFileCsvUnloaderConfig;
+import com.zhgloss.domain.external.CedictLoadInfo;
 import com.zhgloss.repo.jooq.tables.CedictLoad;
 
 public class CedictWordRepoImpl implements CedictWordRepo {
@@ -101,6 +102,20 @@ public class CedictWordRepoImpl implements CedictWordRepo {
 			.from(CedictLoad.CEDICT_LOAD)
 			.fetchAny();
 		return record == null ? Optional.empty() : Optional.ofNullable(record.value1());
+	}
+	
+	public Stream<CedictLoadInfo> getLoadList(int offset, int limit) {
+		return context
+			.selectFrom(CedictLoad.CEDICT_LOAD)
+			.orderBy(CedictLoad.CEDICT_LOAD.LOAD_FINISH.desc())
+			.limit(limit)
+			.maxRows(offset)
+			.fetch()
+			.map(r -> new CedictLoadInfo()
+					.withStart(r.getLoadStart())
+					.withEnd(r.getLoadFinish())
+					.withCount(r.getLoadCount()))
+			.stream();
 	}
 
 }

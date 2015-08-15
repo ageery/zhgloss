@@ -6,12 +6,17 @@
 	<entry key="app.author">zhGloss Admin &lt;zhgloss@gmail.com&gt;</entry>
 	<entry key="app.contact">zhgloss@gmail.com</entry>
 	<entry key="label.about">About</entry>
+	<entry key="label.activity">Activity</entry>
 	<entry key="label.character_type">Character Type</entry>
 	<entry key="label.contact">Contact</entry>
 	<entry key="label.dictionary">Dictionary</entry>
 	<entry key="label.edit">Edit</entry>
 	<entry key="label.format">Format</entry>
 	<entry key="label.gloss">Gloss</entry>
-	<entry key="label.transcription_system">Transcription System</entry>
 	<entry key="label.recently_added_words">Recently Added Words</entry>
+	<entry key="label.transcription_system">Transcription System</entry>
+	<entry key="label.updated">Updated</entry>
+	<entry key="label.words">Words</entry>
+	
+	
 </properties>

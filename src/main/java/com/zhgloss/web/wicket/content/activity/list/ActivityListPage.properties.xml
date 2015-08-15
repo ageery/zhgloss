@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="page.title">CEDICT Loads</entry>
+	<entry key="page.headerDescription">Recent Activity</entry>
+	<entry key="page.help">CEDict data load activity</entry>
+</properties>

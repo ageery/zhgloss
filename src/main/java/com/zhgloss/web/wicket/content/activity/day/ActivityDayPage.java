@@ -1,4 +1,4 @@
-package com.zhgloss.web.wicket.content.activity;
+package com.zhgloss.web.wicket.content.activity.day;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,17 +16,17 @@ import com.zhgloss.web.wicket.component.TitledPage;
 import com.zhgloss.web.wicket.content.home.ActivityPanel;
 import com.zhgloss.web.wicket.model.SupplierModel;
 
-@MountPath("/activity/${" + ActivityPage.PARAM_NAME_DATE + "}")
-public class ActivityPage extends TitledPage {
+@MountPath("/activity/day/${" + ActivityDayPage.PARAM_NAME_DATE + "}")
+public class ActivityDayPage extends TitledPage {
 
 	static final String PARAM_NAME_DATE = "DATE";
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityPage.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityDayPage.class);
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
 	private IModel<LocalDate> dateModel;
 	
-	public ActivityPage(PageParameters parameters) {
+	public ActivityDayPage(PageParameters parameters) {
 		super(parameters);
 		
 		LocalDate createdDate = LocalDate.now();
@@ -46,6 +46,10 @@ public class ActivityPage extends TitledPage {
 	@Override
 	protected IModel<?> getDescriptionModel() {
 		return new SupplierModel<>(() -> String.format("CEDICT words loaded on %s", dateModel.getObject().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+	}
+	
+	public static PageParameters newPageParameters(LocalDate date) {
+		return new PageParameters().add(PARAM_NAME_DATE, date.format(FORMATTER));
 	}
 	
 }
