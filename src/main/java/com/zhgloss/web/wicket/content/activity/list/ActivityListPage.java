@@ -1,6 +1,5 @@
 package com.zhgloss.web.wicket.content.activity.list;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,29 +34,10 @@ public class ActivityListPage extends TitledPage {
 				new SupplierModel<>(() -> wordService.getCedictLoadHistory(0, 20).collect(Collectors.toList())), 
 				item -> {
 					item.add(new Label("start", new LoadDayModel(new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_START)))));
-					item.add(new Label("duration", new LoadDurationModel(new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_DURATION)))));
 					item.add(new BookmarkableLink<>("link", ActivityDayPage.class, 
 							() -> ActivityDayPage.newPageParameters(item.getModelObject().getStart().toLocalDate()))
 							.add(new Label("count", new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_COUNT)))));
-						//.setLabel(new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_COUNT))));
 				}));
-	}
-	
-	private static class LoadDurationModel extends LoadableDetachableDependentModel<String, Duration> {
-
-		public LoadDurationModel(IModel<Duration> dependentModel) {
-			super(dependentModel);
-		}
-
-		@Override
-		protected String load() {
-			Duration d = getDependentModel().getObject();
-			if (d == null) {
-				return null;
-			}
-			return d.getSeconds() + " secs";
-		}
-		
 	}
 	
 	private static class LoadDayModel extends LoadableDetachableDependentModel<String, LocalDateTime> {
@@ -80,7 +60,7 @@ public class ActivityListPage extends TitledPage {
 			} else if (LocalDate.now().minusDays(1).equals(date)) {
 				s = "Yesterday";
 			} else {
-				s = date.format(DateTimeFormatter.ofPattern("eeeee, YYYY MM dd"));
+				s = date.format(DateTimeFormatter.ofPattern("eee, YYYY-MM-dd"));
 			}
 			
 			return s;
