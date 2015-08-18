@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
-@ConditionalOnProperty(name = "twitter.enabled")
+@ConditionalOnProperty(name = "twitter_enabled")
 @Service
 public class TwitterServiceImpl implements TwitterSevice {
 	

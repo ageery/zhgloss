@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
-@ConditionalOnProperty(name = "twitter.enabled")
+@ConditionalOnProperty(name = "twitter_enabled")
 @Configuration
 public class TwitterTemplateConfig {
 
@@ -19,10 +19,10 @@ public class TwitterTemplateConfig {
 
 	@Bean
 	public Twitter getTwitter() {
-		String consumerKey = env.getProperty("twitter.consumerKey");
-		String consumerSecret = env.getProperty("twitter.consumerSecret");
-		String accessToken = env.getProperty("twitter.accessToken");
-		String accessTokenSecret = env.getProperty("twitter.accessTokenSecret");
+		String consumerKey = env.getProperty("twitter_consumerKey");
+		String consumerSecret = env.getProperty("twitter_consumerSecret");
+		String accessToken = env.getProperty("twitter_accessToken");
+		String accessTokenSecret = env.getProperty("twitter_accessTokenSecret");
 		Objects.requireNonNull(consumerKey);
 		Objects.requireNonNull(consumerSecret);
 		Objects.requireNonNull(accessToken);

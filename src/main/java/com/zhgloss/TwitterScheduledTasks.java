@@ -21,7 +21,7 @@ import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.service.TwitterSevice;
 import com.zhgloss.service.WordService;
 
-@ConditionalOnProperty(name = "twitter.enabled")
+@ConditionalOnProperty(name = "twitter_enabled")
 @Component
 public class TwitterScheduledTasks {
 
