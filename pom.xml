@@ -57,6 +57,10 @@
 
 	<dependencies>
 		<dependency>
+        	<groupId>org.springframework.social</groupId>
+        	<artifactId>spring-social-twitter</artifactId>
+    	</dependency>
+		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>

@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 import com.zhgloss.service.WordService;
 
 @Component
-public class ScheduledTasks {
+public class LoaderScheduledTasks {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ScheduledTasks.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoaderScheduledTasks.class);
 	
 	@Inject
 	private WordService wordService;
+	
+	public LoaderScheduledTasks() {
+		super();
+	}
 	
 	/*
 	 * Load new CEDICT words every day at 01:07:13 AM EST.
