@@ -1,18 +1,24 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:panel>
-	<div>
-		<a wicket:id="activityLink"><strong wicket:id="title">[TITLE]</strong></a>
-		<div class="pull-right">
-			<ul class="list-inline">
-				<li>
-					<span wicket:id="wordCountLabel">[WORD COUNT LABEL]</span>
-					<span wicket:id="wordCount">[WORD COUNT]</span>
-				</li>
-				<li>
-					<span wicket:id="lastUpdateLabel">[LAST UPDATE LABEL]</span>
-					<span wicket:id="lastUpdate">[LAST UPDATE]</span>
-				</li>
-			</ul>
+	<div class="row">
+		<div class="col-md-3">
+			<h4>
+				<a wicket:id="activityLink"><span wicket:id="title">[TITLE]</span></a>
+			</h4>
+		</div>
+		<div class="col-md-9 margin-top-10">
+			<div class="pull-right">
+				<ul class="list-inline">
+					<li>
+						<span wicket:id="wordCountLabel">[WORD COUNT LABEL]</span>
+						<span wicket:id="wordCount">[WORD COUNT]</span>
+					</li>
+					<li>
+						<span wicket:id="lastUpdateLabel">[LAST UPDATE LABEL]</span>
+						<span wicket:id="lastUpdate">[LAST UPDATE]</span>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </wicket:panel>
