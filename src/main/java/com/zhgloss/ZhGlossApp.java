@@ -40,6 +40,8 @@ import com.zhgloss.service.AppConfigService;
 import com.zhgloss.service.AppConfigServiceImpl;
 import com.zhgloss.service.TranscriptionService;
 import com.zhgloss.service.TranscriptionServiceImpl;
+import com.zhgloss.service.UserSettingsService;
+import com.zhgloss.service.UserSettingsServiceImpl;
 import com.zhgloss.service.WordService;
 import com.zhgloss.service.WordServiceImpl;
 import com.zhgloss.web.wicket.app.ZhGlossWebApp;
@@ -112,6 +114,11 @@ public class ZhGlossApp extends SpringBootServletInitializer {
     @Bean
     public WicketProperties getWicketProperties() {
     	return new WicketProperties();
+    }
+
+    @Bean
+    public UserSettingsService getUserSettingsService() {
+    	return new UserSettingsServiceImpl(getObjectMapper());
     }
     
     @Bean

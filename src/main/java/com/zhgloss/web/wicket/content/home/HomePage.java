@@ -10,10 +10,12 @@ import org.wicketstuff.annotation.mount.MountPath;
 import com.zhgloss.domain.WordDetailSearchCriteria;
 import com.zhgloss.service.WordService;
 import com.zhgloss.web.wicket.app.Icons;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
 import com.zhgloss.web.wicket.component.HeaderPanel;
 import com.zhgloss.web.wicket.component.TitledPage;
 import com.zhgloss.web.wicket.content.dictionary.DictionaryPage;
 import com.zhgloss.web.wicket.content.gloss.GlossPage;
+import com.zhgloss.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapBookmarkablePageLink;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons.Size;
@@ -30,7 +32,10 @@ public class HomePage extends TitledPage {
 		
 		add(new HeaderPanel("panel", cid -> new ActivityHeaderPanel(cid))
 				.add(new Label("title", new ResourceModel("label.recently_added_words")))
-				.add(new ActivityPanel("activity", Model.of(new WordDetailSearchCriteria()), Model.of("H"), 20)));
+				.add(new ActivityPanel("activity", 
+						Model.of(new WordDetailSearchCriteria()), 
+						new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystemCode()), 
+						20)));
 		
 		add(new BootstrapBookmarkablePageLink<>("dictionaryLink", DictionaryPage.class, Type.Menu)
 				.setIconType(Icons.ICON_DICTIONARY)

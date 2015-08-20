@@ -2,11 +2,19 @@ package com.zhgloss.domain;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserSettings implements Serializable {
 
+	@JsonProperty("tsCode")
 	private String transcriptionSystemCode;
+	
+	@JsonProperty("charType")
 	private CharacterType characterType;
-	private boolean simpleLayout;
 	
 	public UserSettings() {
 		super();
@@ -38,17 +46,12 @@ public class UserSettings implements Serializable {
 		return this;
 	}
 	
-	public boolean isSimpleLayout() {
-		return simpleLayout;
-	}
-
-	public void setSimpleLayout(boolean simpleLayout) {
-		this.simpleLayout = simpleLayout;
-	}
-	
-	public UserSettings withSetSimpleLayout(boolean simpleLayout) {
-		setSimpleLayout(simpleLayout);
-		return this;
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("transcription system code", getTranscriptionSystemCode())
+				.append("character type", getCharacterType())
+				.toString();
 	}
 	
 }

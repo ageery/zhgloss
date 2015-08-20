@@ -3,7 +3,10 @@ package com.zhgloss.web.wicket.app;
 import static org.springframework.web.context.support.WebApplicationContextUtils.getWebApplicationContext;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
@@ -32,7 +35,12 @@ public class ZhGlossWebApp extends WebApplication {
         configureBootstrap();
 	}
 	
-    private void configureBootstrap() {
+    @Override
+	public Session newSession(Request request, Response response) {
+    	return new ZhGlossSession(request, response);
+	}
+
+	private void configureBootstrap() {
     	WicketWebjars.install(this, new WebjarsSettings().useCdnResources(true));
         BootstrapSettings settings = new BootstrapSettings();
         settings.setThemeProvider(new SingleThemeProvider(new ZhGlossTheme()));
