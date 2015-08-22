@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.zhgloss.domain.CharacterType;
 import com.zhgloss.domain.UserSettings;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
+import com.zhgloss.service.TranscriptionService;
 import com.zhgloss.service.UserSettingsService;
 
 public class ZhGlossSession extends WebSession {
@@ -28,6 +29,8 @@ public class ZhGlossSession extends WebSession {
 	
 	@SpringBean
 	private UserSettingsService userSettingsService;
+	@SpringBean
+	private TranscriptionService transcriptionService;
 	
 	private UserSettings userSettings;
 	
@@ -53,10 +56,10 @@ public class ZhGlossSession extends WebSession {
 		LOGGER.info("User settings: {}", userSettings);
 	}
 	
-	private static UserSettings newUserSettings() {
+	private  UserSettings newUserSettings() {
 		return new UserSettings()
 				.withCharacterType(CharacterType.SIMPLFIED)
-				.withTranscriptionSystemCode(TranscriptionSystemInfo.CODE_HANYU_PINYIN);
+				.withTranscriptionSystem(transcriptionService.getTranscriptionSystem(TranscriptionSystemInfo.CODE_HANYU_PINYIN).orElse(null));
 	}
 
 	public static ZhGlossSession get() {

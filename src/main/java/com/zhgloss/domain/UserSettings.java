@@ -4,32 +4,41 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.zhgloss.domain.external.TranscriptionSystemInfo;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserSettings implements Serializable {
 
-	@JsonProperty("tsCode")
-	private String transcriptionSystemCode;
+	public static final String JSON_TRANSCRIPTION_SYSTEM_CODE = "transcriptionSystemCode";
+	public static final String JSON_CHAR_TYPE = "charType";
 	
-	@JsonProperty("charType")
+	@JsonProperty(JSON_TRANSCRIPTION_SYSTEM_CODE)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="code")
+	@JsonIdentityReference(alwaysAsId = true) 
+	private TranscriptionSystemInfo transcriptionSystem;
+	
+	@JsonProperty(JSON_CHAR_TYPE)
 	private CharacterType characterType;
 	
 	public UserSettings() {
 		super();
 	}
 
-	public String getTranscriptionSystemCode() {
-		return transcriptionSystemCode;
+	public TranscriptionSystemInfo getTranscriptionSystem() {
+		return transcriptionSystem;
 	}
 
-	public void setTranscriptionSystemCode(String transcriptionSystemCode) {
-		this.transcriptionSystemCode = transcriptionSystemCode;
+	public void setTranscriptionSystem(TranscriptionSystemInfo transcriptionSystem) {
+		this.transcriptionSystem = transcriptionSystem;
 	}
 	
-	public UserSettings withTranscriptionSystemCode(String transcriptionSystemCode) {
-		setTranscriptionSystemCode(transcriptionSystemCode);
+	public UserSettings withTranscriptionSystem(TranscriptionSystemInfo transcriptionSystem) {
+		setTranscriptionSystem(transcriptionSystem);
 		return this;
 	}
 
@@ -49,7 +58,7 @@ public class UserSettings implements Serializable {
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
-				.append("transcription system code", getTranscriptionSystemCode())
+				.append("transcription system code", getTranscriptionSystem())
 				.append("character type", getCharacterType())
 				.toString();
 	}

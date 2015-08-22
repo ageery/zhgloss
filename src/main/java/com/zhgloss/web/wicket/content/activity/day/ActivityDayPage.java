@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import com.zhgloss.domain.WordDetailSearchCriteria;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
 import com.zhgloss.web.wicket.component.TitledPage;
 import com.zhgloss.web.wicket.content.home.ActivityPanel;
 import com.zhgloss.web.wicket.model.SupplierModel;
@@ -40,7 +41,7 @@ public class ActivityDayPage extends TitledPage {
 		}
 		dateModel = Model.of(createdDate);
 		add(new ActivityPanel("words", Model.of(new WordDetailSearchCriteria().withCreatedDate(createdDate)),
-				Model.of("H"), 100));
+				new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem()), 100));
 	}
 
 	@Override

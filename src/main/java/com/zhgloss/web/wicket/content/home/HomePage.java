@@ -34,7 +34,7 @@ public class HomePage extends TitledPage {
 				.add(new Label("title", new ResourceModel("label.recently_added_words")))
 				.add(new ActivityPanel("activity", 
 						Model.of(new WordDetailSearchCriteria()), 
-						new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystemCode()), 
+						new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem()), 
 						20)));
 		
 		add(new BootstrapBookmarkablePageLink<>("dictionaryLink", DictionaryPage.class, Type.Menu)

@@ -15,12 +15,21 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.PackageResourceReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.wicketstuff.event.annotation.OnEvent;
 
+import com.zhgloss.domain.UserSettings;
+import com.zhgloss.web.wicket.app.Icons;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
 import com.zhgloss.web.wicket.content.about.AboutPage;
 import com.zhgloss.web.wicket.content.dictionary.DictionaryPage;
 import com.zhgloss.web.wicket.content.gloss.GlossPage;
+import com.zhgloss.web.wicket.event.EditEvent;
+import com.zhgloss.web.wicket.model.EmptyStringModel;
 import com.zhgloss.web.wicket.model.MailToModel;
 
+import de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Modal;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.IeEdgeMetaTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.MetaTag;
@@ -34,6 +43,9 @@ import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeIc
 public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
 
 	private static final String LOADER_ID = "ajax-loader-mask";
+	private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
+	
+	private Modal<?> modal;
 	
 	public BasePage() {
 		this(new PageParameters());
@@ -51,6 +63,10 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         add(new FooterPanel("footer"));
         add(new Icon("loader", FontAwesomeIconType.spinner).setMarkupId(LOADER_ID));
         add(new ResourceLink<>("favIcon", new PackageResourceReference(BasePage.class, "res/favicon.png")));
+        
+        modal = new Modal<>("modal");
+        add(modal);
+        
     }
     
     protected IModel<String> getTitleModel() {
@@ -73,6 +89,9 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
                 		new ResourceModel("label.about"))
                 	.setIconType(ICON_ABOUT)));
         navbar.addComponents(transform(Navbar.ComponentPosition.RIGHT,
+        		new NavbarAjaxLink<>(EmptyStringModel.get(), 
+        				target -> new EditEvent<>(target, ZhGlossSession.get().getUserSettings()), 
+        				Icons.ICON_SETTINGS),
         		new NavbarExternalLink(new MailToModel(new ResourceModel("app.contact")))
         			.setLabel(new ResourceModel("label.contact"))
         			.setIconType(ICON_CONTACT)));
@@ -82,6 +101,11 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
 	@Override
 	public String getAjaxIndicatorMarkupId() {
 		return LOADER_ID;
+	}
+	
+	@OnEvent(types = UserSettings.class)
+	public void handleEditUserSettings(EditEvent<UserSettings> event) {
+		LOGGER.info("handling edit user settings");
 	}
 
 }

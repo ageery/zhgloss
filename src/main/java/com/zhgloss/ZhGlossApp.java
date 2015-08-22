@@ -29,7 +29,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.zhgloss.domain.UserSettings;
 import com.zhgloss.domain.WicketProperties;
+import com.zhgloss.json.UserSettingsDeserializer;
 import com.zhgloss.repo.CedictWordRepo;
 import com.zhgloss.repo.CedictWordRepoImpl;
 import com.zhgloss.repo.TranscriptionRepo;
@@ -68,7 +71,11 @@ public class ZhGlossApp extends SpringBootServletInitializer {
 
 	@Bean
     public ObjectMapper getObjectMapper() {
-    	return new ObjectMapper();
+		ObjectMapper objectMapper = new ObjectMapper();
+		SimpleModule module = new SimpleModule();
+		module.addDeserializer(UserSettings.class, new UserSettingsDeserializer(getTranscriptionService()));
+		objectMapper.registerModule(module);
+		return objectMapper;
     }
     
     @Bean
