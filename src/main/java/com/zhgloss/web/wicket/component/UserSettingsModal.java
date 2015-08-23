@@ -16,7 +16,6 @@ import com.zhgloss.web.wicket.model.LambdaModel;
 import com.zhgloss.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
-import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormBehavior;
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.FormGroup;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.form.select.BootstrapSelect;
 
@@ -47,8 +46,7 @@ public class UserSettingsModal extends Modal<UserSettings> {
 					new SupplierModel<>(() -> Arrays.asList(CharacterType.values())),
 					new ChoiceRenderer<>(CharacterType::getDisplayValue, (ct, index) -> ct.getDbValue()))
 				.setLabel(new ResourceModel("label.character_type"))
-				.setRequired(true)
-				.add(new FormBehavior())));
+				.setRequired(true)));
 
 		/*
 		 * Transcription system.
@@ -61,8 +59,7 @@ public class UserSettingsModal extends Modal<UserSettings> {
 					new TranscriptionSystemInfoListModel(),
 					new ChoiceRenderer<>(ts -> ts.getName(), (ts, index) -> ts.getCode()))
 				.setLabel(new ResourceModel("label.transcription_system"))
-				.setRequired(true)
-				.add(new FormBehavior())));
+				.setRequired(true)));
 		
 		/*
 		 * Buttons.

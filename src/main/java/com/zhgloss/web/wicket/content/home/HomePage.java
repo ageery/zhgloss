@@ -2,7 +2,6 @@ package com.zhgloss.web.wicket.content.home;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -12,7 +11,6 @@ import org.wicketstuff.event.annotation.OnEvent;
 
 import com.zhgloss.domain.UserSettings;
 import com.zhgloss.domain.WordDetailSearchCriteria;
-import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.service.WordService;
 import com.zhgloss.web.wicket.app.Icons;
 import com.zhgloss.web.wicket.app.ZhGlossSession;
@@ -33,22 +31,17 @@ public class HomePage extends TitledPage {
 	@SpringBean
 	private WordService wordService;
 	
-	IModel<TranscriptionSystemInfo> tsModel;
-	
 	private Component recentWords;
 	
 	public HomePage(PageParameters parameters) {
 		super(parameters);
-		
-		tsModel = new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem());//
 		
 		recentWords = new HeaderPanel("panel", cid -> new ActivityHeaderPanel(cid))
 				.add(new Label("title", new ResourceModel("label.recently_added_words")))
 				.add(new ActivityPanel("activity", 
 						Model.of(new WordDetailSearchCriteria()), 
 						new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem()),
-						20))
-				.setOutputMarkupId(true);
+						20));
 		add(recentWords);
 		
 		add(new BootstrapBookmarkablePageLink<>("dictionaryLink", DictionaryPage.class, Type.Menu)
@@ -67,7 +60,6 @@ public class HomePage extends TitledPage {
 
 	@OnEvent(types = UserSettings.class)
 	public void handleUserSettingsSaveEvent(SaveEvent<UserSettings> event) {
-		//tsModel.detach();
 		event.getTarget().add(recentWords);
 	}
 

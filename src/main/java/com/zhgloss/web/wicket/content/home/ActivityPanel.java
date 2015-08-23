@@ -25,6 +25,7 @@ public class ActivityPanel extends Panel {
 	public ActivityPanel(String id, IModel<WordDetailSearchCriteria> criteriaModel, IModel<TranscriptionSystemInfo> transcriptionSystemModel, int maxResults) {
 		super(id);
 		this.transcriptionSystemModel = transcriptionSystemModel;
+		setOutputMarkupId(true);
 		add(new ListView<>("words", 
 				new SupplierModel<>(() -> 
 					wordService.find(criteriaModel.getObject(), 

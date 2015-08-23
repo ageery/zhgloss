@@ -7,7 +7,6 @@ import static com.zhgloss.web.wicket.app.Icons.ICON_GLOSS;
 import static de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarComponents.transform;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;

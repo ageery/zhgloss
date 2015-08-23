@@ -47,8 +47,7 @@ public class ActivityDayPage extends TitledPage {
 		}
 		dateModel = Model.of(createdDate);
 		activityPanel = new ActivityPanel("words", Model.of(new WordDetailSearchCriteria().withCreatedDate(createdDate)),
-					new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem()), 100)
-				.setOutputMarkupId(true);
+					new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem()), 100);
 		add(activityPanel);
 	}
 
