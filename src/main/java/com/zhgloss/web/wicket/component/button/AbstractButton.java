@@ -8,10 +8,11 @@ import org.apache.wicket.model.IModel;
 import com.zhgloss.domain.SerializableBiFunction;
 import com.zhgloss.web.wicket.event.ValidationErrorEvent;
 
+import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapAjaxButton;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons.Type;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.ladda.LaddaAjaxButton;
 
-public class AbstractButton extends LaddaAjaxButton {
+public class AbstractButton extends BootstrapAjaxButton {
 	
 	private SerializableBiFunction<AjaxRequestTarget, Form<?>, ?> newEventGenerator;
 	private IModel<String> titleModel;

@@ -20,8 +20,11 @@ public class ActivityPanel extends Panel {
 	@SpringBean
 	private WordService wordService;
 	
+	private IModel<TranscriptionSystemInfo> transcriptionSystemModel;
+	
 	public ActivityPanel(String id, IModel<WordDetailSearchCriteria> criteriaModel, IModel<TranscriptionSystemInfo> transcriptionSystemModel, int maxResults) {
 		super(id);
+		this.transcriptionSystemModel = transcriptionSystemModel;
 		add(new ListView<>("words", 
 				new SupplierModel<>(() -> 
 					wordService.find(criteriaModel.getObject(), 
@@ -34,4 +37,10 @@ public class ActivityPanel extends Panel {
 				item -> item.add(new WordSummaryPanel("word", item.getModel()))));
 	}
 
+	@Override
+	protected void onDetach() {
+		super.onDetach();
+		transcriptionSystemModel.detach();
+	}
+	
 }

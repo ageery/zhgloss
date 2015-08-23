@@ -25,6 +25,7 @@ import com.zhgloss.service.UserSettingsService;
 public class ZhGlossSession extends WebSession {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ZhGlossSession.class);
+	private static final int COOKIE_EXPIRATION_DAYS = 30;
 	private static final String COOKIE_NAME = "user_info";
 	
 	@SpringBean
@@ -40,11 +41,7 @@ public class ZhGlossSession extends WebSession {
 		WebRequest webRequest = (WebRequest)RequestCycle.get().getRequest();
 		Cookie cookie = webRequest.getCookie(COOKIE_NAME);
 		if (cookie == null) {
-			WebResponse webResponse = (WebResponse)RequestCycle.get().getResponse();
 			userSettings = newUserSettings();
-			cookie = new Cookie(COOKIE_NAME, userSettingsService.toJson(userSettings));
-			cookie.setMaxAge((int)Duration.ofDays(7).getSeconds());
-			webResponse.addCookie(cookie);
 		} else {
 			try {
 				userSettings = userSettingsService.toUserSettings(cookie.getValue());
@@ -53,6 +50,7 @@ public class ZhGlossSession extends WebSession {
 				userSettings = newUserSettings();
 			}
 		}
+		saveUserSettings();
 		LOGGER.info("User settings: {}", userSettings);
 	}
 	
@@ -72,6 +70,13 @@ public class ZhGlossSession extends WebSession {
 
 	public void setUserSettings(UserSettings userSettings) {
 		this.userSettings = userSettings;
+	}
+	
+	public void saveUserSettings() {
+		WebResponse webResponse = (WebResponse)RequestCycle.get().getResponse();
+		Cookie cookie = new Cookie(COOKIE_NAME, userSettingsService.toJson(userSettings));
+		cookie.setMaxAge((int)Duration.ofDays(COOKIE_EXPIRATION_DAYS).getSeconds());
+		webResponse.addCookie(cookie);
 	}
 	
 }
