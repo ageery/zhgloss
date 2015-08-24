@@ -19,21 +19,32 @@ import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.service.WordService;
+import com.zhgloss.web.wicket.component.WordPartsModal;
+import com.zhgloss.web.wicket.component.link.DetailLink;
 import com.zhgloss.web.wicket.component.table.BootstrapDataTable;
+import com.zhgloss.web.wicket.component.table.LinkFilteredColumn;
 import com.zhgloss.web.wicket.component.table.OrderedListFilteredColumn;
-import com.zhgloss.web.wicket.component.table.TextFilteredColumn;
+import com.zhgloss.web.wicket.event.DetailEvent;
 import com.zhgloss.web.wicket.event.SearchEvent;
+import com.zhgloss.web.wicket.model.LambdaModel;
 
 public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	
 	@SpringBean
 	private WordService service;
 	
+	private WordPartsModel wordPartsModel;
+	
 	private WordLookupDataSource dataSource;
 	private DataTable<WordParts, WordSorts> table;
+	private WordPartsModal modal;
 	
 	public DictionaryPanel(String id, IModel<WordLookupCriteria> model, IModel<TranscriptionSystemInfo> transcriptionSystemModel) {
 		super(id, model);
+		
+		wordPartsModel = new WordPartsModel(null, transcriptionSystemModel);
+		modal = new WordPartsModal("modal", wordPartsModel, transcriptionSystemModel);
+		add(modal);
 		
 		dataSource = new WordLookupDataSource(model, transcriptionSystemModel);
 		FilterForm<WordLookupCriteria> form = new FilterForm<>("form", dataSource);
@@ -54,14 +65,14 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	
 	private List<IColumn<WordParts, WordSorts>> getColumns(IModel<TranscriptionSystemInfo> transcriptionSystemModel) {
 		return asList(
-				new TextFilteredColumn<>(
+				new LinkFilteredColumn<>(
 						new ResourceModel("column.traditional_characters"), 
-						new OptionalFunction<>(WordParts.FUNCTION_TRADITIONAL), 
-						WordLookupCriteria.PROPERTY_TRADITIONAL_CHARACTERS),
-				new TextFilteredColumn<>(
-						new ResourceModel("column.simplified_characters"), 
-						new OptionalFunction<>(WordParts.FUNCTION_SIMPLIFIED), 
-						WordLookupCriteria.PROPERTY_SIMPLIFIED_CHARACTERS),
+						WordLookupCriteria.PROPERTY_TRADITIONAL_CHARACTERS,
+						(id, rowModel) -> new DetailLink<>(id, rowModel, new LambdaModel<>(rowModel, new OptionalFunction<>(WordParts.FUNCTION_TRADITIONAL)))),
+				new LinkFilteredColumn<>(
+						new ResourceModel("column.simplified_characters"),  
+						WordLookupCriteria.PROPERTY_SIMPLIFIED_CHARACTERS,
+						(id, rowModel) -> new DetailLink<>(id, rowModel, new LambdaModel<>(rowModel, new OptionalFunction<>(WordParts.FUNCTION_SIMPLIFIED)))),
 				new TranscriptionColumn(getModel(), transcriptionSystemModel),
 				new OrderedListFilteredColumn<>(
 						new ResourceModel("column.definition"), 
@@ -76,6 +87,12 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 			dataSource.criteriaChanged();
 			event.getTarget().add(table);
 		}
+	}
+	
+	@OnEvent(types = WordParts.class)
+	public void handleDetailEvent(DetailEvent<WordParts> event) {
+		wordPartsModel.setObject(event.getPayload());
+		modal.show(event.getTarget());
 	}
 	
 }

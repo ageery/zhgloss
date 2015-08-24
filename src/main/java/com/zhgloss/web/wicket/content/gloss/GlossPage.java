@@ -11,9 +11,11 @@ import org.wicketstuff.event.annotation.OnEvent;
 import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 import org.wicketstuff.minis.model.NotModel;
 
+import com.zhgloss.domain.UserSettings;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.service.TranscriptionService;
 import com.zhgloss.service.WordService;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
 import com.zhgloss.web.wicket.component.TitledPage;
 import com.zhgloss.web.wicket.event.EditEvent;
 import com.zhgloss.web.wicket.event.SearchEvent;
@@ -30,11 +32,9 @@ public class GlossPage extends TitledPage {
 	
 	public GlossPage(PageParameters parameters) {
 		super(parameters);
-		
+		UserSettings userSettings = ZhGlossSession.get().getUserSettings();
 		IModel<SegmentedWordSearchCriteria> searchCriteriaModel = Model.of(
-				new SegmentedWordSearchCriteria(SIMPLFIED, 
-						transcriptionService.getTranscriptionSystem(TranscriptionSystemInfo.CODE_HANYU_PINYIN)
-							.orElse(null)));
+				new SegmentedWordSearchCriteria(userSettings.getCharacterType(), userSettings.getTranscriptionSystem()));
 		isEditModeModel = Model.of(true);
 		IModel<GlossFormat> formatModel = Model.of(GlossFormat.INLINE);
 		
