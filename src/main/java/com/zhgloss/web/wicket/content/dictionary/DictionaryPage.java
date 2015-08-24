@@ -4,7 +4,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import com.zhgloss.domain.external.TranscriptionSystemInfo;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
 import com.zhgloss.web.wicket.component.TitledPage;
 
 @MountPath("/dictionary")
@@ -18,7 +18,7 @@ public class DictionaryPage extends TitledPage {
 		
 		String pinyin = parameters.get(PARAM_NAME_PINYIN).toString();
 		String systemCode = parameters.get(PARAM_NAME_SYSTEM_CODE)
-				.toString(TranscriptionSystemInfo.CODE_HANYU_PINYIN);
+				.toString(ZhGlossSession.get().getUserSettings().getTranscriptionSystem().getCode());
 		
 		WordLookupCriteria criteria = new WordLookupCriteria().withPinyin(pinyin);
 		add(new DictionaryPanel("panel", Model.of(criteria), new TranscriptionSystemInfoModel(systemCode)));
