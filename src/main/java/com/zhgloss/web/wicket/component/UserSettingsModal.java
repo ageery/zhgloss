@@ -64,8 +64,8 @@ public class UserSettingsModal extends Modal<UserSettings> {
 		/*
 		 * Buttons.
 		 */
-		addButton(new CancelButton(Modal.BUTTON_MARKUP_ID, form));
 		addButton(new SaveButton(Modal.BUTTON_MARKUP_ID, form));
+		addButton(new CancelButton(Modal.BUTTON_MARKUP_ID, form));
 		
 	}
 	

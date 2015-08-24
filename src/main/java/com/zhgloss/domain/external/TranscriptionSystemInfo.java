@@ -1,13 +1,20 @@
 package com.zhgloss.domain.external;
 
+import static java.util.Optional.ofNullable;
+
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.zhgloss.domain.SerializableFunction;
 
 public class TranscriptionSystemInfo implements Serializable {
 	
 	public static final String CODE_HANYU_PINYIN = "H";
 
+	public static final SerializableFunction<TranscriptionSystemInfo, Optional<String>> FUNCTION_NAME = tsi -> ofNullable(tsi).flatMap(x -> ofNullable(x.getName()));
+	
 	private String code;
 	private String name;
 	

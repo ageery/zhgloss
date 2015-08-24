@@ -70,7 +70,7 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
         add(new Icon("loader", FontAwesomeIconType.spinner).setMarkupId(LOADER_ID));
         add(new ResourceLink<>("favIcon", new PackageResourceReference(BasePage.class, "res/favicon.png")));
         
-        modal = new UserSettingsModal("modal", new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings()));
+        modal = new UserSettingsModal("userSettingsModal", new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings()));
         add(modal);
         
     }

@@ -1,5 +1,6 @@
 package com.zhgloss.web.wicket.component;
 
+import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
 import org.apache.wicket.model.IModel;
 import org.wicketstuff.event.annotation.OnEvent;
 
@@ -9,6 +10,12 @@ public class Modal<T> extends de.agilecoders.wicket.core.markup.html.bootstrap.d
 
 	public Modal(String id, IModel<T> model) {
 		super(id, model);
+	}
+	
+	@Override
+	public de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Modal<T> show(IPartialPageRequestHandler target) {
+		target.add(this);
+		return super.show(target);
 	}
 
 	@OnEvent(stop = true)

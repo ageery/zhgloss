@@ -21,7 +21,7 @@ public class WordPartsModel extends LoadableDetachableModel<WordParts> {
 	
 	public WordPartsModel(WordParts wordParts, IModel<TranscriptionSystemInfo> transcriptionSystemModel) {
 		super(wordParts);
-		this.id = wordParts.getId();
+		this.id = wordParts == null ? null : wordParts.getId();
 		this.transcriptionSystemModel = transcriptionSystemModel;
 		Injector.get().inject(this);
 	}
@@ -35,6 +35,12 @@ public class WordPartsModel extends LoadableDetachableModel<WordParts> {
 	protected void onDetach() {
 		super.onDetach();
 		transcriptionSystemModel.detach();
+	}
+
+	@Override
+	public void setObject(WordParts object) {
+		super.setObject(object);
+		this.id = object.getId();
 	}
 
 }

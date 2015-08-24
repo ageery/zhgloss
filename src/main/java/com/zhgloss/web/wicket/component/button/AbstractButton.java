@@ -10,12 +10,11 @@ import com.zhgloss.web.wicket.event.ValidationErrorEvent;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapAjaxButton;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons.Type;
-import de.agilecoders.wicket.extensions.markup.html.bootstrap.ladda.LaddaAjaxButton;
 
 public class AbstractButton extends BootstrapAjaxButton {
 	
 	private SerializableBiFunction<AjaxRequestTarget, Form<?>, ?> newEventGenerator;
-	private IModel<String> titleModel;
+	private IModel<?> titleModel;
 
 	public AbstractButton(String componentId, IModel<String> model, Type type, SerializableBiFunction<AjaxRequestTarget, Form<?>, ?> newEventGenerator) {
 		this(componentId, model, type, null, newEventGenerator);
@@ -25,7 +24,7 @@ public class AbstractButton extends BootstrapAjaxButton {
 		this(componentId, model, type, form, newEventGenerator, model);
 	}
 	
-	public AbstractButton(String componentId, IModel<String> model, Type type, Form<?> form, SerializableBiFunction<AjaxRequestTarget, Form<?>, ?> newEventGenerator, IModel<String> titleModel) {
+	public AbstractButton(String componentId, IModel<String> model, Type type, Form<?> form, SerializableBiFunction<AjaxRequestTarget, Form<?>, ?> newEventGenerator, IModel<?> titleModel) {
 		super(componentId, model, form, type);
 		this.newEventGenerator = newEventGenerator;
 		this.titleModel = titleModel;
@@ -41,7 +40,7 @@ public class AbstractButton extends BootstrapAjaxButton {
 		send(form, Broadcast.BREADTH, new ValidationErrorEvent(target));
 	}
 	
-	protected IModel<String> getTitleModel() {
+	protected IModel<?> getTitleModel() {
 		return titleModel;
 	}
 	
