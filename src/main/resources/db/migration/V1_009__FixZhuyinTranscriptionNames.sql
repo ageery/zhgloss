@@ -1,0 +1,1 @@
+update transcription_system set ts_name = 'Zhuyin', ts_short_name = 'Zhuyin' where ts_code = 'Z';

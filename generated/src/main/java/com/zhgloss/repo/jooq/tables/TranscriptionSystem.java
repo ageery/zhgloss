@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TranscriptionSystem extends TableImpl<TranscriptionSystemRecord> {
 
-	private static final long serialVersionUID = -1229799434;
+	private static final long serialVersionUID = -1377480638;
 
 	/**
 	 * The reference instance of <code>public.transcription_system</code>
@@ -58,6 +58,11 @@ public class TranscriptionSystem extends TableImpl<TranscriptionSystemRecord> {
 	 * The column <code>public.transcription_system.ts_name</code>.
 	 */
 	public final TableField<TranscriptionSystemRecord, String> TS_NAME = createField("ts_name", org.jooq.impl.SQLDataType.CLOB, this, "");
+
+	/**
+	 * The column <code>public.transcription_system.ts_short_name</code>.
+	 */
+	public final TableField<TranscriptionSystemRecord, String> TS_SHORT_NAME = createField("ts_short_name", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
 
 	/**
 	 * Create a <code>public.transcription_system</code> table reference

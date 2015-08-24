@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.jooq.DSLContext;
-import org.jooq.Record2;
 
 import com.zhgloss.domain.external.TranscriptionPlane;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
@@ -20,14 +19,15 @@ public class TranscriptionRepoImpl extends AbstractRepoImpl implements Transcrip
 	@Override
 	public Stream<TranscriptionSystemInfo> getTranscriptionSystems() {
 		return getContext()
-				.select(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_CODE, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_NAME)
+				.select(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_CODE, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_NAME, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_SHORT_NAME)
 				.from(TranscriptionSystem.TRANSCRIPTION_SYSTEM)
 				.orderBy(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_NAME)
 				.fetch()
 				.stream()
 				.map(t -> new TranscriptionSystemInfo()
 						.withCode(t.value1())
-						.withName(t.value2()));
+						.withName(t.value2())
+						.withShortName(t.value3()));
 	}
 
 	@Override
@@ -46,15 +46,16 @@ public class TranscriptionRepoImpl extends AbstractRepoImpl implements Transcrip
 
 	@Override
 	public Optional<TranscriptionSystemInfo> getTranscriptionSystem(String code) {
-		Record2<String, String> t = getContext()
-				.select(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_CODE, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_NAME)
+		return Optional.ofNullable(getContext()
+				.select(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_CODE, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_NAME, TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_SHORT_NAME)
 				.from(TranscriptionSystem.TRANSCRIPTION_SYSTEM)
 				.where(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_CODE.eq(code))
 				.orderBy(TranscriptionSystem.TRANSCRIPTION_SYSTEM.TS_NAME)
-				.fetchOne();
-		return t == null ? Optional.empty() : Optional.of(new TranscriptionSystemInfo()
-				.withCode(t.value1())
-				.withName(t.value2()));
+				.fetchOne())
+			.flatMap(r -> Optional.of(new TranscriptionSystemInfo()
+					.withCode(r.value1())
+					.withName(r.value2())
+					.withShortName(r.value3())));
 	}
 	
 }

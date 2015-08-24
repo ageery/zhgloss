@@ -15,6 +15,7 @@ import com.zhgloss.repo.jooq.tables.FindWordsByDef;
 import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
 import com.zhgloss.repo.jooq.tables.MakePrefixes;
 import com.zhgloss.repo.jooq.tables.TranscriptionPoint;
+import com.zhgloss.repo.jooq.tables.TranscriptionPointRepresentations;
 import com.zhgloss.repo.jooq.tables.TranscriptionSystem;
 import com.zhgloss.repo.jooq.tables.Word;
 import com.zhgloss.repo.jooq.tables.WordDef;
@@ -43,7 +44,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = 80279314;
+	private static final long serialVersionUID = -1560675000;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -88,6 +89,7 @@ public class Public extends SchemaImpl {
 			GetCedictWordParts.GET_CEDICT_WORD_PARTS,
 			MakePrefixes.MAKE_PREFIXES,
 			TranscriptionPoint.TRANSCRIPTION_POINT,
+			TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS,
 			TranscriptionSystem.TRANSCRIPTION_SYSTEM,
 			Word.WORD,
 			WordDef.WORD_DEF);

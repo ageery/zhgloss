@@ -14,6 +14,7 @@ import com.zhgloss.repo.jooq.tables.FindWordsByDef;
 import com.zhgloss.repo.jooq.tables.GetCedictWordParts;
 import com.zhgloss.repo.jooq.tables.MakePrefixes;
 import com.zhgloss.repo.jooq.tables.TranscriptionPoint;
+import com.zhgloss.repo.jooq.tables.TranscriptionPointRepresentations;
 import com.zhgloss.repo.jooq.tables.TranscriptionSystem;
 import com.zhgloss.repo.jooq.tables.Word;
 import com.zhgloss.repo.jooq.tables.WordDef;
@@ -169,6 +170,11 @@ public class Tables {
 	 * Toned transcription syllable info for a transcription system.
 	 */
 	public static final TranscriptionPoint TRANSCRIPTION_POINT = com.zhgloss.repo.jooq.tables.TranscriptionPoint.TRANSCRIPTION_POINT;
+
+	/**
+	 * Transcription points with representation info for each system in JSON.
+	 */
+	public static final TranscriptionPointRepresentations TRANSCRIPTION_POINT_REPRESENTATIONS = com.zhgloss.repo.jooq.tables.TranscriptionPointRepresentations.TRANSCRIPTION_POINT_REPRESENTATIONS;
 
 	/**
 	 * Phonetic systems for transcribing the Mandarin pronounciation of Chinese characters

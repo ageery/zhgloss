@@ -30,6 +30,7 @@ import com.zhgloss.web.wicket.event.EditEvent;
 import com.zhgloss.web.wicket.event.SaveEvent;
 import com.zhgloss.web.wicket.model.EmptyStringModel;
 import com.zhgloss.web.wicket.model.MailToModel;
+import com.zhgloss.web.wicket.model.UserSettingsShortModel;
 import com.zhgloss.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.HtmlTag;
@@ -96,12 +97,12 @@ public abstract class BasePage extends WebPage implements IAjaxIndicatorAware {
                 		new ResourceModel("label.about"))
                 	.setIconType(ICON_ABOUT)));
         navbar.addComponents(transform(Navbar.ComponentPosition.RIGHT,
-        		new NavbarAjaxLink<>(EmptyStringModel.get(), 
+        		new NavbarAjaxLink<>(new UserSettingsShortModel(), 
         				target -> new EditEvent<>(target, ZhGlossSession.get().getUserSettings()), 
-        				Icons.ICON_SETTINGS),
-        		new NavbarExternalLink(new MailToModel(new ResourceModel("app.contact")))
-        			.setLabel(new ResourceModel("label.contact"))
-        			.setIconType(ICON_CONTACT)));
+        				Icons.ICON_SETTINGS)));
+//        		new NavbarExternalLink(new MailToModel(new ResourceModel("app.contact")))
+//        			.setLabel(new ResourceModel("label.contact"))
+//        			.setIconType(ICON_CONTACT)));
         return navbar;
     }
 

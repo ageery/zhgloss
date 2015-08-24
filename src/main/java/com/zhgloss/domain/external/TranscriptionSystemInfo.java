@@ -17,6 +17,7 @@ public class TranscriptionSystemInfo implements Serializable {
 	
 	private String code;
 	private String name;
+	private String shortName;
 	
 	public TranscriptionSystemInfo() {
 		super();
@@ -48,6 +49,19 @@ public class TranscriptionSystemInfo implements Serializable {
 		return this;
 	}
 	
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	
+	public TranscriptionSystemInfo withShortName(String shortName) {
+		setShortName(shortName);
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
