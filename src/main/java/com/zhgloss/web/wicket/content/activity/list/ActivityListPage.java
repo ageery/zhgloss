@@ -20,6 +20,7 @@ import org.wicketstuff.event.annotation.OnEvent;
 import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 
 import com.zhgloss.domain.OptionalFunction;
+import com.zhgloss.domain.UserSettings;
 import com.zhgloss.domain.WordDetailSearchCriteria;
 import com.zhgloss.domain.external.CedictLoadInfo;
 import com.zhgloss.service.WordService;
@@ -30,6 +31,7 @@ import com.zhgloss.web.wicket.component.TitledPage;
 import com.zhgloss.web.wicket.component.link.DetailLink;
 import com.zhgloss.web.wicket.content.home.ActivityPanel;
 import com.zhgloss.web.wicket.event.DetailEvent;
+import com.zhgloss.web.wicket.event.SaveEvent;
 import com.zhgloss.web.wicket.model.LambdaModel;
 import com.zhgloss.web.wicket.model.SupplierModel;
 
@@ -93,6 +95,11 @@ public class ActivityListPage extends TitledPage {
 	public void handleDetailEvent(DetailEvent<LocalDateTime> event) {
 		activeDateModel.setObject(event.getPayload().toLocalDate());
 		event.getTarget().add(activityPanel, tableContainer);
+	}
+	
+	@OnEvent(types = UserSettings.class)
+	public void handleUserSettingsSaveEvent(SaveEvent<UserSettings> event) {
+		event.getTarget().add(activityPanel);
 	}
 	
 }
