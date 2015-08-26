@@ -1,20 +1,35 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <wicket:extend>
-	<dl class="dl-horizontal">
-		<dt wicket:id="traditionalLabel">[TRADITIONAL LABEL]</dt>
-		<dd wicket:id="traditional">[TRADITIONAL]</dd>
-		<dt wicket:id="simplifiedLabel">[SIMPLIFIED LABEL]</dt>
-		<dd wicket:id="simplified">[SIMPLIFIED]</dd>
-		<dt wicket:id="transcriptionLabel">[TRANSCRIPTION LABEL]</dt>
-		<dd wicket:id="transcription">[TRANSCRIPTION]</dd>
-		<dt wicket:id="definitionsLabel">[DEFINITIONS LABEL]</dt>
-		<dd>
-			<ul>
-				<li wicket:id="definitions">
-					<span wicket:id="definition">[DEFINITION]</span>
-				</li>
-			</ul>
-		</dd>
-	</dl>
+	<div class="row">
+		<div class="col-md-6">
+			<div wicket:id="traditional">
+				<h1 wicket:id="chars" class="text-center">[CHARS]</h1>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div wicket:id="simplified">
+				<h1 wicket:id="chars" class="text-center">[CHARS]</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<span wicket:id="transcription" class="h3">[TRANSCRIPTION]</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<dl>
+				<dt wicket:id="definitionsLabel">[DEFINITIONS LABEL]</dt>
+				<dd>
+					<ul>
+						<li wicket:id="definitions">
+							<span wicket:id="definition">[DEFINITION]</span>
+						</li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+	</div>
 </wicket:extend>
 </html>

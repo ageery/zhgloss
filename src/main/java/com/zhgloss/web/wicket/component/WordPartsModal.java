@@ -22,17 +22,12 @@ public class WordPartsModal extends Modal<WordParts> {
 		/*
 		 * Labels.
 		 */
-		add(new Label("traditionalLabel", new ResourceModel("label.traditional_characters")));
-		add(new Label("simplifiedLabel", new ResourceModel("label.simplified_characters")));
-		add(new Label("transcriptionLabel", new LambdaModel<>(transcriptionSystemModel, new OptionalFunction<>(TranscriptionSystemInfo.FUNCTION_NAME))));
-		add(new Label("definitionsLabel", new ResourceModel("label.definitions")));
-		
-		/*
-		 * Data.
-		 */
-		add(new Label("traditional", new LambdaModel<>(model, new OptionalFunction<>(WordParts.FUNCTION_TRADITIONAL))));
-		add(new Label("simplified", new LambdaModel<>(model, new OptionalFunction<>(WordParts.FUNCTION_SIMPLIFIED))));
+		add(new HeaderPanel("traditional", new ResourceModel("label.traditional_characters"))
+				.add(new Label("chars", new LambdaModel<>(model, new OptionalFunction<>(WordParts.FUNCTION_TRADITIONAL)))));
+		add(new HeaderPanel("simplified", new ResourceModel("label.simplified_characters"))
+				.add(new Label("chars", new LambdaModel<>(model, new OptionalFunction<>(WordParts.FUNCTION_SIMPLIFIED)))));
 		add(new Label("transcription", new LambdaModel<>(model, new OptionalFunction<>(WordParts.FUNCTION_TRANSCRIPTION))));
+		add(new Label("definitionsLabel", new ResourceModel("label.definitions")));
 		add(new ListView<>("definitions", new LambdaModel<>(model, new OptionalFunction<>(WordParts.FUNCTION_DEFINITIONS)), 
 				item -> item.add(new Label("definition", item.getModel()))));
 		
