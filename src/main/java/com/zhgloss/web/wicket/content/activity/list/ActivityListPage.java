@@ -3,69 +3,96 @@ package com.zhgloss.web.wicket.content.activity.list;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.stream.Collectors;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.wicketstuff.annotation.mount.MountPath;
-import org.wicketstuff.minis.model.LoadableDetachableDependentModel;
+import org.wicketstuff.event.annotation.OnEvent;
+import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 
 import com.zhgloss.domain.OptionalFunction;
+import com.zhgloss.domain.WordDetailSearchCriteria;
 import com.zhgloss.domain.external.CedictLoadInfo;
 import com.zhgloss.service.WordService;
-import com.zhgloss.web.wicket.component.BookmarkableLink;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
+import com.zhgloss.web.wicket.component.HeaderPanel;
 import com.zhgloss.web.wicket.component.ListView;
 import com.zhgloss.web.wicket.component.TitledPage;
-import com.zhgloss.web.wicket.content.activity.day.ActivityDayPage;
+import com.zhgloss.web.wicket.component.link.DetailLink;
+import com.zhgloss.web.wicket.content.home.ActivityPanel;
+import com.zhgloss.web.wicket.event.DetailEvent;
 import com.zhgloss.web.wicket.model.LambdaModel;
 import com.zhgloss.web.wicket.model.SupplierModel;
 
-@MountPath("/activity/list")
+import de.agilecoders.wicket.core.markup.html.bootstrap.behavior.CssClassNameAppender;
+
+@MountPath("/activity/list/#{" + ActivityListPage.PARAM_NAME_DATE + "}")
 public class ActivityListPage extends TitledPage {
 
+	static final String PARAM_NAME_DATE = "DATE";
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityListPage.class);
+	private static final DateTimeFormatter PAGE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
+	private static final DateTimeFormatter LABEL_DATE_FORMATTER = DateTimeFormatter.ofPattern("eee, yyyy-MM-dd");
+	
 	@SpringBean
 	private WordService wordService;
+
+	private IModel<LocalDate> activeDateModel;
 	
-	public ActivityListPage() {
+	private Component activityPanel;
+	private WebMarkupContainer tableContainer;
+	
+	public ActivityListPage(PageParameters parameters) {
 		super();
 		
-		add(new ListView<>("loads", 
-				new SupplierModel<>(() -> wordService.getCedictLoadHistory(0, 20).collect(Collectors.toList())), 
-				item -> {
-					item.add(new Label("start", new LoadDayModel(new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_START)))));
-					item.add(new BookmarkableLink<>("link", ActivityDayPage.class, 
-							() -> ActivityDayPage.newPageParameters(item.getModelObject().getStart().toLocalDate()))
-							.add(new Label("count", new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_COUNT)))));
-				}));
-	}
-	
-	private static class LoadDayModel extends LoadableDetachableDependentModel<String, LocalDateTime> {
-
-		public LoadDayModel(IModel<LocalDateTime> dependentModel) {
-			super(dependentModel);
-		}
-
-		@Override
-		protected String load() {
-			LocalDateTime dateTime = getDependentModel().getObject();
-			if (dateTime == null) {
-				return null;
+		LocalDate activeDate = LocalDate.now();
+		String dateString = parameters.get(PARAM_NAME_DATE).toOptionalString();
+		if (dateString != null) {
+			try {
+				activeDate = LocalDate.parse(dateString, PAGE_DATE_FORMATTER);
+			} catch (DateTimeParseException e) {
+				LOGGER.warn("Unable to parse date '{}' -- defaulting to today's date", dateString);
 			}
-			LocalDate date = dateTime.toLocalDate();
-			String s = null;
-			
-			if (LocalDate.now().equals(date)) {
-				s = "Today";
-			} else if (LocalDate.now().minusDays(1).equals(date)) {
-				s = "Yesterday";
-			} else {
-				s = date.format(DateTimeFormatter.ofPattern("eee, YYYY-MM-dd"));
-			}
-			
-			return s;
 		}
 		
+		activeDateModel = Model.of(activeDate);
+		tableContainer = new WebMarkupContainer("container");
+		tableContainer.setOutputMarkupId(true);
+		tableContainer.add(
+				new ListView<>("loads", 
+				new SupplierModel<>(() -> wordService.getCedictLoadHistory(0, 10).collect(Collectors.toList())), 
+				item -> {
+					IModel<LocalDateTime> dateModel = new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_START));
+					item.add(new CssClassNameAppender(new SupplierModel<>(() -> dateModel.getObject().toLocalDate().equals(activeDateModel.getObject()) ? "active" : "")));
+					item.add(new DetailLink<>("link", dateModel, 
+							new SupplierModel<>(() -> dateModel.getObject().format(LABEL_DATE_FORMATTER))));
+					item.add(new Label("count", new LambdaModel<>(item.getModel(), new OptionalFunction<>(CedictLoadInfo.FUNCTION_COUNT))));
+				}));
+		add(tableContainer);
+		
+		activityPanel = new HeaderPanel("details", 
+						new SupplierModel<String>(() -> String.format("Words for %s", activeDateModel.getObject().format(LABEL_DATE_FORMATTER))))
+					.add(new ActivityPanel("activity", new SupplierModel<>(() -> new WordDetailSearchCriteria().withCreatedDate(activeDateModel.getObject())),
+							new SupplierModel<>(() -> ZhGlossSession.get().getUserSettings().getTranscriptionSystem()), 100))
+					.add(new VisibleModelBehavior(new SupplierModel<>(() -> activeDateModel.getObject() != null)))
+					.setOutputMarkupPlaceholderTag(true);
+		add(activityPanel);
+	}
+	
+	@OnEvent(types = LocalDateTime.class)
+	public void handleDetailEvent(DetailEvent<LocalDateTime> event) {
+		activeDateModel.setObject(event.getPayload().toLocalDate());
+		event.getTarget().add(activityPanel, tableContainer);
 	}
 	
 }

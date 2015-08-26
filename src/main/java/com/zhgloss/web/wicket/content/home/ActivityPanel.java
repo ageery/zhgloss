@@ -27,12 +27,14 @@ public class ActivityPanel extends Panel {
 	
 	private IModel<TranscriptionSystemInfo> transcriptionSystemModel;
 	private IModel<WordParts> wordPartsModel;
+	private IModel<WordDetailSearchCriteria> criteriaModel;
 	
 	private WordPartsModal modal;
 	
 	public ActivityPanel(String id, IModel<WordDetailSearchCriteria> criteriaModel, IModel<TranscriptionSystemInfo> transcriptionSystemModel, int maxResults) {
 		super(id);
 		this.transcriptionSystemModel = transcriptionSystemModel;
+		this.criteriaModel = criteriaModel;
 		setOutputMarkupId(true);
 	
 		wordPartsModel = new WordPartsModel(null, transcriptionSystemModel);
@@ -56,6 +58,7 @@ public class ActivityPanel extends Panel {
 		super.onDetach();
 		transcriptionSystemModel.detach();
 		wordPartsModel.detach();
+		criteriaModel.detach();
 	}
 	
 	@OnEvent
