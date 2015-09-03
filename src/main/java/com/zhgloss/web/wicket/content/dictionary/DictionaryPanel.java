@@ -11,6 +11,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.Filte
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterToolbar;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.event.annotation.OnEvent;
@@ -19,14 +20,13 @@ import com.zhgloss.domain.OptionalFunction;
 import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.service.WordService;
+import com.zhgloss.web.wicket.app.ZhGlossSession;
 import com.zhgloss.web.wicket.component.WordPartsModal;
-import com.zhgloss.web.wicket.component.link.DetailLink;
 import com.zhgloss.web.wicket.component.table.BootstrapDataTable;
-import com.zhgloss.web.wicket.component.table.LinkFilteredColumn;
 import com.zhgloss.web.wicket.component.table.OrderedListFilteredColumn;
 import com.zhgloss.web.wicket.event.DetailEvent;
+import com.zhgloss.web.wicket.event.RefreshEvent;
 import com.zhgloss.web.wicket.event.SearchEvent;
-import com.zhgloss.web.wicket.model.LambdaModel;
 
 public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	
@@ -65,20 +65,23 @@ public class DictionaryPanel extends GenericPanel<WordLookupCriteria> {
 	
 	private List<IColumn<WordParts, WordSorts>> getColumns(IModel<TranscriptionSystemInfo> transcriptionSystemModel) {
 		return asList(
-				new LinkFilteredColumn<>(
-						new ResourceModel("column.traditional_characters"), 
-						WordLookupCriteria.PROPERTY_TRADITIONAL_CHARACTERS,
-						(id, rowModel) -> new DetailLink<>(id, rowModel, new LambdaModel<>(rowModel, new OptionalFunction<>(WordParts.FUNCTION_TRADITIONAL)))),
-				new LinkFilteredColumn<>(
-						new ResourceModel("column.simplified_characters"),  
-						WordLookupCriteria.PROPERTY_SIMPLIFIED_CHARACTERS,
-						(id, rowModel) -> new DetailLink<>(id, rowModel, new LambdaModel<>(rowModel, new OptionalFunction<>(WordParts.FUNCTION_SIMPLIFIED)))),
+				new WordColumn(getModel(), Model.of(ZhGlossSession.get().getUserSettings().getCharacterType())),
 				new TranscriptionColumn(getModel(), transcriptionSystemModel),
 				new OrderedListFilteredColumn<>(
 						new ResourceModel("column.definition"), 
 						new OptionalFunction<>(WordParts.FUNCTION_DEFINITIONS), 
 						WordLookupCriteria.PROPERTY_DEFINITION)
 		);
+	}
+
+	@OnEvent(types = WordLookupCriteria.class, stop = true)
+	public void handleRefreshEvent(RefreshEvent event) {
+		if (!getModel().getObject().isEmpty()) {
+			getModelObject()
+				.withSimplifiedCharacters(null)
+				.withTraditionalCharacters(null);
+			event.getTarget().add(table);
+		}
 	}
 	
 	@OnEvent(types = WordLookupCriteria.class, stop = true)

@@ -1,7 +1,7 @@
 package com.zhgloss.web.wicket.content.gloss;
 
-import static com.zhgloss.domain.CharacterType.SIMPLFIED;
-
+import org.apache.wicket.Component;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -12,7 +12,6 @@ import org.wicketstuff.minis.behavior.VisibleModelBehavior;
 import org.wicketstuff.minis.model.NotModel;
 
 import com.zhgloss.domain.UserSettings;
-import com.zhgloss.domain.external.TranscriptionSystemInfo;
 import com.zhgloss.service.TranscriptionService;
 import com.zhgloss.service.WordService;
 import com.zhgloss.web.wicket.app.ZhGlossSession;
@@ -30,6 +29,8 @@ public class GlossPage extends TitledPage {
 	
 	private IModel<Boolean> isEditModeModel;
 	
+	private Component content;
+	
 	public GlossPage(PageParameters parameters) {
 		super(parameters);
 		UserSettings userSettings = ZhGlossSession.get().getUserSettings();
@@ -38,22 +39,26 @@ public class GlossPage extends TitledPage {
 		isEditModeModel = Model.of(true);
 		IModel<GlossFormat> formatModel = Model.of(GlossFormat.INLINE);
 		
-		add(new GlossFormPanel("form", searchCriteriaModel, formatModel)
+		content = new WebMarkupContainer("content");
+		content.setOutputMarkupId(true);
+		queue(content);
+		
+		queue(new GlossFormPanel("form", searchCriteriaModel, formatModel)
 				.add(new VisibleModelBehavior(isEditModeModel)));
-		add(new GlossResultsPanel("results", searchCriteriaModel, formatModel)
+		queue(new GlossResultsPanel("results", searchCriteriaModel, formatModel)
 				.add(new VisibleModelBehavior(new NotModel(isEditModeModel))));
 	}
 	
 	@OnEvent
 	public void handleSearchEvent(SearchEvent<String> event) {
 		isEditModeModel.setObject(false);
-		event.getTarget().add(this);
+		event.getTarget().add(content);
 	}
 	
 	@OnEvent
 	public void handleEditEvent(EditEvent<String> event) {
 		isEditModeModel.setObject(true);
-		event.getTarget().add(this);
+		event.getTarget().add(content);
 	}
 	
 }

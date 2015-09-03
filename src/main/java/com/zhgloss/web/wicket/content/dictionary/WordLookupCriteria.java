@@ -32,6 +32,11 @@ public class WordLookupCriteria implements Serializable {
 	public void setTraditionalCharacters(String traditionalCharacters) {
 		this.traditionalCharacters = traditionalCharacters;
 	}
+	
+	public WordLookupCriteria withTraditionalCharacters(String traditionalCharacters) {
+		setTraditionalCharacters(traditionalCharacters);
+		return this;
+	}
 
 	public String getSimplifiedCharacters() {
 		return simplifiedCharacters;
@@ -39,6 +44,11 @@ public class WordLookupCriteria implements Serializable {
 
 	public void setSimplifiedCharacters(String simplifiedCharacters) {
 		this.simplifiedCharacters = simplifiedCharacters;
+	}
+	
+	public WordLookupCriteria withSimplifiedCharacters(String simplifiedCharacters) {
+		setSimplifiedCharacters(simplifiedCharacters);
+		return this;
 	}
 
 	public String getPinyin() {
