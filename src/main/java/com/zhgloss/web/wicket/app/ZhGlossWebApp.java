@@ -41,7 +41,7 @@ public class ZhGlossWebApp extends WebApplication {
 	}
 
 	private void configureBootstrap() {
-    	WicketWebjars.install(this, new WebjarsSettings().useCdnResources(true));
+    	WicketWebjars.install(this, new WebjarsSettings().useCdnResources(false));
         BootstrapSettings settings = new BootstrapSettings();
         settings.setThemeProvider(new SingleThemeProvider(new ZhGlossTheme()));
         settings.useCdnResources(true);
