@@ -17,31 +17,33 @@ import com.zhgloss.domain.SerializableFunction;
 import com.zhgloss.domain.SerializableProperty;
 import com.zhgloss.domain.external.WordParts;
 import com.zhgloss.web.wicket.component.form.ChoiceRenderer;
-import com.zhgloss.web.wicket.component.table.TextFilteredColumn;
+import com.zhgloss.web.wicket.component.link.DetailLink;
+import com.zhgloss.web.wicket.component.table.LinkFilteredColumn;
 import com.zhgloss.web.wicket.event.RefreshEvent;
+import com.zhgloss.web.wicket.model.LambdaModel;
 import com.zhgloss.web.wicket.model.SupplierModel;
 
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.form.select.BootstrapSelect;
 
-// FIXME: when the char type changes, null out the char type value
-public class WordColumn extends TextFilteredColumn<WordParts, WordSorts, String, WordLookupCriteria, String> {
+public class WordColumn extends LinkFilteredColumn<WordParts, WordSorts, String, WordLookupCriteria, String> {
 
 	private IModel<WordLookupCriteria> model;
 	private IModel<CharacterType> characterTypeModel;
 	
 	public WordColumn(IModel<WordLookupCriteria> model, IModel<CharacterType> characterTypeModel) {
 		super(new ResourceModel("column.transcription"), 
-				new Y(characterTypeModel),
-				new X(characterTypeModel));
+				new WordCriteriaFunction(characterTypeModel),
+				(cid, m) -> new DetailLink<>(cid, m, 
+						new LambdaModel<WordParts, String>(m, new WordDataFunction(characterTypeModel))));
 		this.model = model;
 		this.characterTypeModel = characterTypeModel;
 	}
 	
-	private static class Y implements SerializableFunction<WordParts, String> {
+	private static class WordDataFunction implements SerializableFunction<WordParts, String> {
 
 		private IModel<CharacterType> characterTypeModel;
 		
-		public Y(IModel<CharacterType> characterTypeModel) {
+		public WordDataFunction(IModel<CharacterType> characterTypeModel) {
 			this.characterTypeModel = characterTypeModel;
 		}
 		
@@ -52,11 +54,11 @@ public class WordColumn extends TextFilteredColumn<WordParts, WordSorts, String,
 		
 	}
 
-	private static class X implements SerializableProperty<WordLookupCriteria, String> {
+	private static class WordCriteriaFunction implements SerializableProperty<WordLookupCriteria, String> {
 
 		private IModel<CharacterType> characterTypeModel;
 		
-		public X(IModel<CharacterType> characterTypeModel) {
+		public WordCriteriaFunction(IModel<CharacterType> characterTypeModel) {
 			this.characterTypeModel = characterTypeModel;
 		}
 		
@@ -81,7 +83,7 @@ public class WordColumn extends TextFilteredColumn<WordParts, WordSorts, String,
 	
 	@Override
 	public String getCssClass() {
-		return "h4";
+		return "chinese-character";
 	}
 
 	@Override

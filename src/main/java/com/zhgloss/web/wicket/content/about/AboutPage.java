@@ -15,8 +15,12 @@ public class AboutPage extends TitledPage {
 
 	public AboutPage(PageParameters parameters) {
 		super(parameters);
+		
 		queue(new ForkMeLink("fork", Model.of("https://github.com/ageery/zixinxi"), Location.LOWER_RIGHT));
-		queue(new HeaderPanel("data", hid -> new HeaderTitlePanel(hid, Model.of("Data"))));
+
+		queue(new LinkedThumbnail("cedictLicense", 
+				Model.of("http://creativecommons.org/licenses/by-sa/3.0/"), 
+				new PackageResourceReference(getClass(), "res/by-sa.png")));
 		
 		queue(new LinkedThumbnail("javaThumbnail", 
 				Model.of("http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html"), 
