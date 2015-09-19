@@ -2,6 +2,7 @@ package com.zhgloss.web.wicket.app;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.GlyphIconType;
 import de.agilecoders.wicket.core.markup.html.bootstrap.image.IconType;
+import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeIconType;
 
 public class Icons {
 
@@ -17,6 +18,7 @@ public class Icons {
 	public static final IconType ICON_SEARCH = GlyphIconType.search;
 	public static final IconType ICON_SETTINGS = GlyphIconType.cog;
 	public static final IconType ICON_SEGMENT = GlyphIconType.play;
+	public static final IconType ICON_TWITTER = FontAwesomeIconType.twitter;
 	
 	private Icons() {
 		super();

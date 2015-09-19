@@ -1,13 +1,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
 <wicket:panel>
 	<div class="container">
-    	<p class="text-center">
-    		Copyright &copy; <span wicket:id="year">[YEAR]</span>
-    		- 
-    		built: <span wicket:id="built">[BUILT]</span>
-    		-
-    		version: <span wicket:id="version">[VERSION]</span>
-    	</p>
+    	<div>
+	    	<span class="text-center">
+	    		Copyright &copy; <span wicket:id="year">[YEAR]</span>
+	    		- 
+	    		built: <span wicket:id="built">[BUILT]</span>
+	    		-
+	    		version: <span wicket:id="version">[VERSION]</span>
+	    	</span>
+	    	<div class="pull-right">
+	    		<a wicket:id="email" class="padding-0">[EMAIL]</a>
+	    		<a wicket:id="twitter" class="padding-0">[TWITTER]</a>
+	    	</div>
+    	</div>
 	</div>
 </wicket:panel>
 </html>
