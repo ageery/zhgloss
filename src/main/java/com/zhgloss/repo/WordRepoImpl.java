@@ -62,34 +62,34 @@ import com.zhgloss.repo.jooq.Routines;
 import com.zhgloss.repo.jooq.tables.records.CedictLoadRecord;
 
 public class WordRepoImpl implements WordRepo {
-	
+
 	private static String NAME_ID = "id";
 	private static String NAME_WORD_INFO = "word_info";
 	private static String NAME_DEFS = "defs";
 	private static String NAME_SORT_ORDER = "sort_order";
-	
+
 	private static final Field<String> FIELD_SIMPLIFIED = DSL.field("'simp'", String.class);
 	private static final Field<String> FIELD_TRADITIONAL = DSL.field("'trad'", String.class);
 	private static final Field<String> FIELD_PINYIN = DSL.field("'pinyin'", String.class);
 	private static final Field<String> FIELD_EMPTY_STRING = DSL.field("''", String.class);
 	private static final Field<String> FIELD_SPACE_STRING = DSL.field("' '", String.class);
-	
+
 	private static final Map<WordDetailSort, Supplier<Stream<Field<?>>>> SORT_MAP = ImmutableMap.<WordDetailSort, Supplier<Stream<Field<?>>>>builder()
 			.put(WordDetailSort.TRADITIONAL, () -> Stream.of(jsonbArrayAttrValuesToString(DSL.field(DSL.name("word_info"), WordInfo.class), FIELD_TRADITIONAL, FIELD_EMPTY_STRING)))
 			.put(WordDetailSort.SIMPLIFIED, () -> Stream.of(jsonbArrayAttrValuesToString(DSL.field(DSL.name("word_info"), WordInfo.class), FIELD_SIMPLIFIED, FIELD_EMPTY_STRING)))
 			.put(WordDetailSort.CREATED, () -> Stream.of(DSL.field("created_date")))
 			.put(WordDetailSort.TRANSCRIPTION, () -> Stream.of(jsonbArrayAttrValuesToString(DSL.field(DSL.name("word_info"), WordInfo.class), FIELD_PINYIN, FIELD_SPACE_STRING)))
 			.build();
-	
+
 	private DSLContext context;
 	private ObjectMapper mapper;
-	
+
 	public WordRepoImpl(DSLContext context, ObjectMapper mapper) {
 		super();
 		this.context = context;
 		this.mapper = mapper;
 	}
-	
+
 	@Override
 	public int updateWordsFromCedictData() {
 		CedictLoadRecord clr = context.newRecord(CEDICT_LOAD);
@@ -97,11 +97,13 @@ public class WordRepoImpl implements WordRepo {
 		int count = updateWordsFromCedictWords(context.configuration());
 		clr.setLoadFinish(now());
 		clr.setLoadCount(count);
-		context.execute("vacuum analyze");
 		clr.store();
+		if (count > 1000) {
+		    context.execute("vacuum analyze");
+		}
 		return count;
 	}
-	
+
 	@Override
 	public Stream<SegmentDetail> segmentText(String text, CharacterType type, String transcriptionSystemCode, int maxLen) {
 		return context
@@ -111,7 +113,7 @@ public class WordRepoImpl implements WordRepo {
 			.fetch(new SegmentDetailMapper())
 			.stream();
 	}
-	
+
 	@Override
 	public int count(WordDetailSearchCriteria criteria) {
 		return context
@@ -120,35 +122,35 @@ public class WordRepoImpl implements WordRepo {
 				.where(criteriaToConditions(criteria))
 				.fetchOne(0, int.class);
 	}
-	
+
 	private List<Condition> criteriaToConditions(WordDetailSearchCriteria criteria) {
 		return Seq.of(
 				getIdCondition(criteria),
-				getWordLengthCondition(criteria), 
-				getCharacterCondition(criteria), 
+				getWordLengthCondition(criteria),
+				getCharacterCondition(criteria),
 				getDefinitionCondition(criteria),
 				getCreatedDateCondition(criteria))
 			.flatMap(op -> op.isPresent() ? Stream.of(op.get()) : Stream.empty())
 			.collect(Collectors.toList());
 	}
-	
+
 	private Collection<? extends SortField<?>> sortsToOrderBy(Stream<SortInfo<WordDetailSort>> sorts) {
 		return getOrderBy(sorts).collect(Collectors.toList());
 	}
-	
+
 	private Select<Record2<UUID, Integer>> getWordIdAndOrder(WordDetailSearchCriteria criteria, Stream<SortInfo<WordDetailSort>> sorts, int offset, int limit) {
 		return context
-			.select(WORD.ID, 
+			.select(WORD.ID,
 					rowNumber().over().orderBy(sortsToOrderBy(sorts)))
 			.from(WORD)
 			.where(criteriaToConditions(criteria))
 			.limit(limit)
 			.offset(offset);
 	}
-	
+
 	private Select<Record4<UUID, WordInfo, Integer, String[]>> getWordInfoAndDefs(Table<Record> table, Field<UUID> idField, Field<Integer> sortField) {
 		return context
-			.select(WORD.ID, 
+			.select(WORD.ID,
 					WORD.WORD_INFO,
 					sortField,
 					DSL.arrayAgg(WORD_DEF.DEF).orderBy(WORD_DEF.ORDER_NUM))
@@ -157,19 +159,20 @@ public class WordRepoImpl implements WordRepo {
 			.join(WORD_DEF, JoinType.JOIN).on(WORD.ID.eq(WORD_DEF.WORD_ID))
 			.groupBy(WORD.ID, WORD.WORD_INFO, sortField);
 	}
-	
-	
-	
-	public Stream<WordDetail> find(WordDetailSearchCriteria criteria, String transcriptionSystemCode, Stream<SortInfo<WordDetailSort>> sorts, int offset, int limit) {
+
+
+
+	@Override
+    public Stream<WordDetail> find(WordDetailSearchCriteria criteria, String transcriptionSystemCode, Stream<SortInfo<WordDetailSort>> sorts, int offset, int limit) {
 		Table<Record> criteriaAndSortQuery = DSL.table(DSL.name("w"));
 		Table<Record> wordWithDefinitionsQuery = DSL.table(DSL.name("x"));
-		
+
 		return context
 			.with(criteriaAndSortQuery.getName(), NAME_ID, NAME_SORT_ORDER)
 				.as(getWordIdAndOrder(criteria, sorts, offset, limit))
 			.with(wordWithDefinitionsQuery.getName(), NAME_ID, NAME_WORD_INFO, NAME_SORT_ORDER, NAME_DEFS)
-				.as(getWordInfoAndDefs(criteriaAndSortQuery, 
-						field(name(criteriaAndSortQuery.getName(), NAME_ID), UUID.class), 
+				.as(getWordInfoAndDefs(criteriaAndSortQuery,
+						field(name(criteriaAndSortQuery.getName(), NAME_ID), UUID.class),
 						field(name(criteriaAndSortQuery.getName(), NAME_SORT_ORDER), int.class)))
 			.select(field(name(wordWithDefinitionsQuery.getName(), NAME_ID), UUID.class),
 					jsonbArrayAttrValuesToString(DSL.field(DSL.name(wordWithDefinitionsQuery.getName(), NAME_WORD_INFO), WordInfo.class), FIELD_TRADITIONAL, FIELD_EMPTY_STRING),
@@ -181,33 +184,33 @@ public class WordRepoImpl implements WordRepo {
 			.fetch(new WordDetailMapper())
 			.stream();
 	}
-	
+
 	private Stream<SortField<?>> getOrderBy(Stream<SortInfo<WordDetailSort>> sorts) {
 		return sorts.flatMap(si -> Seq.zip(
-					SORT_MAP.get(si.getProperty()).get(), 
+					SORT_MAP.get(si.getProperty()).get(),
 					Seq.<Boolean>generate(() -> si.isAscending()))) // https://bugs.eclipse.org/bugs/show_bug.cgi?id=470826
 				.map(t -> t.v1().sort(t.v2() ? SortOrder.ASC : SortOrder.DESC));
 	}
-	
+
 	private static Optional<Condition> getCharacterCondition(WordDetailSearchCriteria criteria) {
 		List<CharacterInfo> list = criteria.getCharacterInfoCriteria();
-		return (list != null) && (!list.isEmpty()) ? 
+		return (list != null) && (!list.isEmpty()) ?
 				Optional.of(new WordInfoCondition(WORD.WORD_INFO, new WordInfo(list))) :
 				Optional.empty();
 	}
-	
+
 	private Optional<Condition> getDefinitionCondition(WordDetailSearchCriteria criteria) {
 		List<String> list = criteria.getDefinitionCriteria();
-		return (list != null) && (!list.isEmpty()) ? 
+		return (list != null) && (!list.isEmpty()) ?
 				Optional.of(WORD.ID.in(context.select(WORD_DEF.WORD_ID).from(WORD_DEF).where(new FullTextSearchCondition(WORD_DEF.DEF_TSV, toFtsQueryString(list.stream()))))) :
-				Optional.empty(); 
+				Optional.empty();
 	}
 
 	private static Optional<Condition> getIdCondition(WordDetailSearchCriteria criteria) {
 		UUID id = criteria.getId();
 		return id != null ? Optional.of(WORD.ID.eq(id)) : Optional.empty();
 	}
-	
+
 	private static Optional<Condition> getWordLengthCondition(WordDetailSearchCriteria criteria) {
 		Integer wordLength = criteria.getWordLength();
 		return wordLength != null ? Optional.of(DSL.condition("jsonb_array_length(word_info) = ?", wordLength)) : Optional.empty();
@@ -217,13 +220,13 @@ public class WordRepoImpl implements WordRepo {
 		LocalDate createdDate = criteria.getCreatedDate();
 		return (createdDate != null) ?
 				Optional.of(WORD.CREATED_DATE.between(createdDate.atStartOfDay(), createdDate.plusDays(1).atStartOfDay())) :
-				Optional.empty(); 
+				Optional.empty();
 	}
-	
+
 	private static String toFtsQueryString(Stream<String> termStream) {
 		return termStream.collect(Collectors.joining(" & ", "\"", "\""));
 	}
-	
+
 	private class WordDetailMapper implements RecordMapper<Record5<UUID, String, String, Object, String[]>, WordDetail> {
 
 		@Override
@@ -240,9 +243,9 @@ public class WordRepoImpl implements WordRepo {
 				throw new RuntimeException(e);
 			}
 		}
-		
+
 	}
-	
+
 	private class SegmentDetailMapper implements RecordMapper<Record2<WordDetails, String>, SegmentDetail> {
 
 		@Override
@@ -252,7 +255,7 @@ public class WordRepoImpl implements WordRepo {
 				.withText(r.value2())
 				.withDetails(details == null ? Collections.emptyList() : details.getWordDetails());
 		}
-		
+
 	}
 
 	@Override
