@@ -25,5 +25,5 @@ env:
 after_success:
   if [ ! -z "$TRAVIS_TAG" ] ; 
   then
-    curl -T target/zhgloss.war -u "$TOMCAT_USER:$TOMCAT_PASSWORD" "http://www.zhgloss.com/manager/text/deploy?path=/zhgloss\\&update=true";
+    curl -T target/zhgloss.war -u "$TOMCAT_USER:$TOMCAT_PASSWORD" "http://www.zhgloss.com/manager/text/deploy?path=/zhgloss&update=true";
   fi
