@@ -25,5 +25,5 @@ env:
 after_success:
   if [ "$TRAVIS_BRANCH" == "master" ] && [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] ; 
   then
-    "curl -T target/zhgloss.war -u $TOMCAT_USER:$TOMCAT_PASSWORD http://www.zhgloss.com/manager/text/deploy?path=/zhgloss\\&update=true"
+    curl -T target/zhgloss.war -u "$TOMCAT_USER:$TOMCAT_PASSWORD" "http://www.zhgloss.com/manager/text/deploy?path=/zhgloss\\&update=true";
   fi
