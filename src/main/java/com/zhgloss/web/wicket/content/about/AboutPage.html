@@ -2,11 +2,32 @@
 <wicket:extend>
     <div wicket:id="fork">[FORK]</div>
 	<div class="jumbotron">
-		<h1>Dictionary</h1>
+	<ul>
+	   <li>
+		<p>
+            Character data comes from the <a href="http://unicode.org/reports/tr38/">Unihan</a> project
+            <a wicket:id="unihanLicense">[LICENSE]</a>
+        </p>
+        </li>
+        <li>
 		<p>
 			Word data comes from the <a href="http://cc-cedict.org/wiki/">CC-CEDICT</a> project
 			<span wicket:id="cedictLicense">[CEDICT LICENSE]</span>
 		</p>
+		</li>
+		<li>
+		<p>
+            Radical data comes from <a href="https://en.wikipedia.org/wiki/Kangxi_radical">Wikipedia</a>
+            <span wicket:id="wikipediaLicense">[WIKIPEDIA LICENSE]</span>
+        </p>
+        </li>
+        <li>
+        <p>
+            Pinyin data comes from <a href="http://www.pinyin.info/romanization/compare/hanyu.html">pinyin.info</a> 
+            and <a href="https://en.wikipedia.org/wiki/Pinyin#Chart_of_comparison_with_other_romanizations">Wikipedia</a>
+        </p>
+        </li>
+    </ul>
 	</div>
 	<div class="row">
 		<div class="col-md-2">
